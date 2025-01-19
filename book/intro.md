@@ -1,11 +1,6 @@
-# Welcome to your Jupyter Book
+# From Molecules to Systems to Behavior
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
-
-Check out the content pages bundled with this sample book to see more.
+This lab course introduces students to the variety of experimental and computational techniques and concepts used in modern cognitive neuroscience. Topics include functional magnetic resonance imaging, scalp electrophysiological recording, and computational modeling. In-lab lectures provide students with the background necessary to understand the scientific content of the labs, but the emphasis is on the labs themselves, including student-designed experiments using these techniques. This is the second term of a double-credit core lab course required of all Neuroscience Ph.D. students.
 
 ```{tableofcontents}
 ```

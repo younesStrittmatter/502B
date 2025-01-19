@@ -1,4 +1,5 @@
 # Dynamics in Perception
 
 ## Contents
-1. [Hebbian Learning](notebooks/Hebbian Learning.ipynb)
+
+- [Hebbian Learning](notebooks/Hebbian%20Learning.ipynb)
