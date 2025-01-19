@@ -7,8 +7,8 @@ root: intro
 chapters:
 - file: content/chapter_1/intro
   sections:
-  - file: content/chapter_1/notebooks/1 Hebbian Learning
-  - file: content/chapter_1/notebooks/2 Hopfield Networks
-  - file: content/chapter_1/notebooks/3 Dynamic Systems and Bistable Perception
+    - file: content/chapter_1/notebooks/1 Hebbian Learning
+    - file: content/chapter_1/notebooks/2 Hopfield Networks
+    - file: content/chapter_1/notebooks/3 Dynamic Systems and Bistable Perception
 - file: content/chapter_2/intro
 
