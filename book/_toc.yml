@@ -7,5 +7,6 @@ root: intro
 chapters:
 - file: content/chapter_1/intro
   sections:
-  - file: content/chapter_1/notebooks/Hebbian Learning
+  - file: content/chapter_1/notebooks/1 Hebbian Learning
+  - file: content/chapter_1/notebooks/2 Hopfield Networks
 
