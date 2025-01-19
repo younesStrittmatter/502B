@@ -6,6 +6,7 @@ This course introduces a variety of experimental and computational techniques an
 
 This course introduces [PsyNeuLink](https://princetonuniversity.github.io/PsyNeuLink/), a Python package for building cognitive and neural models. It is assumed that you have some familiarity with Python and Numpy, and are comfortable with basic programming concepts. You should also complete the [PsyNeuLink Beginner Tutorial](https://princetonuniversity.github.io/PsyNeuLink/index_logo_with_text.html#tutorial) prior to this course, unless you are already familiar with the PsyNeuLink environment.
 
+## Content
 
 ```{tableofcontents}
 ```
