@@ -7,3 +7,4 @@ In this chapter we will explore dynamic models using some examples from percepti
 ## Content
 1. [Hebbian Learning](notebooks/1%20Hebbian%20Learning.ipynb)
 2. [Hopfield Networks](notebooks/2%20Hopfield%20Networks.ipynb)
+3. [Dynamic Systems & Bistable Perception](notebooks/3%20Dynamic%20Systems%20and%20Bistable%20Perception.ipynb)
