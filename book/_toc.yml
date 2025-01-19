@@ -5,5 +5,7 @@ format: jb-book
 root: intro
 
 chapters:
-- file: notebooks/chapter_1/(1) Hebbian Learning
+- file: content/chapter_1/intro
+  sections:
+  - file: content/chapter_1/notebooks/(1) Hebbian Learning
 
