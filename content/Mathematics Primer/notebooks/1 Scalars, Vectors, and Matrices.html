@@ -173,9 +173,6 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Mathematics Primer</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Scalars, Vectors, and Matrices</a></li>
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../Dynamics%20in%20Perception/intro.html">Dynamics in Perception</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -376,7 +373,6 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Scalars, Vectors, and Matrices</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-matrix-operations">Vector &amp; Matrix Operations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
@@ -387,37 +383,10 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-of-matrix-and-a-vector-multiplication">Multiplication of Matrix and a Vector Multiplication</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-ab-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-b-11-b-12-b-21-b-22-b-31-b-32-end-matrix-right">\begin{equation}
-AB =
-\left[
-\begin{matrix}
-a_{11} &amp; a_{12} &amp; a_{13} \ a_{21} &amp; a_{22} &amp; a_{23}
-\end{matrix}
-\right]
-\left[
-\begin{matrix}
-b_{11} &amp; b_{12} \ b_{21} &amp; b_{22}  \ b_{31} &amp; b_{32}
-\end{matrix}
-\right]</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-overrightarrow-a-1-cdot-overrightarrow-b-1-overrightarrow-a-1-cdot-overrightarrow-b-2-overrightarrow-a-2-cdot-overrightarrow-b-1-overrightarrow-a-2-cdot-overrightarrow-b-2-end-matrix-right">\left[
-\begin{matrix}
-\overrightarrow{a_{1}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{1}} \cdot \overrightarrow{b_{2}} \ \overrightarrow{a_{2}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{2}} \cdot \overrightarrow{b_{2}}
-\end{matrix}
-\right]</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-c-11-c-12-c-21-c-22-end-matrix-right">\left[
-\begin{matrix}
-c_{11} &amp; c_{12} \ c_{21} &amp; c_{22}
-\end{matrix}
-\right]</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2:</a></li>
-</ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -684,7 +653,7 @@ c =
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{equation}
-b \cdot a = b^T a = 
+\overrightarrow{b} \cdot \overrightarrow{a} = \overrightarrow{b}^T \overrightarrow{a} = 
 \left[
 \begin{matrix}
 b_{1} &amp; b_{2} &amp; b_{3}
@@ -724,7 +693,7 @@ a_{1} \\ a_{2} \\ a_{3}
 <section id="exercise-1">
 <h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
 <p>What happens if we try to compute a dot product from vectors whose inner dimensions are different? Write some code in Python that tries to compute the dot product from vectors with different inner dimensions. Report and interpret the error.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove_output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example for vectors where the inner dimension match</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
@@ -743,23 +712,6 @@ a_{1} \\ a_{2} \\ a_{3}
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dim(a)=(1, 3), dim(b)=(3, 1)
-Dot product between a and b:
- [[32]]
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">d</span> <span class="o">=</span> <span class="o">...</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># Calculate the dot product</span>
-<span class="ne">---&gt; </span><span class="mi">14</span> <span class="n">dot_cd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: unsupported operand type(s) for *: &#39;ellipsis&#39; and &#39;ellipsis&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <details><summary>Solution</summary>
 <p>The following solution is just one of many. Make sure to understand why a dot product is not possible when the dimensions don’t match.</p>
@@ -767,7 +719,7 @@ Dot product between a and b:
 </section>
 <section id="multiplication-of-matrix-and-a-vector-multiplication">
 <h3>Multiplication of Matrix and a Vector Multiplication<a class="headerlink" href="#multiplication-of-matrix-and-a-vector-multiplication" title="Link to this heading">#</a></h3>
-<p>The concept of a dot product can be extended to multiplying a matrix with a vector. We can think of this as multiply a single vector <span class="math notranslate nohighlight">\(b\)</span> by a set of vectors <span class="math notranslate nohighlight">\(A\)</span>. Rather than doing so individually, we can form the vectors in <span class="math notranslate nohighlight">\(A\)</span> into a matrix (which we will also call <span class="math notranslate nohighlight">\(A\)</span>), by storing their transposes in the rows of <span class="math notranslate nohighlight">\(A\)</span>. Then, we can sequentially compute the dot product of each vector in <span class="math notranslate nohighlight">\(A\)</span> with <span class="math notranslate nohighlight">\(b\)</span>, and store their results in a new vector, <span class="math notranslate nohighlight">\(c\)</span>. The dimensions of <span class="math notranslate nohighlight">\(c\)</span> will depend on how many vectors we stored in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>The concept of a dot product can be extended to multiplying a matrix with a vector. We can think of this as multiply a single vector <span class="math notranslate nohighlight">\(b\)</span> by a set of vectors <span class="math notranslate nohighlight">\({A}\)</span>. Rather than doing so individually, we can form the vectors in <span class="math notranslate nohighlight">\({A}\)</span> into a matrix (which we will also call <span class="math notranslate nohighlight">\(A\)</span>), by storing their transposes in the rows of <span class="math notranslate nohighlight">\(A\)</span>. Then, we can sequentially compute the dot product of each vector in <span class="math notranslate nohighlight">\(A\)</span> with <span class="math notranslate nohighlight">\(b\)</span>, and store their results in a new vector, <span class="math notranslate nohighlight">\(c\)</span>. The dimensions of <span class="math notranslate nohighlight">\(c\)</span> will depend on how many vectors we stored in <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <p>For example, let there be a set of two vectors</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -829,7 +781,7 @@ b_{1}\\b_{2}\\b_{3}
 =
 \left[
 \begin{matrix}
-\overrightarrow{a_{1}}^T \cdot \overrightarrow{b} \\ \overrightarrow{a_{2}} \cdot \overrightarrow{b}
+\overrightarrow{a_{1}} \cdot \overrightarrow{b} \\ \overrightarrow{a_{2}} \cdot \overrightarrow{b}
 \end{matrix}
 \right]
 =
@@ -850,7 +802,7 @@ c_{1} \\ c_{2}
 <span class="n">a_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">]])</span>
 
 <span class="c1"># Define the matrix A</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">a_2</span><span class="o">.</span><span class="n">T</span><span class="p">])</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">a_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">a_2</span><span class="o">.</span><span class="n">T</span><span class="p">])</span>
 
 <span class="c1"># Define b</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]])</span>
@@ -866,9 +818,8 @@ c_{1} \\ c_{2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A * b: [[[ 50]]
-
- [[122]]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A * b: [[ 50]
+ [122]]
 
 a_1 * b: [[50]]
 a_2 * b: [[122]]
@@ -880,59 +831,118 @@ a_2 * b: [[122]]
 <section id="matrix-multiplication">
 <h3>Matrix Multiplication<a class="headerlink" href="#matrix-multiplication" title="Link to this heading">#</a></h3>
 <p>Matrix multiplication is what we use if we want to multiply a set of vectors <span class="math notranslate nohighlight">\({B}\)</span> by the vectors in <span class="math notranslate nohighlight">\(A\)</span>, we can perform a similar operation as before. We store the vectors in <span class="math notranslate nohighlight">\({B}\)</span> in the columns of a matrix (also called <span class="math notranslate nohighlight">\(B\)</span>). Then, we compute the dot product of each vector in the columns of <span class="math notranslate nohighlight">\(B\)</span> with each vector in the rows of <span class="math notranslate nohighlight">\(A\)</span>. We store the results, as we did before, in a new set of column vectors, a matrix <span class="math notranslate nohighlight">\(C\)</span>. <span class="math notranslate nohighlight">\(C\)</span> will have the “outer dimensions” of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> (the same number of rows as <span class="math notranslate nohighlight">\(A\)</span> and the same number of columns as <span class="math notranslate nohighlight">\(B\)</span>).</p>
-<p>For example, let there be two vectors b such that <span class="math notranslate nohighlight">\( \overrightarrow{b_{1}} =
+<p>For example, let there be two vectors b such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+\overrightarrow{b_{1}} =
 \left[
 \begin{matrix}
 b_{11} \\ b_{21} \\ b_{31}
 \end{matrix}
-\right] \)</span> and <span class="math notranslate nohighlight">\( \overrightarrow{b_{2}} \)</span> be similar. Then B is given by</p>
-<p>\begin{equation}
+\right] 
+\end{split}\]</div>
+<p>and <span class="math notranslate nohighlight">\( \overrightarrow{b_{2}} \)</span> be similar. Then B is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{equation}
 B =
 \left[
 \begin{matrix}
-b_{11} &amp; b_{12} \ b_{21} &amp; b_{22}  \ b_{31} &amp; b_{32}
+b_{11} &amp; b_{12} \\ b_{21} &amp; b_{22}  \\ b_{31} &amp; b_{32}
 \end{matrix}
 \right]
-\end{equation}</p>
-</section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="begin-equation-ab-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-b-11-b-12-b-21-b-22-b-31-b-32-end-matrix-right">
-<h1>\begin{equation}
+\end{equation}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{equation}
 AB =
 \left[
 \begin{matrix}
-a_{11} &amp; a_{12} &amp; a_{13} \ a_{21} &amp; a_{22} &amp; a_{23}
+a_{11} &amp; a_{12} &amp; a_{13} \\ a_{21} &amp; a_{22} &amp; a_{23}
 \end{matrix}
 \right]
 \left[
 \begin{matrix}
-b_{11} &amp; b_{12} \ b_{21} &amp; b_{22}  \ b_{31} &amp; b_{32}
+b_{11} &amp; b_{12} \\ b_{21} &amp; b_{22}  \\ b_{31} &amp; b_{32}
 \end{matrix}
-\right]<a class="headerlink" href="#begin-equation-ab-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-b-11-b-12-b-21-b-22-b-31-b-32-end-matrix-right" title="Link to this heading">#</a></h1>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="left-begin-matrix-overrightarrow-a-1-cdot-overrightarrow-b-1-overrightarrow-a-1-cdot-overrightarrow-b-2-overrightarrow-a-2-cdot-overrightarrow-b-1-overrightarrow-a-2-cdot-overrightarrow-b-2-end-matrix-right">
-<h1>\left[
+\right]
+=
+\left[
 \begin{matrix}
-\overrightarrow{a_{1}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{1}} \cdot \overrightarrow{b_{2}} \ \overrightarrow{a_{2}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{2}} \cdot \overrightarrow{b_{2}}
+\overrightarrow{a_{1}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{1}} \cdot \overrightarrow{b_{2}} \\ \overrightarrow{a_{2}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{2}} \cdot \overrightarrow{b_{2}}
 \end{matrix}
-\right]<a class="headerlink" href="#left-begin-matrix-overrightarrow-a-1-cdot-overrightarrow-b-1-overrightarrow-a-1-cdot-overrightarrow-b-2-overrightarrow-a-2-cdot-overrightarrow-b-1-overrightarrow-a-2-cdot-overrightarrow-b-2-end-matrix-right" title="Link to this heading">#</a></h1>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="left-begin-matrix-c-11-c-12-c-21-c-22-end-matrix-right">
-<h1>\left[
+\right]
+=
+\left[
 \begin{matrix}
-c_{11} &amp; c_{12} \ c_{21} &amp; c_{22}
+c_{11} &amp; c_{12} \\ c_{21} &amp; c_{22}
 \end{matrix}
-\right]<a class="headerlink" href="#left-begin-matrix-c-11-c-12-c-21-c-22-end-matrix-right" title="Link to this heading">#</a></h1>
-<p>C
-\end{equation}</p>
-<p>The components of C are therefore given by <span class="math notranslate nohighlight">\( c_{ij} = a_{i} \cdot b_{j} \)</span></p>
+\right]
+=
+C
+\end{equation}
+\end{split}\]</div>
+<p>The components of <span class="math notranslate nohighlight">\(C\)</span> are therefore given by <span class="math notranslate nohighlight">\( c_{ij} = a_{i} \cdot b_{j} \)</span></p>
 <p>In this case, the product BA also exists. However, it is very important to understand that matrix multiplication does not commute: <span class="math notranslate nohighlight">\( AB \neq BA.\)</span></p>
-<hr class="docutils" />
+<p><strong>Code</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define Vectors</span>
+<span class="n">a_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">a_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">]])</span>
+
+<span class="n">b_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">]])</span>
+<span class="n">b_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">]])</span>
+
+<span class="c1"># Define the matrices</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">a_1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">a_2</span><span class="o">.</span><span class="n">T</span><span class="p">])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">b_1</span><span class="p">,</span> <span class="n">b_2</span><span class="p">])</span>
+
+<span class="c1"># Calculate the matrix product</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">B</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A * B&#39;</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a_1 * b_1&#39;</span><span class="p">,</span> <span class="n">a_1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a_1 * b_2&#39;</span><span class="p">,</span> <span class="n">a_1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a_2 * b_1&#39;</span><span class="p">,</span> <span class="n">a_2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a_2 * b_2&#39;</span><span class="p">,</span> <span class="n">a_2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b_2</span><span class="p">)</span>
+
+<span class="c1"># Calculate the matrix product in reverse order</span>
+<span class="n">C_reverse</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">A</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;B * A&#39;</span><span class="p">,</span> <span class="n">C_reverse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A * B [[ 50  68]
+ [122 167]]
+
+a_1 * b_1 [[50]]
+a_1 * b_2 [[68]]
+a_2 * b_1 [[122]]
+a_2 * b_2 [[167]]
+
+B * A [[47 64 81]
+ [52 71 90]
+ [57 78 99]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="exercise-2">
-<h2>Exercise 2:<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h2>
-<p><strong>Let D be a 4x2 matrix and E be a 2x7 matrix, what are the dimensions of DE? What are the dimensions of ED?</strong></p>
-<hr class="docutils" />
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
+<p>Let D be a 4x2 matrix and E be a 2x7 matrix, what are the dimensions of DE? What are the dimensions of ED?</p>
+<details><summary><b>Solution</b></summary>
+<ul class="simple">
+<li><p>The dimensions of DE are (4, 7)</p></li>
+<li><p>ED is not defined since the inner dimensions (7 and 4) don’t match.</p></li>
+</ul>
+</details></section>
 </section>
 </section>
 
@@ -1001,7 +1011,6 @@ c_{11} &amp; c_{12} \ c_{21} &amp; c_{22}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Scalars, Vectors, and Matrices</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-matrix-operations">Vector &amp; Matrix Operations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
@@ -1012,37 +1021,10 @@ c_{11} &amp; c_{12} \ c_{21} &amp; c_{22}
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-of-matrix-and-a-vector-multiplication">Multiplication of Matrix and a Vector Multiplication</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-ab-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-b-11-b-12-b-21-b-22-b-31-b-32-end-matrix-right">\begin{equation}
-AB =
-\left[
-\begin{matrix}
-a_{11} &amp; a_{12} &amp; a_{13} \ a_{21} &amp; a_{22} &amp; a_{23}
-\end{matrix}
-\right]
-\left[
-\begin{matrix}
-b_{11} &amp; b_{12} \ b_{21} &amp; b_{22}  \ b_{31} &amp; b_{32}
-\end{matrix}
-\right]</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-overrightarrow-a-1-cdot-overrightarrow-b-1-overrightarrow-a-1-cdot-overrightarrow-b-2-overrightarrow-a-2-cdot-overrightarrow-b-1-overrightarrow-a-2-cdot-overrightarrow-b-2-end-matrix-right">\left[
-\begin{matrix}
-\overrightarrow{a_{1}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{1}} \cdot \overrightarrow{b_{2}} \ \overrightarrow{a_{2}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{2}} \cdot \overrightarrow{b_{2}}
-\end{matrix}
-\right]</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-c-11-c-12-c-21-c-22-end-matrix-right">\left[
-\begin{matrix}
-c_{11} &amp; c_{12} \ c_{21} &amp; c_{22}
-\end{matrix}
-\right]</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2:</a></li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
