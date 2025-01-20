@@ -12,5 +12,5 @@ Computational modeling in psychology and cognitive neuroscience uses a variety o
 
 ## Additional Resources
 
-[Linear Algebra](https://www.deeplearningbook.org/contents/linear_algebra.html)
-[Deep Learning Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
+- [Linear Algebra](https://www.deeplearningbook.org/contents/linear_algebra.html)
+- [Deep Learning Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
