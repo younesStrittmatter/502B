@@ -62,7 +62,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Mathematics Primer/notebooks/Lab4_2021_MathPrimerAndPerceptrons';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Mathematics Primers/notebooks/Lab4_2021_MathPrimerAndPerceptrons';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -171,13 +171,6 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../intro.html">Mathematics Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="1%20Scalars%2C%20Vectors%2C%20and%20Matrices.html">Scalars, Vectors, and Matrices</a></li>
-
-
-
-</ul>
-</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../Dynamics%20in%20Perception/intro.html">Dynamics in Perception</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../Dynamics%20in%20Perception/notebooks/1%20Hebbian%20Learning.html">Hebbian Learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../Dynamics%20in%20Perception/notebooks/2%20Hopfield%20Networks.html">Hopfield Networks</a></li>
@@ -244,7 +237,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book/content/Mathematics Primer/notebooks/Lab4_2021_MathPrimerAndPerceptrons.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book/content/Mathematics Primers/notebooks/Lab4_2021_MathPrimerAndPerceptrons.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -290,7 +283,7 @@
       
       
       
-      <li><a href="../../../_sources/content/Mathematics Primer/notebooks/Lab4_2021_MathPrimerAndPerceptrons.ipynb" target="_blank"
+      <li><a href="../../../_sources/content/Mathematics Primers/notebooks/Lab4_2021_MathPrimerAndPerceptrons.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -514,10 +507,10 @@ Requirement already satisfied: scipy&lt;1.15,&gt;=1.7.3 in /Users/younesstrittma
 Requirement already satisfied: toposort&lt;1.11 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.10)
 Requirement already satisfied: modeci-mdf&lt;0.5,&gt;=0.4.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.4.10)
 Requirement already satisfied: torch&lt;2.6.0,&gt;=1.10.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (2.5.1)
+Requirement already satisfied: xarray in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from fastkde&lt;2.0.2,&gt;=2.0.0-&gt;psyneulink) (2025.1.1)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: xarray in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from fastkde&lt;2.0.2,&gt;=2.0.0-&gt;psyneulink) (2025.1.1)
-Requirement already satisfied: bokeh&gt;=0.12.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.6.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: bokeh&gt;=0.12.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.6.2)
 Requirement already satisfied: ipywidgets&gt;=7.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (8.1.5)
 Requirement already satisfied: jupyter in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.1.1)
 Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (1.3.1)
@@ -583,11 +576,11 @@ Requirement already satisfied: pexpect&gt;4.3 in /Users/younesstrittmatter/Docum
 Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.48)
 Requirement already satisfied: stack_data in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.6.3)
 Requirement already satisfied: joblib&gt;=1.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=1.1-&gt;skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.4.2)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=1.1-&gt;skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (3.5.0)
+Requirement already satisfied: humanfriendly&gt;=9.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from coloredlogs-&gt;onnxruntime-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (10.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=1.1-&gt;skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (3.5.0)
-Requirement already satisfied: humanfriendly&gt;=9.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from coloredlogs-&gt;onnxruntime-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (10.0)
-Requirement already satisfied: appnope in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: appnope in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.4)
 Requirement already satisfied: debugpy&gt;=1.6.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.8.12)
 Requirement already satisfied: jupyter-client&gt;=6.1.12 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (8.6.3)
 Requirement already satisfied: jupyter-core!=5.0.*,&gt;=4.12 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (5.7.2)
@@ -620,9 +613,7 @@ Requirement already satisfied: h11&lt;0.15,&gt;=0.13 in /Users/younesstrittmatte
 Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jedi&gt;=0.16-&gt;ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.8.4)
 Requirement already satisfied: platformdirs&gt;=2.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-core!=5.0.*,&gt;=4.12-&gt;ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.3.6)
 Requirement already satisfied: argon2-cffi&gt;=21.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (23.1.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: jupyter-events&gt;=0.11.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.11.0)
+Requirement already satisfied: jupyter-events&gt;=0.11.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.11.0)
 Requirement already satisfied: jupyter-server-terminals&gt;=0.4.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.5.3)
 Requirement already satisfied: overrides&gt;=5.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (7.7.0)
 Requirement already satisfied: prometheus-client&gt;=0.9 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.21.1)
@@ -633,7 +624,9 @@ Requirement already satisfied: babel&gt;=2.10 in /Users/younesstrittmatter/Docum
 Requirement already satisfied: json5&gt;=0.9.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.10.0)
 Requirement already satisfied: jsonschema&gt;=4.18.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.23.0)
 Requirement already satisfied: requests&gt;=2.31 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.32.3)
-Requirement already satisfied: fastjsonschema&gt;=2.15 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbformat&gt;=5.7-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.21.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fastjsonschema&gt;=2.15 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbformat&gt;=5.7-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.21.1)
 Requirement already satisfied: ptyprocess&gt;=0.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pexpect&gt;4.3-&gt;ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.7.0)
 Requirement already satisfied: wcwidth in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.13)
 Requirement already satisfied: soupsieve&gt;1.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from beautifulsoup4-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.6)
@@ -642,15 +635,15 @@ Requirement already satisfied: asttokens&gt;=2.1.0 in /Users/younesstrittmatter/
 Requirement already satisfied: pure-eval in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.3)
 Requirement already satisfied: sniffio&gt;=1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from anyio-&gt;httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.1)
 Requirement already satisfied: argon2-cffi-bindings in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (21.2.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2024.10.1)
+Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2024.10.1)
 Requirement already satisfied: referencing&gt;=0.28.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.36.1)
 Requirement already satisfied: rpds-py&gt;=0.7.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.22.3)
 Requirement already satisfied: python-json-logger&gt;=2.0.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.2.1)
 Requirement already satisfied: rfc3339-validator in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.4)
 Requirement already satisfied: rfc3986-validator&gt;=0.1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.1)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.4.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.4.1)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.3.0)
 Requirement already satisfied: fqdn in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.5.1)
 Requirement already satisfied: isoduration in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (20.11.0)
@@ -658,10 +651,10 @@ Requirement already satisfied: jsonpointer&gt;1.13 in /Users/younesstrittmatter/
 Requirement already satisfied: uri-template in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.0)
 Requirement already satisfied: webcolors&gt;=24.6.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (24.11.1)
 Requirement already satisfied: cffi&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.17.1)
+Requirement already satisfied: pycparser in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.22)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pycparser in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.22)
-Requirement already satisfied: arrow&gt;=0.15.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: arrow&gt;=0.15.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.0)
 Requirement already satisfied: types-python-dateutil&gt;=2.8.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from arrow&gt;=0.15.0-&gt;isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.9.0.20241206)
 </pre></div>
 </div>
@@ -1110,7 +1103,7 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/ec93fecaefb7fd2b14094fb33dcce9b989e3ee8955bcd179174f57a56f5d73b1.png" src="../../../_images/ec93fecaefb7fd2b14094fb33dcce9b989e3ee8955bcd179174f57a56f5d73b1.png" />
+<img alt="../../../_images/d851d60230610b6c6487ea923f461085d0b9c812cf587f62b6c433fb6184b22a.png" src="../../../_images/d851d60230610b6c6487ea923f461085d0b9c812cf587f62b6c433fb6184b22a.png" />
 </div>
 </div>
 </section>
@@ -1254,7 +1247,7 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 <span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 <span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
 
-<span class="nn">File &lt;@beartype(psyneulink.core.components.mechanisms.processing.transfermechanism.TransferMechanism.__init__) at 0x2954d3e20&gt;:176,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_11095217456, __beartype_get_violation, __beartype_conf, __beartype_object_6260084992, __beartype_object_4765420992, __beartype_object_4359805256, __beartype_object_11095443824, __beartype_object_4359805368, __beartype_object_11095443120, __beartype_object_11095442416, __beartype_object_11095442800, __beartype_object_11095027712, __beartype_object_6237934528, __beartype_object_6260148624, __beartype_object_6260088368, __beartype_object_6260088496, __beartype_object_6260148704, __beartype_object_6260088560, __beartype_object_6260148784, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
+<span class="nn">File &lt;@beartype(psyneulink.core.components.mechanisms.processing.transfermechanism.TransferMechanism.__init__) at 0x157a2fec0&gt;:176,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_5764328208, __beartype_get_violation, __beartype_conf, __beartype_object_5451631808, __beartype_object_4908011520, __beartype_object_4394506568, __beartype_object_5765270768, __beartype_object_4394506680, __beartype_object_5765270704, __beartype_object_5765280304, __beartype_object_5765280112, __beartype_object_5764212096, __beartype_object_5454097280, __beartype_object_5451696448, __beartype_object_5451634928, __beartype_object_5451634992, __beartype_object_5451696528, __beartype_object_5451635056, __beartype_object_5451696608, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
 
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/mechanisms/processing/transfermechanism.py:1321,</span> in <span class="ni">TransferMechanism.__init__</span><span class="nt">(self, default_variable, input_shapes, input_ports, function, noise, clip, integrator_mode, integrator_function, initial_value, integration_rate, on_resume_integrator_mode, termination_measure, termination_threshold, termination_comparison_op, output_ports, params, name, prefs, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1317</span> <span class="n">initial_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_arg_initial_value</span><span class="p">(</span><span class="n">initial_value</span><span class="p">)</span>
@@ -1511,7 +1504,7 @@ E_{i} =
         },
         kernelOptions: {
             name: "python3",
-            path: "./content/Mathematics Primer/notebooks"
+            path: "./content/Mathematics Primers/notebooks"
         },
         predefinedOutput: true
     }
