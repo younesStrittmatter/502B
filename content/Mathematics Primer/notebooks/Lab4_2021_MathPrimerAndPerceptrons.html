@@ -1,0 +1,1696 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab4: Math Primer and Simple Neural Networks &#8212; 502B</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Mathematics Primer/notebooks/Lab4_2021_MathPrimerAndPerceptrons';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.svg" class="logo__image only-light" alt="502B - Home"/>
+    <img src="../../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="502B - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    From Molecules to Systems to Behavior
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro.html">Mathematics Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="1%20Scalars%2C%20Vectors%2C%20and%20Matrices.html">Scalars, Vectors, and Matrices</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Dynamics%20in%20Perception/intro.html">Dynamics in Perception</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Dynamics%20in%20Perception/notebooks/1%20Hebbian%20Learning.html">Hebbian Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Dynamics%20in%20Perception/notebooks/2%20Hopfield%20Networks.html">Hopfield Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Dynamics%20in%20Perception/notebooks/3%20Dynamic%20Systems%20and%20Bistable%20Perception.html">Dynamic Systems and Bistable Perception</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chapter_2/intro.html">Decision-Making</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book/content/Mathematics Primer/notebooks/Lab4_2021_MathPrimerAndPerceptrons.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/younesStrittmatter/502B" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/Mathematics Primer/notebooks/Lab4_2021_MathPrimerAndPerceptrons.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab4: Math Primer and Simple Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lab4: Math Primer and Simple Neural Networks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-mathematics-primer-for-psyneulink">Part 1: Mathematics Primer for PsyNeuLink</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#scalars-vectors-matrices">Scalars, Vectors, &amp; Matrices</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-matrix-operations">Vector &amp; Matrix Operations</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-left-begin-matrix-a-1-a-2-a-3-end-matrix-right-left-begin-matrix-b-1-b-2-b-3-end-matrix-right">\begin{equation}
+\left[
+\begin{matrix}
+a_{1} \ a_{2} \ a_{3}
+\end{matrix}
+\right]
++
+\left[
+\begin{matrix}
+b_{1} \ b_{2} \ b_{3}
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-alpha-left-begin-matrix-a-1-a-2-a-3-end-matrix-right">\begin{equation}
+\alpha \left[
+\begin{matrix}
+a_{1} \ a_{2} \ a_{3}
+\end{matrix}
+\right]</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-a-left-begin-matrix-overrightarrow-a-1-t-overrightarrow-a-2-t-end-matrix-right">\begin{equation}
+A =
+\left[
+\begin{matrix}
+\overrightarrow{a_{1}}^T \ \overrightarrow{a_{2}}^T
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-ax-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-x-1-x-2-x-3-end-matrix-right">\begin{equation}
+Ax =
+\left[
+\begin{matrix}
+a_{11} &amp; a_{12} &amp; a_{13} \ a_{21} &amp; a_{22} &amp; a_{23}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+x_{1}\x_{2}\x_{3}
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-overrightarrow-a-1-cdot-x-overrightarrow-a-2-cdot-x-overrightarrow-a-3-cdot-x-end-matrix-right">\left[
+\begin{matrix}
+\overrightarrow{a_{1}} \cdot x \ \overrightarrow{a_{2}} \cdot x \ \overrightarrow{a_{3}} \cdot x
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-y-1-y-2-y-3-end-matrix-right">\left[
+\begin{matrix}
+y_{1} \ y_{2} \ y_{3}
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-ab-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-b-11-b-12-b-21-b-22-b-31-b-32-end-matrix-right">\begin{equation}
+AB =
+\left[
+\begin{matrix}
+a_{11} &amp; a_{12} &amp; a_{13} \ a_{21} &amp; a_{22} &amp; a_{23}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+b_{11} &amp; b_{12} \ b_{21} &amp; b_{22}  \ b_{31} &amp; b_{32}
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-overrightarrow-a-1-cdot-overrightarrow-b-1-overrightarrow-a-1-cdot-overrightarrow-b-2-overrightarrow-a-2-cdot-overrightarrow-b-1-overrightarrow-a-2-cdot-overrightarrow-b-2-end-matrix-right">\left[
+\begin{matrix}
+\overrightarrow{a_{1}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{1}} \cdot \overrightarrow{b_{2}} \ \overrightarrow{a_{2}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{2}} \cdot \overrightarrow{b_{2}}
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-c-11-c-12-c-21-c-22-end-matrix-right">\left[
+\begin{matrix}
+c_{11} &amp; c_{12} \ c_{21} &amp; c_{22}
+\end{matrix}
+\right]</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-function">Logistic Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-step-function">Logistic Step Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-offset-bias">Gain, Offset, &amp; Bias</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-perceptron-and-xor">Part 2: Perceptron and XOR</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-artificial-neural-networks"><a id="m0"> History of Artificial Neural Networks</a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-and-gate"><a id="m1">Learning the AND Gate</a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-learning-the-or-gate"><a id="e3">Exercise 3:  Learning the OR Gate</a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pnl-two-layer-network"><a id="m2"> PNL Two Layer Network</a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-limitations-of-the-perceptron-learning-rule"><a id="e3">Exercise 4: Limitations of the Perceptron Learning Rule</a></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build">BUILD</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab4-math-primer-and-simple-neural-networks">
+<h1>Lab4: Math Primer and Simple Neural Networks<a class="headerlink" href="#lab4-math-primer-and-simple-neural-networks" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>psyneulink
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: psyneulink in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (0.15.3.0)
+Requirement already satisfied: beartype&lt;0.20.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.19.0)
+Requirement already satisfied: dill&lt;0.3.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.3.9)
+Requirement already satisfied: fastkde&lt;2.0.2,&gt;=2.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (2.0.1)
+Requirement already satisfied: graph-scheduler&lt;1.3.0,&gt;=1.2.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.2.2)
+Requirement already satisfied: graphviz&lt;0.21.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.20.3)
+Requirement already satisfied: grpcio&lt;1.69.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.68.1)
+Requirement already satisfied: leabra-psyneulink&lt;0.3.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.3.2)
+Requirement already satisfied: llvmlite&lt;0.44 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.43.0)
+Requirement already satisfied: matplotlib&lt;3.7.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (3.7.5)
+Requirement already satisfied: networkx&lt;3.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (3.4.2)
+Requirement already satisfied: numpy&lt;1.26.5,&gt;=1.21.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.26.4)
+Requirement already satisfied: optuna&lt;4.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (4.1.0)
+Requirement already satisfied: packaging&lt;25.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (24.2)
+Requirement already satisfied: pandas&lt;2.2.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (2.2.3)
+Requirement already satisfied: pillow&lt;11.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (11.0.0)
+Requirement already satisfied: pint&lt;0.22.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.21.1)
+Requirement already satisfied: protobuf&lt;3.20.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (3.20.2)
+Requirement already satisfied: rich&lt;10.13,&gt;=10.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (10.12.0)
+Requirement already satisfied: scipy&lt;1.15,&gt;=1.7.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.14.1)
+Requirement already satisfied: toposort&lt;1.11 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.10)
+Requirement already satisfied: modeci-mdf&lt;0.5,&gt;=0.4.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.4.10)
+Requirement already satisfied: torch&lt;2.6.0,&gt;=1.10.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (2.5.1)
+Requirement already satisfied: xarray in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from fastkde&lt;2.0.2,&gt;=2.0.0-&gt;psyneulink) (2025.1.1)
+Requirement already satisfied: bokeh&gt;=0.12.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.6.2)
+Requirement already satisfied: ipywidgets&gt;=7.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (8.1.5)
+Requirement already satisfied: jupyter in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.1.1)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (1.3.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: cycler&gt;=0.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (4.55.3)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (1.4.8)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (3.2.1)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (2.9.0.post0)
+Requirement already satisfied: h5py in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (3.12.1)
+Requirement already satisfied: onnxruntime in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.20.1)
+Requirement already satisfied: onnx in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.17.0)
+Requirement already satisfied: skl2onnx in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.18.0)
+Requirement already satisfied: attrs&gt;=21.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.3.0)
+Requirement already satisfied: cattrs in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.1.2)
+Requirement already satisfied: modelspec&lt;0.4,&gt;=0.3.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (0.3.5)
+Requirement already satisfied: glom in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.11.0)
+Requirement already satisfied: alembic&gt;=1.5.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (1.14.0)
+Requirement already satisfied: colorlog in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (6.9.0)
+Requirement already satisfied: sqlalchemy&gt;=1.4.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (2.0.37)
+Requirement already satisfied: tqdm in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (4.67.1)
+Requirement already satisfied: PyYAML in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (6.0.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pandas&lt;2.2.4-&gt;psyneulink) (2024.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pandas&lt;2.2.4-&gt;psyneulink) (2024.2)
+Requirement already satisfied: colorama&lt;0.5.0,&gt;=0.4.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from rich&lt;10.13,&gt;=10.1-&gt;psyneulink) (0.4.6)
+Requirement already satisfied: commonmark&lt;0.10.0,&gt;=0.9.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from rich&lt;10.13,&gt;=10.1-&gt;psyneulink) (0.9.1)
+Requirement already satisfied: pygments&lt;3.0.0,&gt;=2.6.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from rich&lt;10.13,&gt;=10.1-&gt;psyneulink) (2.19.1)
+Requirement already satisfied: filelock in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (3.16.1)
+Requirement already satisfied: typing-extensions&gt;=4.8.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (4.12.2)
+Requirement already satisfied: jinja2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (3.1.5)
+Requirement already satisfied: fsspec in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (2024.12.0)
+Requirement already satisfied: sympy==1.13.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (1.13.1)
+Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from sympy==1.13.1-&gt;torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (1.3.0)
+Requirement already satisfied: Mako in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from alembic&gt;=1.5.0-&gt;optuna&lt;4.2.0-&gt;psyneulink) (1.3.8)
+Requirement already satisfied: tornado&gt;=6.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bokeh&gt;=0.12.6-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.4.2)
+Requirement already satisfied: xyzservices&gt;=2021.09.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bokeh&gt;=0.12.6-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2025.1.0)
+Requirement already satisfied: comm&gt;=0.1.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.2)
+Requirement already satisfied: ipython&gt;=6.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (8.31.0)
+Requirement already satisfied: traitlets&gt;=4.3.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (5.14.3)
+Requirement already satisfied: widgetsnbextension~=4.0.12 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.0.13)
+Requirement already satisfied: jupyterlab-widgets~=3.0.12 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.13)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jinja2-&gt;torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (3.0.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pymongo in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (4.10.1)
+Requirement already satisfied: tabulate in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (0.9.0)
+Requirement already satisfied: docstring-parser in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (0.16)
+Requirement already satisfied: six&gt;=1.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&lt;3.7.6-&gt;psyneulink) (1.17.0)
+Requirement already satisfied: boltons&gt;=19.3.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from glom-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.1.0)
+Requirement already satisfied: face&gt;=20.1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from glom-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.0.0)
+Requirement already satisfied: notebook in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (7.3.2)
+Requirement already satisfied: jupyter-console in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.6.3)
+Requirement already satisfied: nbconvert in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (7.16.5)
+Requirement already satisfied: ipykernel in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.29.5)
+Requirement already satisfied: jupyterlab in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.3.4)
+Requirement already satisfied: coloredlogs in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from onnxruntime-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (15.0.1)
+Requirement already satisfied: flatbuffers in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from onnxruntime-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.12.23)
+Requirement already satisfied: scikit-learn&gt;=1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.6.1)
+Requirement already satisfied: onnxconverter-common&gt;=1.7.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.14.0)
+Requirement already satisfied: decorator in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (5.1.1)
+Requirement already satisfied: jedi&gt;=0.16 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.19.2)
+Requirement already satisfied: matplotlib-inline in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.7)
+Requirement already satisfied: pexpect&gt;4.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.9.0)
+Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.48)
+Requirement already satisfied: stack_data in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.6.3)
+Requirement already satisfied: joblib&gt;=1.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=1.1-&gt;skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.4.2)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=1.1-&gt;skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (3.5.0)
+Requirement already satisfied: humanfriendly&gt;=9.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from coloredlogs-&gt;onnxruntime-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (10.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: appnope in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.4)
+Requirement already satisfied: debugpy&gt;=1.6.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.8.12)
+Requirement already satisfied: jupyter-client&gt;=6.1.12 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (8.6.3)
+Requirement already satisfied: jupyter-core!=5.0.*,&gt;=4.12 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (5.7.2)
+Requirement already satisfied: nest-asyncio in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.6.0)
+Requirement already satisfied: psutil in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.1.1)
+Requirement already satisfied: pyzmq&gt;=24 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (26.2.0)
+Requirement already satisfied: async-lru&gt;=1.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.0.4)
+Requirement already satisfied: httpx&gt;=0.25.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.28.1)
+Requirement already satisfied: jupyter-lsp&gt;=2.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.2.5)
+Requirement already satisfied: jupyter-server&lt;3,&gt;=2.4.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.15.0)
+Requirement already satisfied: jupyterlab-server&lt;3,&gt;=2.27.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.27.3)
+Requirement already satisfied: notebook-shim&gt;=0.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.4)
+Requirement already satisfied: setuptools&gt;=40.8.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (74.1.2)
+Requirement already satisfied: beautifulsoup4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.12.3)
+Requirement already satisfied: bleach!=5.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.2.0)
+Requirement already satisfied: defusedxml in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.7.1)
+Requirement already satisfied: jupyterlab-pygments in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.3.0)
+Requirement already satisfied: mistune&lt;4,&gt;=2.0.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.1.0)
+Requirement already satisfied: nbclient&gt;=0.5.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.10.2)
+Requirement already satisfied: nbformat&gt;=5.7 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (5.10.4)
+Requirement already satisfied: pandocfilters&gt;=1.4.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.5.1)
+Requirement already satisfied: dnspython&lt;3.0.0,&gt;=1.16.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pymongo-&gt;modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (2.7.0)
+Requirement already satisfied: webencodings in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bleach!=5.0.0-&gt;bleach[css]!=5.0.0-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.5.1)
+Requirement already satisfied: tinycss2&lt;1.5,&gt;=1.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.4.0)
+Requirement already satisfied: anyio in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.8.0)
+Requirement already satisfied: certifi in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2024.12.14)
+Requirement already satisfied: httpcore==1.* in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.0.7)
+Requirement already satisfied: idna in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.10)
+Requirement already satisfied: h11&lt;0.15,&gt;=0.13 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpcore==1.*-&gt;httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.14.0)
+Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jedi&gt;=0.16-&gt;ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.8.4)
+Requirement already satisfied: platformdirs&gt;=2.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-core!=5.0.*,&gt;=4.12-&gt;ipykernel-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.3.6)
+Requirement already satisfied: argon2-cffi&gt;=21.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (23.1.0)
+Requirement already satisfied: jupyter-events&gt;=0.11.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.11.0)
+Requirement already satisfied: jupyter-server-terminals&gt;=0.4.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.5.3)
+Requirement already satisfied: overrides&gt;=5.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (7.7.0)
+Requirement already satisfied: prometheus-client&gt;=0.9 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.21.1)
+Requirement already satisfied: send2trash&gt;=1.8.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.8.3)
+Requirement already satisfied: terminado&gt;=0.8.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.18.1)
+Requirement already satisfied: websocket-client&gt;=1.7 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.8.0)
+Requirement already satisfied: babel&gt;=2.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.16.0)
+Requirement already satisfied: json5&gt;=0.9.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.10.0)
+Requirement already satisfied: jsonschema&gt;=4.18.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.23.0)
+Requirement already satisfied: requests&gt;=2.31 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.32.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fastjsonschema&gt;=2.15 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbformat&gt;=5.7-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.21.1)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pexpect&gt;4.3-&gt;ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.7.0)
+Requirement already satisfied: wcwidth in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.13)
+Requirement already satisfied: soupsieve&gt;1.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from beautifulsoup4-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.6)
+Requirement already satisfied: executing&gt;=1.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.1.0)
+Requirement already satisfied: asttokens&gt;=2.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.0)
+Requirement already satisfied: pure-eval in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=6.1.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.3)
+Requirement already satisfied: sniffio&gt;=1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from anyio-&gt;httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.1)
+Requirement already satisfied: argon2-cffi-bindings in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (21.2.0)
+Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2024.10.1)
+Requirement already satisfied: referencing&gt;=0.28.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.36.1)
+Requirement already satisfied: rpds-py&gt;=0.7.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.22.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-json-logger&gt;=2.0.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.2.1)
+Requirement already satisfied: rfc3339-validator in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.4)
+Requirement already satisfied: rfc3986-validator&gt;=0.1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.1)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.4.1)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.3.0)
+Requirement already satisfied: fqdn in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.5.1)
+Requirement already satisfied: isoduration in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (20.11.0)
+Requirement already satisfied: jsonpointer&gt;1.13 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.0)
+Requirement already satisfied: uri-template in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.0)
+Requirement already satisfied: webcolors&gt;=24.6.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (24.11.1)
+Requirement already satisfied: cffi&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.17.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pycparser in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.22)
+Requirement already satisfied: arrow&gt;=0.15.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.0)
+Requirement already satisfied: types-python-dateutil&gt;=2.8.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from arrow&gt;=0.15.0-&gt;isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.9.0.20241206)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.2</span> -&gt; <span class=" -Color -Color-Green">24.3.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span> <span class="k">as</span> <span class="n">la</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.axes</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ax</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits</span><span class="w"> </span><span class="kn">import</span> <span class="n">mplot3d</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psyneulink</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pnl</span>
+
+<span class="c1"># This couple of lines sets our color palette</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sb</span>
+<span class="n">sb</span><span class="o">.</span><span class="n">palplot</span><span class="p">(</span><span class="n">sb</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">sb</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">sb</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Imports Successful&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This will be our color palette&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Imports Successful
+This will be our color palette
+</pre></div>
+</div>
+<img alt="../../../_images/ca43c825fc974629cf185502f5f6f696fc7308da496d5ab5001f36d365550207.png" src="../../../_images/ca43c825fc974629cf185502f5f6f696fc7308da496d5ab5001f36d365550207.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="part-1-mathematics-primer-for-psyneulink">
+<h1>Part 1: Mathematics Primer for PsyNeuLink<a class="headerlink" href="#part-1-mathematics-primer-for-psyneulink" title="Link to this heading">#</a></h1>
+<p>Computational modeling in psychology and cognitive neuroscience uses a variety of math.  This primer reviews some useful concepts and equations, including vectors, matrices, derivatives, and logistic functions.</p>
+<p>Here are some additional resources overlapping and going beyond what is covered here:</p>
+<p><a class="reference external" href="https://www.deeplearningbook.org/contents/linear_algebra.html">Linear Algeabra</a></p>
+<p><a class="reference external" href="https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning">Deep Learning Cheatsheet</a></p>
+<p>Neural networks are inspired by real neurons, simplified to model two key properties: firing and connectivity.  Artificial neurons can be active or inactive and connected to other artificial neurons by weights.  Each neuron receives a set of inputs and applies an operation (typically non-linear) to produce a single output.  That output is then sent via weighted connections to other neurons.  Neurons are usually grouped into layers.  Layers transform inputs using weights and biases, which can be pre-set or learned through multiple iterations and used to extract qualitatively meaningful features of the raw data.</p>
+<p>In order to understand how artificial neurons and neural networks work, we need to understand the math that they use.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="scalars-vectors-matrices">
+<h1>Scalars, Vectors, &amp; Matrices<a class="headerlink" href="#scalars-vectors-matrices" title="Link to this heading">#</a></h1>
+<p>A <strong>scalar</strong> is a number used to quantify magnitude (e.g. temperature), while a <strong>vector</strong> is a number used to quantify magnitude and direction (e.g. wind).</p>
+<p>Vectors are typically formatted as a list of numbers with each number corresponding to one direction.  Familiar Cartesian coordinates have 2 dimensions, X &amp; Y, and a vector in Cartesian coordinates is 1x2, a one dimensional list with two numbers.   For example, south-north is the Y axis and west-east is the X axis.  The vector 3, 4 indicates wind moving both 3 mph north and 4 mph west, but the combination of these components is a vector of wind moving 5 mph northwest (thanks to the pythagorean theorem, a^2 + b^2 = c^2).  The magnitude is the distance from the origin 0,0, in this case 5.  The vector itself is one dimensional and can be depicted as an arrow starting at 0,0 and extending to 3,4 in these Cartesian coordinates.<br />
+<br>
+(<em><strong>Note:</strong></em> A number with magnitude AND 2 or more directions is called a <strong>tensor</strong>.  One way to think of a basic tensor is pinching and pulling a rubber sheet toward you: there is a magnitude of force pulling back toward the initial position (you could use this to launch a pebble like a slingshot) and there is also a magnidue of tension in the rubber sheet itself that will contract back when you let go.  Tensors are used to describe gravity in general relativity.<br />
+<br>
+Vectors are typically formatted as one-dimensional data structures or lists, 1xN, with N as the length of the list.  A <strong>matrix</strong> is a two dimensional, NxN, data structures.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="vector-matrix-operations">
+<h1>Vector &amp; Matrix Operations<a class="headerlink" href="#vector-matrix-operations" title="Link to this heading">#</a></h1>
+<p>In this section, we will briefly discuss matrix and vector operations. If you are already familiar with them, feel free to skip or skim as you see fit.</p>
+<p>Like scalars, vectors and matrices of numbers can be added and multiplied. However, these operations differ from their scalar counterparts, and are heavily dependent on dimensionality.  Matrix and vector dimensions are given as (r x c) where r is the number of rows, and c is the number of columns.  Individual vectors are 1 dimensional and notated as a single row (1 x c) or as a single column (r x 1).</p>
+<p>For example:</p>
+<p>\begin{equation}
+a =
+\left[
+\begin{matrix}
+a_{1} &amp; a_{2} &amp; a_{3}
+\end{matrix}
+\right]
+;  b =
+\left[
+\begin{matrix}
+b_{1} \ b_{2} \ b_{3}
+\end{matrix}
+\right]
+; C =
+\left[
+\begin{matrix}
+C_{11} &amp; C_{12} &amp; C_{13} \ C_{21} &amp; C_{22} &amp; C_{23} \ C_{31} &amp; C_{32} &amp; C_{33}
+\end{matrix}
+\right]
+\end{equation}</p>
+<p>Vector <span class="math notranslate nohighlight">\(a\)</span> Is a [1x3] vector, called a row vector. Vector <span class="math notranslate nohighlight">\(b\)</span> is a [3x1] vector, called a column vector. C is a 3x3 matrix. The components of a matrix C are denoted Cij , where i is the row index and j is the column index, so ij gives the position of the component in the matrix.</p>
+<p>When performing operations on vectors, it is easiest to represent a vector as a column vector, and a corresponding row vector as its “transpose”.</p>
+<p>\begin{equation}
+a=
+\left[
+\begin{matrix}
+a_{1} \ a_{2} \ a_{3}
+\end{matrix}
+\right]
+; a^T=
+\left[
+\begin{matrix}
+a_{1} &amp; a_{2} &amp; a_{3}
+\end{matrix}
+\right]
+\end{equation}</p>
+<p>Matrices of the same dimension can be added component-wise, and the result is a new matrix of the same dimension.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="begin-equation-left-begin-matrix-a-1-a-2-a-3-end-matrix-right-left-begin-matrix-b-1-b-2-b-3-end-matrix-right">
+<h1>\begin{equation}
+\left[
+\begin{matrix}
+a_{1} \ a_{2} \ a_{3}
+\end{matrix}
+\right]
++
+\left[
+\begin{matrix}
+b_{1} \ b_{2} \ b_{3}
+\end{matrix}
+\right]<a class="headerlink" href="#begin-equation-left-begin-matrix-a-1-a-2-a-3-end-matrix-right-left-begin-matrix-b-1-b-2-b-3-end-matrix-right" title="Link to this heading">#</a></h1>
+<p>\left[
+\begin{matrix}
+a_{1} + b_{1}\ a_{2} + b_{2} \ a_{3} + b_{3}
+\end{matrix}
+\right]
+\end{equation}</p>
+<p>Matrix subtraction works precisely the same way. A matrix can also be multiplied by a scalar by multiplying every component of a matrix by that scalar.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="begin-equation-alpha-left-begin-matrix-a-1-a-2-a-3-end-matrix-right">
+<h1>\begin{equation}
+\alpha \left[
+\begin{matrix}
+a_{1} \ a_{2} \ a_{3}
+\end{matrix}
+\right]<a class="headerlink" href="#begin-equation-alpha-left-begin-matrix-a-1-a-2-a-3-end-matrix-right" title="Link to this heading">#</a></h1>
+<p>\left[
+\begin{matrix}
+\alpha a_{1} \ \alpha a_{2} \ \alpha a_{3}
+\end{matrix}
+\right]
+\end{equation}</p>
+<p>However, there are multiple types of vector muliplication. Today, we will only treat one type of vector multiplication: the “dot product”, or “inner product”.</p>
+<p>A dot product is the sum of component-wise multiplication of vectors. To perform it, we first multiply each component of the first vector by its corresponding component of the second vector, then we sum the resulting products. The result of a dot product is a scalar.</p>
+<p>\begin{equation}
+c =
+\sum\limits_{i} a_{i} b_{i}
+\end{equation}</p>
+<p>In vector notation, the dot product can be written as follows</p>
+<p>\begin{equation}
+b \cdot a = b^T a =
+\left[
+\begin{matrix}
+b_{1} &amp; b_{2} &amp; b_{3}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+a_{1} \ a_{2} \ a_{3}
+\end{matrix}
+\right]
+=a_{1}b_{1} + a_{2}b_{2} + a_{3}b_{3}<br />
+=c
+\end{equation}</p>
+<p>Note that the product only works if its “inner dimensions”, the number of columns of b and the number of rows of a, are the same.</p>
+<hr class="docutils" />
+<section id="exercise-1">
+<h2>Exercise 1:<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h2>
+<p><strong>What happens if we try to compute a dot product from vectors whose inner dimensions are different?  (Write some code in Python that tries to compute the dot product from vectors with different inner dimensions.  Report and interpret the error.)</strong>  —</p>
+<p>The second notation (showing the row and column) is especially useful when considering matrix multiplication. In the sciences, it is convenient to think of matrices as collections of numbers. However, it is important to note that in mathematics, matrices are data constructs, which can be comprised of numbers or symbols, and their primary operations are governed by their dimension.</p>
+<p>If we wish to multiply a single vector (x) by a set of vectors {A}, rather than doing so individually, we can form the vectors in A into a matrix (which we will also call A), by storing their transposes in the rows of A. Then, we can sequentially compute the dot product of each vector in A with x, and store their results in a new vector, y, which will have the same dimensions as x.</p>
+<p>For example, let there be a set of two vectors
+\begin{equation}
+\overrightarrow{a_{1}}=
+\left[
+\begin{matrix}
+a_{11} \ a_{21} \ a_{31}
+\end{matrix}
+\right]
+\end{equation}</p>
+<p>and its transpose
+\begin{equation}
+\overrightarrow{a_{1}}^T=
+\left[
+\begin{matrix}
+a_{11} &amp; a_{12} &amp; a_{13}
+\end{matrix}
+\right]
+\end{equation}</p>
+<p>.</p>
+<p><span class="math notranslate nohighlight">\( \overrightarrow{a_{2}} \)</span> is similar to <span class="math notranslate nohighlight">\( \overrightarrow{a_{1}}\)</span> .</p>
+<p>Now, let A be</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="begin-equation-a-left-begin-matrix-overrightarrow-a-1-t-overrightarrow-a-2-t-end-matrix-right">
+<h1>\begin{equation}
+A =
+\left[
+\begin{matrix}
+\overrightarrow{a_{1}}^T \ \overrightarrow{a_{2}}^T
+\end{matrix}
+\right]<a class="headerlink" href="#begin-equation-a-left-begin-matrix-overrightarrow-a-1-t-overrightarrow-a-2-t-end-matrix-right" title="Link to this heading">#</a></h1>
+<p>\left[
+\begin{matrix}
+a_{11} &amp; a_{12} &amp; a_{13} \ a_{21} &amp; a_{22} &amp; a_{23}
+\end{matrix}
+\right]
+\end{equation}</p>
+<p>Then the product Ax is</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="begin-equation-ax-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-x-1-x-2-x-3-end-matrix-right">
+<h1>\begin{equation}
+Ax =
+\left[
+\begin{matrix}
+a_{11} &amp; a_{12} &amp; a_{13} \ a_{21} &amp; a_{22} &amp; a_{23}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+x_{1}\x_{2}\x_{3}
+\end{matrix}
+\right]<a class="headerlink" href="#begin-equation-ax-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-x-1-x-2-x-3-end-matrix-right" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="left-begin-matrix-overrightarrow-a-1-cdot-x-overrightarrow-a-2-cdot-x-overrightarrow-a-3-cdot-x-end-matrix-right">
+<h1>\left[
+\begin{matrix}
+\overrightarrow{a_{1}} \cdot x \ \overrightarrow{a_{2}} \cdot x \ \overrightarrow{a_{3}} \cdot x
+\end{matrix}
+\right]<a class="headerlink" href="#left-begin-matrix-overrightarrow-a-1-cdot-x-overrightarrow-a-2-cdot-x-overrightarrow-a-3-cdot-x-end-matrix-right" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="left-begin-matrix-y-1-y-2-y-3-end-matrix-right">
+<h1>\left[
+\begin{matrix}
+y_{1} \ y_{2} \ y_{3}
+\end{matrix}
+\right]<a class="headerlink" href="#left-begin-matrix-y-1-y-2-y-3-end-matrix-right" title="Link to this heading">#</a></h1>
+<p>y
+\end{equation}</p>
+<p>Matrix multiplication is what we use if we want to multiply a set of vectors <span class="math notranslate nohighlight">\({B}\)</span> by the vectors in <span class="math notranslate nohighlight">\(A\)</span>, we can perform a similar operation as before. We store the vectors in <span class="math notranslate nohighlight">\({B}\)</span> in the columns of a matrix (also called <span class="math notranslate nohighlight">\(B\)</span>). Then, we compute the dot product of each vector in the columns of <span class="math notranslate nohighlight">\(B\)</span> with each vector in the rows of <span class="math notranslate nohighlight">\(A\)</span>. We store the results, as we did before, in a new set of column vectors, a matrix <span class="math notranslate nohighlight">\(C\)</span>. <span class="math notranslate nohighlight">\(C\)</span> will have the “outer dimensions” of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> (the same number of rows as <span class="math notranslate nohighlight">\(A\)</span> and the same number of columns as <span class="math notranslate nohighlight">\(B\)</span>).</p>
+<p>For example, let there be two vectors b such that <span class="math notranslate nohighlight">\( \overrightarrow{b_{1}} =
+\left[
+\begin{matrix}
+b_{11} \\ b_{21} \\ b_{31}
+\end{matrix}
+\right] \)</span> and <span class="math notranslate nohighlight">\( \overrightarrow{b_{2}} \)</span> be similar. Then B is given by</p>
+<p>\begin{equation}
+B =
+\left[
+\begin{matrix}
+b_{11} &amp; b_{12} \ b_{21} &amp; b_{22}  \ b_{31} &amp; b_{32}
+\end{matrix}
+\right]
+\end{equation}</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="begin-equation-ab-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-b-11-b-12-b-21-b-22-b-31-b-32-end-matrix-right">
+<h1>\begin{equation}
+AB =
+\left[
+\begin{matrix}
+a_{11} &amp; a_{12} &amp; a_{13} \ a_{21} &amp; a_{22} &amp; a_{23}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+b_{11} &amp; b_{12} \ b_{21} &amp; b_{22}  \ b_{31} &amp; b_{32}
+\end{matrix}
+\right]<a class="headerlink" href="#begin-equation-ab-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-b-11-b-12-b-21-b-22-b-31-b-32-end-matrix-right" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="left-begin-matrix-overrightarrow-a-1-cdot-overrightarrow-b-1-overrightarrow-a-1-cdot-overrightarrow-b-2-overrightarrow-a-2-cdot-overrightarrow-b-1-overrightarrow-a-2-cdot-overrightarrow-b-2-end-matrix-right">
+<h1>\left[
+\begin{matrix}
+\overrightarrow{a_{1}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{1}} \cdot \overrightarrow{b_{2}} \ \overrightarrow{a_{2}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{2}} \cdot \overrightarrow{b_{2}}
+\end{matrix}
+\right]<a class="headerlink" href="#left-begin-matrix-overrightarrow-a-1-cdot-overrightarrow-b-1-overrightarrow-a-1-cdot-overrightarrow-b-2-overrightarrow-a-2-cdot-overrightarrow-b-1-overrightarrow-a-2-cdot-overrightarrow-b-2-end-matrix-right" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="left-begin-matrix-c-11-c-12-c-21-c-22-end-matrix-right">
+<h1>\left[
+\begin{matrix}
+c_{11} &amp; c_{12} \ c_{21} &amp; c_{22}
+\end{matrix}
+\right]<a class="headerlink" href="#left-begin-matrix-c-11-c-12-c-21-c-22-end-matrix-right" title="Link to this heading">#</a></h1>
+<p>C
+\end{equation}</p>
+<p>The components of C are therefore given by <span class="math notranslate nohighlight">\( c_{ij} = a_{i} \cdot b_{j} \)</span></p>
+<p>In this case, the product BA also exists. However, it is very important to understand that matrix multiplication does not commute: <span class="math notranslate nohighlight">\( AB \neq BA.\)</span></p>
+<hr class="docutils" />
+<section id="exercise-2">
+<h2>Exercise 2:<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h2>
+<p><strong>Let D be a 4x2 matrix and E be a 2x7 matrix, what are the dimensions of DE? What are the dimensions of ED?</strong></p>
+</section>
+<hr class="docutils" />
+<section id="logistic-function">
+<h2>Logistic Function<a class="headerlink" href="#logistic-function" title="Link to this heading">#</a></h2>
+<p>The logistic function is useful because it is bounded between 0 and 1, and determined by a few basic parameters: gain, bias, &amp; offset.   Plotting a basic logistic function looks like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_transfer_demo</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Logistic</span><span class="p">(</span><span class="n">gain</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">logistic_transfer_demo</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/cbd731082311ab62ae728e76e4ca28ca9d3f9938bbe18cbb9a8ad4e9544223b7.png" src="../../../_images/cbd731082311ab62ae728e76e4ca28ca9d3f9938bbe18cbb9a8ad4e9544223b7.png" />
+</div>
+</div>
+<p>In the cell below you can plug a single number into this function and get an output value.  Your input corresponds to a point on the x axis, and the output is the corresponding y value (height of the point on the curve above the x you specified).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_transfer_demo</span><span class="o">.</span><span class="n">execute</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.11920292]])
+</pre></div>
+</div>
+</div>
+</div>
+<section id="logistic-step-function">
+<h3>Logistic Step Function<a class="headerlink" href="#logistic-step-function" title="Link to this heading">#</a></h3>
+<p>Gain determines how steep the central portion of the S curve is, with higher values being steeper.  Bias shifts the curve left or right.  You can turn the logistic function effectively into a step function that works as a threshhold by increasing gain.  The step in the step function (where it crosses through 0.5 on the Y axis) is located on the X axis at (offset/gain) + bias.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_transfer_step</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Logistic</span><span class="p">(</span><span class="n">gain</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">offset</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">logistic_transfer_step</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/ffe55be6d31eda828ac68cca9f6d52ecc743bce995b8e9291b239d38d06ec260.png" src="../../../_images/ffe55be6d31eda828ac68cca9f6d52ecc743bce995b8e9291b239d38d06ec260.png" />
+</div>
+</div>
+<p>Negative values of gain mirror reverse the S curve accross the vertical axis, centered at the x value of (offset/gain)+bias.  Below notice that offset/gain is -2 (10/-5), and at an X value of -2 the Y value is 0.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_transfer_mirror</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Logistic</span><span class="p">(</span><span class="n">gain</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">logistic_transfer_mirror</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/45f9c00485c5f325656aa531ea5987dfd026d474a278794048e174d4ae836534.png" src="../../../_images/45f9c00485c5f325656aa531ea5987dfd026d474a278794048e174d4ae836534.png" />
+</div>
+</div>
+</section>
+<section id="gain-offset-bias">
+<h3>Gain, Offset, &amp; Bias<a class="headerlink" href="#gain-offset-bias" title="Link to this heading">#</a></h3>
+<p>Imagine you have a neuron that has to decide whether to fire or not based upon its own parameters and some input.  Let’s say this artificial neuron is a greater-than-0-detector for its input – if the input is greater than 0 it fires, otherwise it will not fire.  Now if the neuron receives input [4] it will fire.  If it receives [-3] it will not fire.  In this simplified scenario, gain is a parameter that multiplies input by some value (e.g. multiply everyting by 2, or by 0.15, or whatever you choose), and bias is a parameter that changes the threshold (e.g. bias -2 shifts the threshold down from 0 to -2, turning the neuron into a greater than -2 detector, while bias +2 shifts the threshold up to 2).</p>
+<p>The actual logistic function is a bit more complicated than this example: within the logistic function bias and gain are parameters in the denominator’s exponent – you don’t need to know the exact equation, but one reason a logistic function is useful is that its output is bounded between 0 and 1.</p>
+<p>Try changing the values of bias, offset, and gain in the two cells above, and see how it impacts the graph (execute the cell two above and then the cell one above to see the effect after you change these parameters).  The default values are gain = 1, offset = 0, and bias = 0.</p>
+<p>You should notice two propoerties of the logistic function: 1) the steepness of the S-shaped curve [gain], and 2) where the midpoint y-value of 0.5 aligns with the x axis [bias].  <strong>Increasing gain above 1 will make the curve steeper.  Decreasing gain to a fraction between 0 and 1 will make the curve shallower.  Increasing or decreasing bias will shift the curve right or left.  If you want to shift the curve proportional to gain, offset can do this, shifting the curve left or right by (offset/gain).</strong></p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="part-2-perceptron-and-xor">
+<h1>Part 2: Perceptron and XOR<a class="headerlink" href="#part-2-perceptron-and-xor" title="Link to this heading">#</a></h1>
+<section id="history-of-artificial-neural-networks">
+<h2><a id='m0'> History of Artificial Neural Networks</a><a class="headerlink" href="#history-of-artificial-neural-networks" title="Link to this heading">#</a></h2>
+<p>To first approximation, activity of a neuron in the brain is determined by the integration of excitatory and inhibitory impulses received by its dendrites and passed to the cell body. If excitatory signals outweigh inhibitory signals sufficiently to pass a threshold, the neuron will fire, sending out an action potential via its axon.</p>
+<p>Artificial neurons were conceived to behave in a similar manner to real ones. Early artifical neurons were dubbed perceptrons; they received multiple binary inputs, multiplied each one by an appropriate “weight”, added them together (this should sound familiar), and produced a single binary output that depends on whether the sum passes a certain threshold.  In short, they applied a step function to the transformed input.  This is referred to as an LBF (linear basis function) activation function.</p>
+<img src='https://drive.google.com/uc?id=1OpA3Nq2y_QqwcIxJqwCoiMQFVztYrhon'>  
+<p>If we define the threshold <span class="math notranslate nohighlight">\( \equiv-b \)</span>, then we can rewrite our conditional output</p>
+<p>\begin{equation}
+output=
+\begin{cases}
+0 &amp; if : w \cdot x + b \leq 0
+\
+1  &amp; if : w \cdot x + b &gt;  0
+\end{cases}
+\end{equation}</p>
+<p>The term <span class="math notranslate nohighlight">\(b\)</span> is called a bias, and perceptrons are a special kind of linear classifier called a binary classifier. It is known as a binary classifier because it is assigning one of two labels (the binary output) to the inputs it receives, according to their dot product with the weights (a linear operation). The line defined by <span class="math notranslate nohighlight">\( w \cdot x+b=0 \)</span> is the line that separates the classes from each other. Our “red square, blue circle” class example from earlier in the lab is an example of binarily classifiable data.</p>
+<img src="https://drive.google.com/uc?id=12ChAFalPgyPvzZ9srt8LSz1bd5hcsouE">  
+<p>In a multilayer feedforward network, artificial neurons are clustered into layers, where the output of one layer forms the input of the next. The first layer is known as the input layer, the last is the output layer, and the operational layers, where the dot products are computed, are called “hidden layers”.</p>
+<p>Binary classification is simple but powerful. We will show this by using them to construct a set of logic gates, beginning with AND. An AND gate is a logic gate that answers the question, “are A and B both true?”. The value 1 corresponds to True, and the value 0 corresponds to False.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#This generates a training set of all possible 2-piece combinations of the boolean values True (1) and False (0).</span>
+<span class="c1">#These combinations will be our &quot;examples&quot; that we train our perceptrons on. They are stored in the columns of X.</span>
+
+<span class="n">Bool</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">Bool</span><span class="o">=</span><span class="n">Bool</span><span class="o">.</span><span class="n">T</span>
+<span class="n">n_combos</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Bool</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ub</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">Bool</span><span class="p">)))</span>
+<span class="n">lb</span><span class="o">=-</span><span class="n">ub</span>
+
+<span class="c1">#These are the &quot;labels&quot;, the correct return values for our perceptron. When we train our network, we want it to learn</span>
+<span class="c1">#what values of [w] and [b] to apply to the examples to that the function returns the correct label for every</span>
+<span class="c1">#example.</span>
+<span class="n">AND_labels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">AND_labels</span><span class="o">.</span><span class="n">shape</span><span class="o">=</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="n">n_combos</span><span class="p">))</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Boolean Matrix&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n_combos</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Bool</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">lb</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">ub</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/16cac64e1cee3941ec1094c3f0241e7989016c330ae3a49f39c0e78124c707b8.png" src="../../../_images/16cac64e1cee3941ec1094c3f0241e7989016c330ae3a49f39c0e78124c707b8.png" />
+</div>
+</div>
+<p>For a simple gate like this, we can easily choose our weights and bias manually to correctly classify each example. However, However, we dould rather the perceptron learn the weights itself. We can train it using supervised learning by showing it examples of the data with the appropriate labels (a truth table). Random weights will generate a random answer, so the perceptron must change its weights when its output does not match the labels we gave it.</p>
+<p>For perceptrons, we use error-based learning, where the weights are adjusted in the correct direction, based on the size and direction of the error. This is given by the Perceptron Learning Rule, and is written mathematically as:</p>
+<p>\begin{equation}
+w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
+\end{equation}</p>
+<p>The positive parameter <span class="math notranslate nohighlight">\( \eta \)</span> encodes the learning rate.</p>
+</section>
+<section id="learning-the-and-gate">
+<h2><a id='m1'>Learning the AND Gate</a><a class="headerlink" href="#learning-the-and-gate" title="Link to this heading">#</a></h2>
+<p>Use the perceptron learning rule and the provided skeleton codeto create an AND gate.  Choose your learning rate to be 0.02.  Because our training set is very small, we may need to feed it to the perceptron multiple times. Construct your program to continually run the perceptron until its accuracy is perfect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Begin by initializing the weights to random values, using np.random .</span>
+<span class="n">w</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span>
+<span class="n">b</span><span class="o">=-</span><span class="mi">1</span>
+<span class="n">eta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">.3</span><span class="p">,</span><span class="mf">.3</span><span class="p">])</span>
+<span class="n">accuracy</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">loop_count</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">acc_vec</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">while</span> <span class="n">accuracy</span> <span class="o">!=</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="n">accuracy</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Bool</span><span class="p">)[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">w</span><span class="nd">@Bool</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">predicted_label</span><span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">predicted_label</span><span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">predicted_label</span><span class="o">==</span><span class="n">AND_labels</span><span class="p">[:,</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">accuracy</span><span class="o">=</span><span class="n">accuracy</span><span class="o">+</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">diff</span><span class="o">=</span><span class="p">(</span><span class="n">AND_labels</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">predicted_label</span><span class="p">)</span>
+            <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="o">+</span><span class="n">eta</span><span class="o">*</span><span class="n">diff</span><span class="o">*</span><span class="p">(</span><span class="n">Bool</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">accuracy</span><span class="o">=</span><span class="nb">int</span><span class="p">((</span><span class="n">accuracy</span><span class="o">/</span><span class="n">n_combos</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">acc_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">acc_vec</span><span class="p">,</span><span class="n">accuracy</span><span class="p">)</span>
+    <span class="n">loop_count</span><span class="o">=</span><span class="n">loop_count</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">lc</span><span class="o">=</span><span class="n">loop_count</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">acc_vec</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Accuracy V. Loop Number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Loop Number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">lc</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/7a907b448852cb571b3cab0c46eb1490aa6bb2f990e2ed04b2a1f270b06d0849.png" src="../../../_images/7a907b448852cb571b3cab0c46eb1490aa6bb2f990e2ed04b2a1f270b06d0849.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="exercise-3-learning-the-or-gate">
+<h2><a id='e3'>Exercise 3:  Learning the OR Gate</a><a class="headerlink" href="#exercise-3-learning-the-or-gate" title="Link to this heading">#</a></h2>
+<p><strong>An OR gate should classify [0,0] as False, and [0,1], [1,0], and [1,1] as True.  Modify the code above in a new cell that implements a perceptron that learns the OR gate classificiation.</strong></p>
+<hr class="docutils" />
+<p>This method works well for a single layer of perceptrons. Now, consider multiple layers of perceptrons, each operating linearly, but producing a step function output. When they produce an incorrect result, how do we know which layer is responsible for the mistake and what step size would be useful to correct it?</p>
+<p>Because of their binary output, linearly updating weights of perceptrons in a multilayer network produces unpredictable and problematic results. A natural solution is to replace the step function with a function that more gradually interpolates between 0 and 1. A good choice here is the logistic function, which we have encountered in the previous section. It is possible to generalize the Perceptron Learning Rule to this case using calculus; the details are presented in the Appendix at the end of this notebook. We suggest that you skim the Appendix now, and then read it more carefully after you have finished this lab. Once you understand this derivation, you will be in good shape for when we discuss the Backpropagation algorithm in the next lab.</p>
+</section>
+<section id="pnl-two-layer-network">
+<h2><a id='m2'> PNL Two Layer Network</a><a class="headerlink" href="#pnl-two-layer-network" title="Link to this heading">#</a></h2>
+<p>It is reasonably straightforward to create a two layer sigmoid net in numpy. However, doing so in PNL is almost trivial. We will build one for our logic gates now.</p>
+<p>Explore the effectiveness of this 2 layer network by running it at different learning rates, for different numbers of trials, and on different label sets.</p>
+<p>Which sets does it learn effectively? Which sets doesn’t it?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trials</span><span class="o">=</span><span class="mi">10000</span>
+<span class="c1">#to give the network extra flexibility, we include an extra dimension in the input whose value is always equal to 1</span>
+<span class="c1">#another way to get this same flexibility would be to allow our linear layers to have non-zero bias values </span>
+<span class="n">Bool_bias</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">bool_length</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Bool_bias</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1">#Note that our new set of inputs, Bool_bias, has a third term appended to each input. This is a bias.</span>
+<span class="c1">#PNL is capable of training biases, but when using the method we will be incorporating for the</span>
+<span class="c1">#following exercises, the biases implemented by PNL will not be trained.</span>
+<span class="c1">#To resolve that issue, we simply implement them here.</span>
+
+<span class="n">AND_labels_pnl</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">OR_labels_pnl</span><span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">XOR_labels_pnl</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">rat</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">trials</span><span class="o">/</span><span class="n">n_combos</span><span class="p">)</span>
+
+<span class="c1">#Specify which label set you would like to use.</span>
+<span class="n">labels</span><span class="o">=</span><span class="n">AND_labels_pnl</span>
+
+<span class="c1">#Creating a 2 layer net in PNL:</span>
+<span class="c1">#First, we create the input layer. This layer is simply a Transfer Mechanism that brings the examples into the network</span>
+<span class="c1">#We do not have to specify a function (it defaults to linear, slope = 1, intercept = 0), </span>
+<span class="c1">#but we do need to specify the size, which will be the size of our input array.</span>
+
+<span class="n">in_layer</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">bool_length</span><span class="p">,</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Linear</span><span class="p">)</span>
+
+<span class="c1">#Next, we specify our output layer. This is where we do our sigmoid transformation by simply applying the Logistic function.</span>
+<span class="c1">#The size we specify for this layer is the number of output nodes we want. In this case, we want the network to return a scalar</span>
+<span class="c1">#for each example (either a 1 or a zero), so our size is 1</span>
+
+<span class="n">out_layer</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Logistic</span><span class="p">)</span>
+
+<span class="c1">#Finally we create a projection mapping from input to output. We will initialize with random weights.</span>
+
+<span class="n">weights</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">MappingProjection</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;in_to_out&#39;</span><span class="p">,</span>
+                            <span class="n">matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">bool_length</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+                            <span class="n">sender</span><span class="o">=</span><span class="n">in_layer</span><span class="p">,</span>
+                            <span class="n">receiver</span><span class="o">=</span><span class="n">out_layer</span><span class="p">)</span>
+
+
+<span class="c1">#Now, we will put them together into an Autodiff Composition. These compositions are a faster option</span>
+<span class="c1"># for backpropagation learning that integrate PNL and pytorch.</span>
+
+<span class="n">logic2L</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">AutodiffComposition</span><span class="p">(</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mi">10</span>
+  <span class="p">)</span>
+
+<span class="c1">#We will now add our layers and projection map into our composition</span>
+<span class="n">logic2L</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">in_layer</span><span class="p">)</span>
+<span class="n">logic2L</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">out_layer</span><span class="p">)</span>
+
+<span class="n">out_layer</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">set_log_conditions</span><span class="p">(</span><span class="n">pnl</span><span class="o">.</span><span class="n">VALUE</span><span class="p">)</span>
+
+<span class="n">logic2L</span><span class="o">.</span><span class="n">add_projection</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">in_layer</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">receiver</span><span class="o">=</span><span class="n">out_layer</span><span class="p">)</span>
+
+
+<span class="c1"># To learn our desired gates, we train the autodiff composition by giving it an input dictionary and running it</span>
+<span class="n">input_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;inputs&quot;</span><span class="p">:{</span><span class="n">in_layer</span><span class="p">:</span> <span class="n">Bool_bias</span><span class="p">},</span><span class="s2">&quot;targets&quot;</span><span class="p">:{</span><span class="n">out_layer</span><span class="p">:</span> <span class="n">labels</span><span class="p">},</span><span class="s2">&quot;epochs&quot;</span><span class="p">:</span><span class="mi">50</span><span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">logic2L</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_dict</span><span class="p">)</span>
+
+<span class="c1"># Here, we acquire a log of the losses over time so we can see how our network learned</span>
+<span class="c1">#This portion acquires and plots the losses</span>
+<span class="n">exec_id</span> <span class="o">=</span> <span class="n">logic2L</span><span class="o">.</span><span class="n">default_execution_id</span>
+<span class="n">losses</span> <span class="o">=</span> <span class="n">logic2L</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">exec_id</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The last loss was &quot;</span><span class="p">,</span> <span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Losses of 2 layer net in PNL as a function of trials&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch Number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">#This portion acquires and plots the labels</span>
+
+<span class="c1">#the logged values of the output layer that were recorded during the training</span>
+<span class="n">data</span><span class="o">=</span><span class="n">out_layer</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray</span><span class="p">()[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+
+<span class="c1">#psyneulink stores the logged values as a list of length 200 (50 epochs x 4 inputs per epoch)</span>
+<span class="c1">#we will reshape this list into an array of shape 50 x 4, so that each column represents one of the training patterns</span>
+<span class="c1">#and each row represents one training epoch</span>
+<span class="n">num_outs</span><span class="o">=</span><span class="n">n_combos</span>
+<span class="n">length</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rat</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">length</span><span class="o">/</span><span class="n">num_outs</span><span class="p">)</span>
+
+<span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">,(</span><span class="n">rat</span><span class="p">,</span><span class="n">num_outs</span><span class="p">))</span>
+<span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">labs_1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">labs_2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">labs_3</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">labs_4</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;first pattern&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;second pattern&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_3</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;third pattern&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_4</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;fourth pattern&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;labels 1 through 4 versus epoch number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch Number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Label Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ComponentError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">25</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">labels</span><span class="o">=</span><span class="n">AND_labels_pnl</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="c1">#Creating a 2 layer net in PNL:</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="c1">#First, we create the input layer. This layer is simply a Transfer Mechanism that brings the examples into the network</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="c1">#We do not have to specify a function (it defaults to linear, slope = 1, intercept = 0), </span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="c1">#but we do need to specify the size, which will be the size of our input array.</span>
+<span class="ne">---&gt; </span><span class="mi">25</span> <span class="n">in_layer</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">bool_length</span><span class="p">,</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Linear</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="c1">#Next, we specify our output layer. This is where we do our sigmoid transformation by simply applying the Logistic function.</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="c1">#The size we specify for this layer is the number of output nodes we want. In this case, we want the network to return a scalar</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="c1">#for each example (either a 1 or a zero), so our size is 1</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="n">out_layer</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Logistic</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+<span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
+
+<span class="nn">File &lt;@beartype(psyneulink.core.components.mechanisms.processing.transfermechanism.TransferMechanism.__init__) at 0x28a7d3e20&gt;:176,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_11319369360, __beartype_get_violation, __beartype_conf, __beartype_object_6052434560, __beartype_object_4546272896, __beartype_object_4324645192, __beartype_object_11320317168, __beartype_object_4324645304, __beartype_object_11320324976, __beartype_object_11320325360, __beartype_object_11320325424, __beartype_object_10913573952, __beartype_object_6054932416, __beartype_object_6052514112, __beartype_object_6052437616, __beartype_object_6052437680, __beartype_object_6052514192, __beartype_object_6052437744, __beartype_object_6052514272, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/mechanisms/processing/transfermechanism.py:1321,</span> in <span class="ni">TransferMechanism.__init__</span><span class="nt">(self, default_variable, input_shapes, input_ports, function, noise, clip, integrator_mode, integrator_function, initial_value, integration_rate, on_resume_integrator_mode, termination_measure, termination_threshold, termination_comparison_op, output_ports, params, name, prefs, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1317</span> <span class="n">initial_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_arg_initial_value</span><span class="p">(</span><span class="n">initial_value</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1319</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_variable_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="ne">-&gt; </span><span class="mi">1321</span> <span class="nb">super</span><span class="p">(</span><span class="n">TransferMechanism</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1322</span>     <span class="n">default_variable</span><span class="o">=</span><span class="n">default_variable</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1323</span>     <span class="n">input_shapes</span><span class="o">=</span><span class="n">input_shapes</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1324</span>     <span class="n">input_ports</span><span class="o">=</span><span class="n">input_ports</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1325</span>     <span class="n">output_ports</span><span class="o">=</span><span class="n">output_ports</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1326</span>     <span class="n">initial_value</span><span class="o">=</span><span class="n">initial_value</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1327</span>     <span class="n">noise</span><span class="o">=</span><span class="n">noise</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1328</span>     <span class="n">integration_rate</span><span class="o">=</span><span class="n">integration_rate</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1329</span>     <span class="n">integrator_mode</span><span class="o">=</span><span class="n">integrator_mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1330</span>     <span class="n">clip</span><span class="o">=</span><span class="n">clip</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1331</span>     <span class="n">termination_measure</span><span class="o">=</span><span class="n">termination_measure</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1332</span>     <span class="n">termination_threshold</span><span class="o">=</span><span class="n">termination_threshold</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1333</span>     <span class="n">termination_comparison_op</span><span class="o">=</span><span class="n">termination_comparison_op</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1334</span>     <span class="n">integrator_function</span><span class="o">=</span><span class="n">integrator_function</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1335</span>     <span class="n">on_resume_integrator_mode</span><span class="o">=</span><span class="n">on_resume_integrator_mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1336</span>     <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1337</span>     <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1338</span>     <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1339</span>     <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1340</span>     <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">   </span><span class="mi">1341</span> <span class="p">)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+<span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/mechanisms/processing/processingmechanism.py:293,</span> in <span class="ni">ProcessingMechanism_Base.__init__</span><span class="nt">(self, default_variable, input_shapes, input_ports, function, output_ports, params, name, prefs, context, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span> <span class="nd">@check_user_specified</span>
+<span class="g g-Whitespace">    </span><span class="mi">271</span> <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">272</span>              <span class="n">default_variable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">281</span>              <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">282</span>              <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">283</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Abstract class for processing mechanisms</span>
+<span class="g g-Whitespace">    </span><span class="mi">284</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">285</span><span class="sd">     :param variable: (value)</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">290</span><span class="sd">     :param context: (str)</span>
+<span class="g g-Whitespace">    </span><span class="mi">291</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">293</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">default_variable</span><span class="o">=</span><span class="n">default_variable</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">294</span>                      <span class="n">input_shapes</span><span class="o">=</span><span class="n">input_shapes</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">295</span>                      <span class="n">input_ports</span><span class="o">=</span><span class="n">input_ports</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">296</span>                      <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span>                      <span class="n">output_ports</span><span class="o">=</span><span class="n">output_ports</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">298</span>                      <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>                      <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span>                      <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span>                      <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">302</span>                      <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">303</span>                      <span class="p">)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+<span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/mechanisms/mechanism.py:1762,</span> in <span class="ni">Mechanism_Base.__init__</span><span class="nt">(self, default_variable, input_shapes, input_ports, input_labels, function, output_ports, output_labels, params, name, prefs, context, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1756</span> <span class="kn">from</span><span class="w"> </span><span class="nn">psyneulink.core.components.ports.outputport</span><span class="w"> </span><span class="kn">import</span> <span class="n">OutputPort</span>
+<span class="g g-Whitespace">   </span><span class="mi">1757</span> <span class="n">register_category</span><span class="p">(</span><span class="n">entry</span><span class="o">=</span><span class="n">OutputPort</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1758</span>                   <span class="n">base_class</span><span class="o">=</span><span class="n">Port_Base</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1759</span>                   <span class="n">registry</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_portRegistry</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1760</span>                   <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1762</span> <span class="nb">super</span><span class="p">(</span><span class="n">Mechanism_Base</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1763</span>     <span class="n">default_variable</span><span class="o">=</span><span class="n">default_variable</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1764</span>     <span class="n">input_shapes</span><span class="o">=</span><span class="n">input_shapes</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1765</span>     <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1766</span>     <span class="n">param_defaults</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1767</span>     <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1768</span>     <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1769</span>     <span class="n">input_ports</span><span class="o">=</span><span class="n">input_ports</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1770</span>     <span class="n">output_ports</span><span class="o">=</span><span class="n">output_ports</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1771</span>     <span class="n">input_labels_dict</span><span class="o">=</span><span class="n">input_labels</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1772</span>     <span class="n">output_labels_dict</span><span class="o">=</span><span class="n">output_labels</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1773</span>     <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">   </span><span class="mi">1774</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1776</span> <span class="c1"># FIX: 10/3/17 - IS THIS CORRECT?  SHOULD IT BE INITIALIZED??</span>
+<span class="g g-Whitespace">   </span><span class="mi">1777</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">INITIALIZING</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+<span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/shellclasses.py:82,</span> in <span class="ni">Mechanism.__init__</span><span class="nt">(self, default_variable, input_shapes, function, param_defaults, name, prefs, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="nd">@check_user_specified</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span>              <span class="n">default_variable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">80</span>              <span class="n">prefs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">81</span>              <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">82</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">default_variable</span><span class="o">=</span><span class="n">default_variable</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span>                      <span class="n">input_shapes</span><span class="o">=</span><span class="n">input_shapes</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">84</span>                      <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span>                      <span class="n">param_defaults</span><span class="o">=</span><span class="n">param_defaults</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span>                      <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span>                      <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span>                      <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+<span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/component.py:1146,</span> in <span class="ni">Component.__init__</span><span class="nt">(self, default_variable, param_defaults, input_shapes, function, name, reset_stateful_function_when, prefs, function_params, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1143</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1144</span>     <span class="bp">self</span><span class="o">.</span><span class="n">reset_stateful_function_when</span> <span class="o">=</span> <span class="n">Never</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1146</span> <span class="n">parameter_values</span><span class="p">,</span> <span class="n">function_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_arguments</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1147</span>     <span class="n">default_variable</span><span class="p">,</span> <span class="n">param_defaults</span><span class="p">,</span> <span class="n">input_shapes</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">function_params</span><span class="p">,</span> <span class="n">kwargs</span>
+<span class="g g-Whitespace">   </span><span class="mi">1148</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1150</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_parameters</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1151</span>     <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1152</span>     <span class="o">**</span><span class="n">parameter_values</span>
+<span class="g g-Whitespace">   </span><span class="mi">1153</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1155</span> <span class="n">var</span> <span class="o">=</span> <span class="n">call_with_pruned_args</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1156</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_handle_default_variable</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1157</span>     <span class="o">**</span><span class="n">parameter_values</span>
+<span class="g g-Whitespace">   </span><span class="mi">1158</span> <span class="p">)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/component.py:2253,</span> in <span class="ni">Component._parse_arguments</span><span class="nt">(self, default_variable, param_defaults, input_shapes, function, function_params, kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2248</span>     <span class="n">function_params</span> <span class="o">=</span> <span class="p">{</span>
+<span class="g g-Whitespace">   </span><span class="mi">2249</span>         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2250</span>         <span class="o">**</span><span class="n">function_params</span>
+<span class="g g-Whitespace">   </span><span class="mi">2251</span>     <span class="p">}</span>
+<span class="g g-Whitespace">   </span><span class="mi">2252</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2253</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_validate_arguments</span><span class="p">(</span><span class="n">parameter_values</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2255</span> <span class="c1"># self.parameters here still references &lt;class&gt;.parameters, but</span>
+<span class="g g-Whitespace">   </span><span class="mi">2256</span> <span class="c1"># only unchanging attributes are needed here</span>
+<span class="g g-Whitespace">   </span><span class="mi">2257</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/component.py:2198,</span> in <span class="ni">Component._validate_arguments</span><span class="nt">(self, parameter_values)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2196</span> <span class="c1"># raise deprecated argument errors</span>
+<span class="g g-Whitespace">   </span><span class="mi">2197</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">deprecated_args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2198</span>     <span class="k">raise</span> <span class="n">create_illegal_argument_error</span><span class="p">([</span>
+<span class="g g-Whitespace">   </span><span class="mi">2199</span>         <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2">&#39; is deprecated. Use &#39;</span><span class="si">{</span><span class="n">new_arg</span><span class="si">}</span><span class="s2">&#39; instead&quot;</span>
+<span class="nn">   2200         for arg, new_arg</span> in <span class="ni">deprecated_args.items</span><span class="nt">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">2201</span>     <span class="p">])</span>
+<span class="g g-Whitespace">   </span><span class="mi">2203</span> <span class="c1"># raise generic illegal argument error</span>
+<span class="g g-Whitespace">   </span><span class="mi">2204</span> <span class="n">unknown_args</span> <span class="o">=</span> <span class="n">illegal_passed_args</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">unused_constructor_args</span><span class="p">)</span>
+
+<span class="ne">ComponentError</span>: TransferMechanism-3: Illegal argument in constructor (type: TransferMechanism):
+	<span class="s1">&#39;size&#39;</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Use</span> <span class="s1">&#39;input_shapes&#39;</span> <span class="n">instead</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To understand why our 2 layer net can’t effectively learn the XOR labels, it may be helpful to consider the follwing graph:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#convert to numpy arrays, as required for plotting functions</span>
+<span class="n">Bool_bias_np</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bool_bias</span><span class="p">)</span>
+<span class="c1">#we will plot each point as red if the XOR relation is satisfied, and blue if not </span>
+<span class="n">XOR_colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Bool_bias_np</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">Bool_bias_np</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">Bool_bias_np</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">XOR_colors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;XOR projected into 3-d&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/310de15a49796bcae56c671a971eea62c71496a58a329d325d90f520a23a46f7.png" src="../../../_images/310de15a49796bcae56c671a971eea62c71496a58a329d325d90f520a23a46f7.png" />
+</div>
+</div>
+</section>
+<section id="exercise-4-limitations-of-the-perceptron-learning-rule">
+<h2><a id='e3'>Exercise 4: Limitations of the Perceptron Learning Rule</a><a class="headerlink" href="#exercise-4-limitations-of-the-perceptron-learning-rule" title="Link to this heading">#</a></h2>
+<p><strong>Looking at the graph above, why do you think that the network had trouble learning the XOR relation, but not the AND or the OR?</strong></p>
+<p>This example was important from a historical perspective. In the 1960s, Marvin Minsky and Seymour Papert showed that it was impossible for a simple neural network such as this one to learn the XOR relation. This caused people to lose interest in neural networks for a long time. However the interest was revived in the 1980s with the development of the Backpropagation algorithm, which showed how to generalize the Perceptron Learning Rule to networks with any number of layers. The ability to train networks with more than two layers allowed them to effectively learn XOR, as well as many other much more complex relations.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="build">
+<h1>BUILD<a class="headerlink" href="#build" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">
+<h1>Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation<a class="headerlink" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation" title="Link to this heading">#</a></h1>
+<p>Sigmoid neurons take inputs and produce outputs similar to perceptrons, however, the inputs and outputs are not binary. Additionally, rather than applying a simple dot product to the inputs such that
+\begin{equation}
+z(w,x) = w \cdot x + b
+\end{equation}</p>
+<p>these new types of neurons apply the sigmoid function, of the form</p>
+<p>\begin{equation}
+\sigma(z(w,x))=\frac{1}{1+e^{-z(w,x)}}
+\end{equation}</p>
+<p>.
+This function is actually the same as a Logistic function with a bias value of 0 and a gain value of 1. It has an upper bound at 1 and a lower bound at zero. This can be seen by examining the limits: <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to\infty} \sigma(z(w,x))\)</span> and <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to -\infty} \sigma(z(w,x))\)</span>. Although its equation looks complex, a sigmoid function can quickly become intuitive when you try modifying the parameters, as we did in Lab 1 with the Logistic function. The graph below illustrates gives the graph of <span class="math notranslate nohighlight">\(\sigma(x)\)</span>.</p>
+<img src="https://drive.google.com/uc?id=11pGLSRaXt-eeBp37P0iTc3AmAsdb4Q1_"> 
+<p>In a multilayer network, the output of multiple sigmoid functions in the first non-input layer forms the input to the next layer. However, because of its bounded structure, a sigmoid function only outputs 1 or 0 at the limits (when rounding error kicks in). Typically its output will be somewhere in between. Therefore, there will always be some error between the desired output of a logical function (1 or 0) and the output of a sigmoid. The error of a single output is given by</p>
+<p>\begin{equation}
+E=desired \ output - \sigma(z(w,x))
+\end{equation}</p>
+<p>A common measure of error is called the mean squared error, and is given by</p>
+<p>\begin{equation}
+E =
+\frac{1}{n} \ \sum_{i=1}^{n} (desired \ output_{i} - \sigma(z(w,x))_{i})^2
+\end{equation}</p>
+<p>Although we cannot drive this value to zero (when our desired output is binary), we can minimize it. Because it is a sum of squares, we can minimize it by minimizing each term. Because each term is a convex function of the weights, it is minimized when its derivative as a function of the weights is zero. We can train our neural net to do this using the delta rule, which is very similar to the perceptron learning rule.</p>
+<p>\begin{equation}
+w^{t+1} = \underbrace{w^t}<em>\text{current weight} + \underbrace{\Delta w^t}</em>\text{weight change}
+\end{equation}</p>
+<p>where</p>
+<p>\begin{equation}
+\Delta w^t = - \alpha \underbrace{\frac{\partial E^t}{\partial w^t}}_\text{change in error terms as a function of the weights}
+\end{equation}</p>
+<p>.</p>
+<p>As you can see, when the derivative of the error is zero, the weights stop changing. The error is, at this point, minimized.</p>
+<p>In order to calculate the derviative of the error, we simply employ the chain rule. We will aslo be using a modified form of the error. Instead of scaling each term by <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>, we will scale by <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span></p>
+<p>So, each error term is given by</p>
+<p>\begin{equation}
+E_{i} =
+\frac{1}{2} (desired \ output_{i} - \sigma(h(x))_{i})^2
+\end{equation}</p>
+<p>and its derivative is given by</p>
+<p>\begin{equation}
+\frac{\partial E_{i}}{\partial w} = \underbrace{\frac{\partial E_{i}}{\partial \sigma(h(w,x))}}<em>\text{derivative 1} \quad
+\underbrace{\frac{\partial \sigma(h(w,x))}{\partial h(w,x)}}</em>\text{derivative 2} \quad
+\underbrace{\frac{\partial h(w,x)}{\partial w}}_\text{derivative 3}
+\end{equation}</p>
+<p>Now, because <span class="math notranslate nohighlight">\(h(w,x)\)</span> is a vector equation, its derivative is also a vector. This produces our vector of weight changes, each term of which is determined by derivative 3</p>
+<p>\begin{equation}
+\quad
+\underbrace{\frac{\partial h(w,x)}{\partial w_{i}}}_\text{derivative 3}
+\end{equation}<br />
+.</p>
+<p>This comes out surprisingly tidily:</p>
+<p>\begin{equation}
+{\frac{\partial E^t}{\partial w_{i}^t}}=(desired \ output - \sigma) (\sigma (1 - \sigma))x_{i}
+\end{equation}</p>
+<p>Now
+\begin{equation}
+\Delta w^t_{i} = - \alpha (desired \ output - \sigma) (\sigma (1 - \sigma))x_{i}
+\end{equation}</p>
+<p>Biases are updated in much the same fashion, using</p>
+<p>\begin{equation}
+\Delta b^t_{i} = - \alpha (desired \ output - \sigma) (\sigma (1 - \sigma))1
+\end{equation}</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/Mathematics Primer/notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lab4: Math Primer and Simple Neural Networks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-mathematics-primer-for-psyneulink">Part 1: Mathematics Primer for PsyNeuLink</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#scalars-vectors-matrices">Scalars, Vectors, &amp; Matrices</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-matrix-operations">Vector &amp; Matrix Operations</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-left-begin-matrix-a-1-a-2-a-3-end-matrix-right-left-begin-matrix-b-1-b-2-b-3-end-matrix-right">\begin{equation}
+\left[
+\begin{matrix}
+a_{1} \ a_{2} \ a_{3}
+\end{matrix}
+\right]
++
+\left[
+\begin{matrix}
+b_{1} \ b_{2} \ b_{3}
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-alpha-left-begin-matrix-a-1-a-2-a-3-end-matrix-right">\begin{equation}
+\alpha \left[
+\begin{matrix}
+a_{1} \ a_{2} \ a_{3}
+\end{matrix}
+\right]</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-a-left-begin-matrix-overrightarrow-a-1-t-overrightarrow-a-2-t-end-matrix-right">\begin{equation}
+A =
+\left[
+\begin{matrix}
+\overrightarrow{a_{1}}^T \ \overrightarrow{a_{2}}^T
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-ax-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-x-1-x-2-x-3-end-matrix-right">\begin{equation}
+Ax =
+\left[
+\begin{matrix}
+a_{11} &amp; a_{12} &amp; a_{13} \ a_{21} &amp; a_{22} &amp; a_{23}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+x_{1}\x_{2}\x_{3}
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-overrightarrow-a-1-cdot-x-overrightarrow-a-2-cdot-x-overrightarrow-a-3-cdot-x-end-matrix-right">\left[
+\begin{matrix}
+\overrightarrow{a_{1}} \cdot x \ \overrightarrow{a_{2}} \cdot x \ \overrightarrow{a_{3}} \cdot x
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-y-1-y-2-y-3-end-matrix-right">\left[
+\begin{matrix}
+y_{1} \ y_{2} \ y_{3}
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-ab-left-begin-matrix-a-11-a-12-a-13-a-21-a-22-a-23-end-matrix-right-left-begin-matrix-b-11-b-12-b-21-b-22-b-31-b-32-end-matrix-right">\begin{equation}
+AB =
+\left[
+\begin{matrix}
+a_{11} &amp; a_{12} &amp; a_{13} \ a_{21} &amp; a_{22} &amp; a_{23}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+b_{11} &amp; b_{12} \ b_{21} &amp; b_{22}  \ b_{31} &amp; b_{32}
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-overrightarrow-a-1-cdot-overrightarrow-b-1-overrightarrow-a-1-cdot-overrightarrow-b-2-overrightarrow-a-2-cdot-overrightarrow-b-1-overrightarrow-a-2-cdot-overrightarrow-b-2-end-matrix-right">\left[
+\begin{matrix}
+\overrightarrow{a_{1}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{1}} \cdot \overrightarrow{b_{2}} \ \overrightarrow{a_{2}} \cdot \overrightarrow{b_{1}} &amp; \overrightarrow{a_{2}} \cdot \overrightarrow{b_{2}}
+\end{matrix}
+\right]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#left-begin-matrix-c-11-c-12-c-21-c-22-end-matrix-right">\left[
+\begin{matrix}
+c_{11} &amp; c_{12} \ c_{21} &amp; c_{22}
+\end{matrix}
+\right]</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-function">Logistic Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-step-function">Logistic Step Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-offset-bias">Gain, Offset, &amp; Bias</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-perceptron-and-xor">Part 2: Perceptron and XOR</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-artificial-neural-networks"><a id="m0"> History of Artificial Neural Networks</a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-and-gate"><a id="m1">Learning the AND Gate</a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-learning-the-or-gate"><a id="e3">Exercise 3:  Learning the OR Gate</a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pnl-two-layer-network"><a id="m2"> PNL Two Layer Network</a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-limitations-of-the-perceptron-learning-rule"><a id="e3">Exercise 4: Limitations of the Perceptron Learning Rule</a></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build">BUILD</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ...
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
