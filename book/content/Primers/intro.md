@@ -7,6 +7,7 @@ Computational modeling in psychology and cognitive neuroscience uses a variety o
 ## Content
 
 1. [Scalars, Vectors, and Matrices](notebooks/1%20Scalars,%20Vectors,%20and%20Matrices.ipynb)
+2. [Logistic Function](notebooks/2%20Logistic%20Function.ipynb)
 
 
 ## Additional Resources

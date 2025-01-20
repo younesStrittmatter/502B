@@ -8,6 +8,7 @@ chapters:
 - file: content/Mathematics Primer/intro
   sections:
     - file: content/Mathematics Primer/notebooks/1 Scalars, Vectors, and Matrices
+    - file: content/Mathematics Primer/notebooks/2 Logistic Function
 - file: content/Dynamics in Perception/intro
   sections:
     - file: content/Dynamics in Perception/notebooks/1 Hebbian Learning
