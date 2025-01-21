@@ -1,4 +1,4 @@
-# Mathematics Primer
+# Primers
 
 ## Overview
 
