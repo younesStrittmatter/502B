@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Part 2: Perceptron and XOR &#8212; 502B</title>
+    <title>PNL Two Layer Network &#8212; 502B</title>
   
   
   
@@ -366,7 +366,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Part 2: Perceptron and XOR</h1>
+    <h1><a id='m2'> PNL Two Layer Network</a></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -376,14 +376,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Part 2: Perceptron and XOR</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-artificial-neural-networks"><a id="m0"> History of Artificial Neural Networks</a></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-and-gate"><a id="m1">Learning the AND Gate</a></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-learning-the-or-gate"><a id="e3">Exercise 3:  Learning the OR Gate</a></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pnl-two-layer-network"><a id="m2"> PNL Two Layer Network</a></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-limitations-of-the-perceptron-learning-rule"><a id="e3">Exercise 4: Limitations of the Perceptron Learning Rule</a></a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><a id="m2"> PNL Two Layer Network</a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-limitations-of-the-perceptron-learning-rule"><a id="e3">Exercise 4: Limitations of the Perceptron Learning Rule</a></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build">BUILD</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation</a></li>
 </ul>
@@ -398,142 +392,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="part-2-perceptron-and-xor">
-<h1>Part 2: Perceptron and XOR<a class="headerlink" href="#part-2-perceptron-and-xor" title="Link to this heading">#</a></h1>
-<section id="history-of-artificial-neural-networks">
-<h2><a id='m0'> History of Artificial Neural Networks</a><a class="headerlink" href="#history-of-artificial-neural-networks" title="Link to this heading">#</a></h2>
-<p>To first approximation, activity of a neuron in the brain is determined by the integration of excitatory and inhibitory impulses received by its dendrites and passed to the cell body. If excitatory signals outweigh inhibitory signals sufficiently to pass a threshold, the neuron will fire, sending out an action potential via its axon.</p>
-<p>Artificial neurons were conceived to behave in a similar manner to real ones. Early artifical neurons were dubbed perceptrons; they received multiple binary inputs, multiplied each one by an appropriate “weight”, added them together (this should sound familiar), and produced a single binary output that depends on whether the sum passes a certain threshold.  In short, they applied a step function to the transformed input.  This is referred to as an LBF (linear basis function) activation function.</p>
-<img src='https://drive.google.com/uc?id=1OpA3Nq2y_QqwcIxJqwCoiMQFVztYrhon'>  
-<p>If we define the threshold <span class="math notranslate nohighlight">\( \equiv-b \)</span>, then we can rewrite our conditional output</p>
-<p>\begin{equation}
-output=
-\begin{cases}
-0 &amp; if : w \cdot x + b \leq 0
-\
-1  &amp; if : w \cdot x + b &gt;  0
-\end{cases}
-\end{equation}</p>
-<p>The term <span class="math notranslate nohighlight">\(b\)</span> is called a bias, and perceptrons are a special kind of linear classifier called a binary classifier. It is known as a binary classifier because it is assigning one of two labels (the binary output) to the inputs it receives, according to their dot product with the weights (a linear operation). The line defined by <span class="math notranslate nohighlight">\( w \cdot x+b=0 \)</span> is the line that separates the classes from each other. Our “red square, blue circle” class example from earlier in the lab is an example of binarily classifiable data.</p>
-<img src="https://drive.google.com/uc?id=12ChAFalPgyPvzZ9srt8LSz1bd5hcsouE">  
-<p>In a multilayer feedforward network, artificial neurons are clustered into layers, where the output of one layer forms the input of the next. The first layer is known as the input layer, the last is the output layer, and the operational layers, where the dot products are computed, are called “hidden layers”.</p>
-<p>Binary classification is simple but powerful. We will show this by using them to construct a set of logic gates, beginning with AND. An AND gate is a logic gate that answers the question, “are A and B both true?”. The value 1 corresponds to True, and the value 0 corresponds to False.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#This generates a training set of all possible 2-piece combinations of the boolean values True (1) and False (0).</span>
-<span class="c1">#These combinations will be our &quot;examples&quot; that we train our perceptrons on. They are stored in the columns of X.</span>
-
-<span class="n">Bool</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
-<span class="n">Bool</span><span class="o">=</span><span class="n">Bool</span><span class="o">.</span><span class="n">T</span>
-<span class="n">n_combos</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Bool</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">ub</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">Bool</span><span class="p">)))</span>
-<span class="n">lb</span><span class="o">=-</span><span class="n">ub</span>
-
-<span class="c1">#These are the &quot;labels&quot;, the correct return values for our perceptron. When we train our network, we want it to learn</span>
-<span class="c1">#what values of [w] and [b] to apply to the examples to that the function returns the correct label for every</span>
-<span class="c1">#example.</span>
-<span class="n">AND_labels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">AND_labels</span><span class="o">.</span><span class="n">shape</span><span class="o">=</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="n">n_combos</span><span class="p">))</span>
-
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Boolean Matrix&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n_combos</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Bool</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">lb</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">ub</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#This generates a training set of all possible 2-piece combinations of the boolean values True (1) and False (0).</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#These combinations will be our &quot;examples&quot; that we train our perceptrons on. They are stored in the columns of X.</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">Bool</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">Bool</span><span class="o">=</span><span class="n">Bool</span><span class="o">.</span><span class="n">T</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">n_combos</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Bool</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="ne">NameError</span>: name &#39;np&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<p>For a simple gate like this, we can easily choose our weights and bias manually to correctly classify each example. However, However, we dould rather the perceptron learn the weights itself. We can train it using supervised learning by showing it examples of the data with the appropriate labels (a truth table). Random weights will generate a random answer, so the perceptron must change its weights when its output does not match the labels we gave it.</p>
-<p>For perceptrons, we use error-based learning, where the weights are adjusted in the correct direction, based on the size and direction of the error. This is given by the Perceptron Learning Rule, and is written mathematically as:</p>
-<p>\begin{equation}
-w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
-\end{equation}</p>
-<p>The positive parameter <span class="math notranslate nohighlight">\( \eta \)</span> encodes the learning rate.</p>
-</section>
-<section id="learning-the-and-gate">
-<h2><a id='m1'>Learning the AND Gate</a><a class="headerlink" href="#learning-the-and-gate" title="Link to this heading">#</a></h2>
-<p>Use the perceptron learning rule and the provided skeleton codeto create an AND gate.  Choose your learning rate to be 0.02.  Because our training set is very small, we may need to feed it to the perceptron multiple times. Construct your program to continually run the perceptron until its accuracy is perfect.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Begin by initializing the weights to random values, using np.random .</span>
-<span class="n">w</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span>
-<span class="n">b</span><span class="o">=-</span><span class="mi">1</span>
-<span class="n">eta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">.3</span><span class="p">,</span><span class="mf">.3</span><span class="p">])</span>
-<span class="n">accuracy</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">loop_count</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">acc_vec</span><span class="o">=</span><span class="p">[]</span>
-
-<span class="k">while</span> <span class="n">accuracy</span> <span class="o">!=</span> <span class="mi">100</span><span class="p">:</span>
-    <span class="n">accuracy</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Bool</span><span class="p">)[</span><span class="mi">1</span><span class="p">]):</span>
-        <span class="k">if</span> <span class="n">w</span><span class="nd">@Bool</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">:</span>
-            <span class="n">predicted_label</span><span class="o">=</span> <span class="mi">0</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">predicted_label</span><span class="o">=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">predicted_label</span><span class="o">==</span><span class="n">AND_labels</span><span class="p">[:,</span><span class="n">i</span><span class="p">]:</span>
-            <span class="n">accuracy</span><span class="o">=</span><span class="n">accuracy</span><span class="o">+</span><span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">diff</span><span class="o">=</span><span class="p">(</span><span class="n">AND_labels</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">predicted_label</span><span class="p">)</span>
-            <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="o">+</span><span class="n">eta</span><span class="o">*</span><span class="n">diff</span><span class="o">*</span><span class="p">(</span><span class="n">Bool</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-    <span class="n">accuracy</span><span class="o">=</span><span class="nb">int</span><span class="p">((</span><span class="n">accuracy</span><span class="o">/</span><span class="n">n_combos</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">acc_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">acc_vec</span><span class="p">,</span><span class="n">accuracy</span><span class="p">)</span>
-    <span class="n">loop_count</span><span class="o">=</span><span class="n">loop_count</span><span class="o">+</span><span class="mi">1</span>
-<span class="n">lc</span><span class="o">=</span><span class="n">loop_count</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">acc_vec</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Accuracy V. Loop Number&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Loop Number&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">lc</span><span class="p">)))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#Begin by initializing the weights to random values, using np.random .</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">w</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">b</span><span class="o">=-</span><span class="mi">1</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">eta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">.3</span><span class="p">,</span><span class="mf">.3</span><span class="p">])</span>
-
-<span class="ne">NameError</span>: name &#39;np&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="exercise-3-learning-the-or-gate">
-<h2><a id='e3'>Exercise 3:  Learning the OR Gate</a><a class="headerlink" href="#exercise-3-learning-the-or-gate" title="Link to this heading">#</a></h2>
-<p><strong>An OR gate should classify [0,0] as False, and [0,1], [1,0], and [1,1] as True.  Modify the code above in a new cell that implements a perceptron that learns the OR gate classificiation.</strong></p>
-<hr class="docutils" />
-<p>This method works well for a single layer of perceptrons. Now, consider multiple layers of perceptrons, each operating linearly, but producing a step function output. When they produce an incorrect result, how do we know which layer is responsible for the mistake and what step size would be useful to correct it?</p>
-<p>Because of their binary output, linearly updating weights of perceptrons in a multilayer network produces unpredictable and problematic results. A natural solution is to replace the step function with a function that more gradually interpolates between 0 and 1. A good choice here is the logistic function, which we have encountered in the previous section. It is possible to generalize the Perceptron Learning Rule to this case using calculus; the details are presented in the Appendix at the end of this notebook. We suggest that you skim the Appendix now, and then read it more carefully after you have finished this lab. Once you understand this derivation, you will be in good shape for when we discuss the Backpropagation algorithm in the next lab.</p>
-</section>
-<section id="pnl-two-layer-network">
-<h2><a id='m2'> PNL Two Layer Network</a><a class="headerlink" href="#pnl-two-layer-network" title="Link to this heading">#</a></h2>
+  <section id="pnl-two-layer-network">
+<h1><a id='m2'> PNL Two Layer Network</a><a class="headerlink" href="#pnl-two-layer-network" title="Link to this heading">#</a></h1>
 <p>It is reasonably straightforward to create a two layer sigmoid net in numpy. However, doing so in PNL is almost trivial. We will build one for our logic gates now.</p>
 <p>Explore the effectiveness of this 2 layer network by running it at different learning rates, for different numbers of trials, and on different label sets.</p>
 <p>Which sets does it learn effectively? Which sets doesn’t it?</p>
@@ -647,7 +507,7 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#to give the network extra flexibility, we include an extra dimension in the input whose value is always equal to 1</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">#another way to get this same flexibility would be to allow our linear layers to have non-zero bias values </span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">Bool_bias</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
@@ -681,7 +541,7 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#convert to numpy arrays, as required for plotting functions</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">Bool_bias_np</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bool_bias</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">#we will plot each point as red if the XOR relation is satisfied, and blue if not </span>
@@ -694,10 +554,9 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 </div>
 </section>
 <section id="exercise-4-limitations-of-the-perceptron-learning-rule">
-<h2><a id='e3'>Exercise 4: Limitations of the Perceptron Learning Rule</a><a class="headerlink" href="#exercise-4-limitations-of-the-perceptron-learning-rule" title="Link to this heading">#</a></h2>
+<h1><a id='e3'>Exercise 4: Limitations of the Perceptron Learning Rule</a><a class="headerlink" href="#exercise-4-limitations-of-the-perceptron-learning-rule" title="Link to this heading">#</a></h1>
 <p><strong>Looking at the graph above, why do you think that the network had trouble learning the XOR relation, but not the AND or the OR?</strong></p>
 <p>This example was important from a historical perspective. In the 1960s, Marvin Minsky and Seymour Papert showed that it was impossible for a simple neural network such as this one to learn the XOR relation. This caused people to lose interest in neural networks for a long time. However the interest was revived in the 1980s with the development of the Backpropagation algorithm, which showed how to generalize the Perceptron Learning Rule to networks with any number of layers. The ability to train networks with more than two layers allowed them to effectively learn XOR, as well as many other much more complex relations.</p>
-</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="build">
 <h1>BUILD<a class="headerlink" href="#build" title="Link to this heading">#</a></h1>
@@ -813,14 +672,8 @@ E_{i} =
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Part 2: Perceptron and XOR</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-artificial-neural-networks"><a id="m0"> History of Artificial Neural Networks</a></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-and-gate"><a id="m1">Learning the AND Gate</a></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-learning-the-or-gate"><a id="e3">Exercise 3:  Learning the OR Gate</a></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pnl-two-layer-network"><a id="m2"> PNL Two Layer Network</a></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-limitations-of-the-perceptron-learning-rule"><a id="e3">Exercise 4: Limitations of the Perceptron Learning Rule</a></a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><a id="m2"> PNL Two Layer Network</a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-limitations-of-the-perceptron-learning-rule"><a id="e3">Exercise 4: Limitations of the Perceptron Learning Rule</a></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build">BUILD</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation</a></li>
 </ul>
