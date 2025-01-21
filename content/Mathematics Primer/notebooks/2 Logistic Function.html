@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; 502B</title>
+    <title>Logistic Function &#8212; 502B</title>
   
   
   
@@ -168,12 +168,10 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../intro.html">Mathematics Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Mathematics Primer</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="1%20Scalars%2C%20Vectors%2C%20and%20Matrices.html">Scalars, Vectors, and Matrices</a></li>
-
-
-
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Logistic Function</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../Dynamics%20in%20Perception/intro.html">Dynamics in Perception</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -364,7 +362,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Logistic Function</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -373,9 +371,10 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-offset-and-bias">Gain, Offset, and Bias</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -386,7 +385,54 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="logistic-function">
+<h1>Logistic Function<a class="headerlink" href="#logistic-function" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>The logistic function, also known as the sigmoid function, is a mathematical function that maps any real number to a value between 0 and 1. It is widely used in machine learning, statistics, and biology for modeling probabilities, activation functions in neural networks, and processes with S-shaped growth curves. Its smooth, S-shaped curve makes it ideal for representing transitions or probabilities.</p>
+<p>Here, we also use PsyNeuLink to introduce basic functionality.
+<strong>Setup:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">psyneulink</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">psyneulink</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pnl</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use PsyNeuLink to blot the default logistic function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_transfer</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Logistic</span><span class="p">())</span>
+<span class="n">logistic_transfer</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/140e837b26f0223c42e80c55945d174ca3c021e7305e8825cff3022e3edaeea1.png" src="../../../_images/140e837b26f0223c42e80c55945d174ca3c021e7305e8825cff3022e3edaeea1.png" />
+</div>
+</div>
+<p>In the cell below you can plug a single number into this function and get an output value. Your input corresponds to a point on the x-axis, and the output is the corresponding y-value (height of the point on the curve above the x you specified).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_transfer</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># Try other inputs! What do you expect when you input 0?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.11920292]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="gain-offset-and-bias">
+<h2>Gain, Offset, and Bias<a class="headerlink" href="#gain-offset-and-bias" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -451,9 +497,10 @@
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-offset-and-bias">Gain, Offset, and Bias</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
