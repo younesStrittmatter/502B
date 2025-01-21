@@ -30,8 +30,15 @@ repository:
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_repository_button: true
+  baseurl: https://younesstrittmatter.github.io/502B/
 
 launch_buttons:
   colab_url: https://colab.research.google.com
+  thebe: false
 
 
+
+
+sphinx:
+  config:
+    html_extra_path: ['assets']
