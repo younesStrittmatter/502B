@@ -5,10 +5,11 @@ format: jb-book
 root: intro
 
 chapters:
-- file: content/Mathematics Primer/intro
+- file: content/Primers/intro
   sections:
-    - file: content/Mathematics Primer/notebooks/1 Scalars, Vectors, and Matrices
-    - file: content/Mathematics Primer/notebooks/2 Logistic Function
+    - file: content/Primers/notebooks/1 Scalars, Vectors, and Matrices
+    - file: content/Primers/notebooks/2 Logistic Function
+    - file: content/Primers/notebooks/3 Perceptron and XOR
 - file: content/Dynamics in Perception/intro
   sections:
     - file: content/Dynamics in Perception/notebooks/1 Hebbian Learning
