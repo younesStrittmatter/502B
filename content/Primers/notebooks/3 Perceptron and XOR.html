@@ -172,7 +172,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Mathematics Primer</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Primers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="1%20Scalars%2C%20Vectors%2C%20and%20Matrices.html">Scalars, Vectors, and Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2%20Logistic%20Function.html">Logistic Function</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Perceptron and XOR</a></li>
@@ -435,6 +435,7 @@ output=
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psyneulink</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pnl</span>
 </pre></div>
 </div>
 </div>
@@ -612,7 +613,121 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 </section>
 <section id="two-layer-network-in-psyneulink">
 <h2>Two Layer Network in PsyNeuLink<a class="headerlink" href="#two-layer-network-in-psyneulink" title="Link to this heading">#</a></h2>
-<p>It is reasonably straightforward to create a two layer sigmoid net in numpy. However, doing so in PNL is almost trivial. We will build one for our logic gates now.</p>
+<p>It is reasonably straightforward to create a two layer logistic network in numpy. However, doing so in PNL is almost trivial. Here, we implement both the AND, and the OR gate in psyneulink. In addition, we also implement the XOR gate. Remember, XOR(X, Y) is true if X or Y is true, but not both.</p>
+<p><em><strong>Note:</strong></em>, a XOR gate is not linearly separable, so a single layer perceptron cannot learn it. However, a two-layer network can learn it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trials</span> <span class="o">=</span> <span class="mi">10_000</span>
+<span class="c1"># To give the network extra flexibility, we include an extra dimension in the input whose value is always equal to 1</span>
+<span class="c1"># this effectively allows the network to learn a bias term</span>
+
+<span class="n">input_set_pnl</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="n">input_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">input_set_pnl</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">n_combos_pnl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">input_set_pnl</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Note, PNL is capable of training biases, but to keep this tutorial simple using the method we will be incorporating for the</span>
+<span class="c1"># following exercises, the biases implemented by PNL would not be trained.</span>
+<span class="c1"># To resolve that issue, we implement the bias as an extra input, and train it as we would any other weight.</span>
+
+<span class="n">and_labels_pnl</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">or_labels_pnl</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">xor_labels_pnl</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="c1"># Specify which label set you would like to use.</span>
+<span class="n">labels_pnl</span> <span class="o">=</span> <span class="n">and_labels_pnl</span>  <span class="c1"># Change this to OR_labels_pnl or XOR_labels_pnl to see the network learn the OR or XOR gate</span>
+
+<span class="c1"># Creating a 2 layer net in PNL:</span>
+<span class="c1"># First, we create the input layer. This layer is simply a Transfer Mechanism that brings the examples into the network</span>
+<span class="c1"># We do not have to specify a function (it defaults to linear, slope = 1, intercept = 0), </span>
+<span class="c1"># but we do need to specify the size, which will be the size of our input array.</span>
+<span class="n">in_layer</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">input_shapes</span><span class="o">=</span><span class="n">input_length</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Linear</span><span class="p">)</span>
+
+<span class="c1"># Next, we specify the output layer. This is where we do our logistic transformation by applying the Logistic function.</span>
+<span class="c1"># The size we specify for this layer is the number of output. In this case, we only have one output.</span>
+<span class="n">out_layer</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">input_shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Logistic</span><span class="p">)</span>
+
+<span class="c1"># Finally, we create a projection mapping from input to output. We will initialize with random weights.</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">MappingProjection</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;in_to_out&#39;</span><span class="p">,</span>
+                                <span class="n">matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">input_length</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                                <span class="n">sender</span><span class="o">=</span><span class="n">in_layer</span><span class="p">,</span>
+                                <span class="n">receiver</span><span class="o">=</span><span class="n">out_layer</span><span class="p">)</span>
+
+<span class="c1"># The, we will put them together into an Autodiff Composition. These compositions are a faster option</span>
+<span class="c1"># for backpropagation learning that integrate PNL and pytorch.</span>
+<span class="n">logic_two_layer</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">AutodiffComposition</span><span class="p">(</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># We will now add our layers and projection map into our composition</span>
+<span class="n">logic_two_layer</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">in_layer</span><span class="p">)</span>
+<span class="n">logic_two_layer</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">out_layer</span><span class="p">)</span>
+
+<span class="c1"># Here, we set the log conditions for the output layer. This will allow us to see the output of the network as it trains.</span>
+<span class="n">out_layer</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">set_log_conditions</span><span class="p">(</span><span class="n">pnl</span><span class="o">.</span><span class="n">VALUE</span><span class="p">)</span>
+
+<span class="c1"># We add the projection to the composition</span>
+<span class="n">logic_two_layer</span><span class="o">.</span><span class="n">add_projection</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">in_layer</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">receiver</span><span class="o">=</span><span class="n">out_layer</span><span class="p">)</span>
+
+<span class="c1"># To learn our desired gates, we train the autodiff composition by giving it an input dictionary and running it</span>
+<span class="n">input_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">in_layer</span><span class="p">:</span> <span class="n">input_set_pnl</span><span class="p">},</span> <span class="s2">&quot;targets&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">out_layer</span><span class="p">:</span> <span class="n">labels_pnl</span><span class="p">},</span> <span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">logic_two_layer</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_dict</span><span class="p">)</span>
+
+<span class="c1"># Here, we acquire a log of the losses over time so we can see how our network learned</span>
+<span class="c1">#This portion acquires and plots the losses</span>
+<span class="n">exec_id</span> <span class="o">=</span> <span class="n">logic_two_layer</span><span class="o">.</span><span class="n">default_execution_id</span>
+<span class="n">losses</span> <span class="o">=</span> <span class="n">logic_two_layer</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">torch_losses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">exec_id</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The last loss was &quot;</span><span class="p">,</span> <span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Losses of 2 layer net in PNL as a function of trials&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch Number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">#This portion acquires and plots the labels</span>
+
+<span class="c1"># The logged values of the output layer that were recorded during the training</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">out_layer</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray</span><span class="p">()[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+
+<span class="c1"># Psyneulink stores the logged values as a list of length 200 (50 epochs x 4 inputs per epoch)</span>
+<span class="c1"># We will reshape this list into an array of shape 50 x 4, so that each column represents one of the training patterns</span>
+<span class="c1"># and each row represents one training epoch</span>
+<span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rat</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">/</span> <span class="n">n_combos_pnl</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">rat</span><span class="p">,</span> <span class="n">n_combos_pnl</span><span class="p">))</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">labs_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">labs_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">labs_3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">labs_4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first pattern&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;second pattern&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;third pattern&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fourth pattern&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;labels 1 through 4 versus epoch number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch Number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Label Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/library/compositions/autodiffcomposition.py:1436: UserWarning: The execution_mode argument was not specified in the learn() method of &#39;autodiff_composition&#39;; ExecutionMode.PyTorch will be used by default.
+  warnings.warn(f&quot;The execution_mode argument was not specified in the learn() method of &#39;{self.name}&#39;; &quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The last loss was  [0.00134469]
+</pre></div>
+</div>
+<img alt="../../../_images/adeb72b43511232bc99f6e1c6d53b5dcc2744ccfd40a4ef3bd828e907ffc18cd.png" src="../../../_images/adeb72b43511232bc99f6e1c6d53b5dcc2744ccfd40a4ef3bd828e907ffc18cd.png" />
+<img alt="../../../_images/be82cc47ff65f24f2b18f4bf55ecb0f847ea78681890da07810cd406f3d5b63e.png" src="../../../_images/be82cc47ff65f24f2b18f4bf55ecb0f847ea78681890da07810cd406f3d5b63e.png" />
+</div>
+</div>
 <p>Explore the effectiveness of this 2 layer network by running it at different learning rates, for different numbers of trials, and on different label sets.</p>
 <p>Which sets does it learn effectively? Which sets doesn’t it?</p>
 </section>
