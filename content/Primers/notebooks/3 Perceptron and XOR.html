@@ -386,7 +386,11 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-layer-network-in-psyneulink">Two Layer Network in PsyNeuLink</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-layer-network-in-psyneulink">Two Layer Network in PsyNeuLink</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation</a></li>
 </ul>
             </nav>
         </div>
@@ -730,6 +734,155 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 </div>
 <p>Explore the effectiveness of this 2 layer network by running it at different learning rates, for different numbers of trials, and on different label sets.</p>
 <p>Which sets does it learn effectively? Which sets doesn’t it?</p>
+<section id="exercise-2">
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
+<p>Try the running the two layer network on the XOR gate. You will observe that the network is not able to learn the XOR gate. Why do you think this is the case?</p>
+<p>Hint: Consider the following graph that shows the values of the XOR gate for different inputs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#convert to numpy arrays, as required for plotting functions</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="c1">#we will plot each point as red if the XOR relation is satisfied, and blue if not </span>
+<span class="n">xor_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">xor_colors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;XOR projected into 3-d&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/15516556ba4447d71ed0a3231decff2ce95e661cdf305c51b2c8755a71ad5f05.png" src="../../../_images/15516556ba4447d71ed0a3231decff2ce95e661cdf305c51b2c8755a71ad5f05.png" />
+</div>
+</div>
+<details><summary><b>Solution</b></summary>
+<p>The important difference between the XOR compared to AND, and OR is that XOR is not <em>linearly separable</em>, while the other two are. This means that in the graph above, that it is not possible to draw a straight line such that</p>
+<ol class="arabic simple">
+<li><p>Both red points are on the same side of the line</p></li>
+<li><p>Both blue points are on the same side of the line</p></li>
+<li><p>The red points are on the opposite side as the blue points.</p></li>
+</ol>
+<p>In 2 dimensions, this is clearer. Try running the following code to see the XOR gate in 2 dimensions (copy it into a code cell) and create a random line. You can convince yourself that no matter which line is chosen, at least one of the three conditions above will be violated.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#the third dimension is equal to 1 for all four points, so it makes no difference to ignore it</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">xor_colors</span><span class="p">)</span>
+
+<span class="c1">#randomly generate and plot a line </span>
+<span class="n">y_intercept</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">x_intercept</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">slope</span><span class="o">=-</span><span class="n">y_intercept</span><span class="o">/</span><span class="n">x_intercept</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="n">y_intercept</span><span class="p">,</span><span class="n">y_intercept</span><span class="o">+</span><span class="n">slope</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>In contrast, for the AND gate, a line that separates the blue and red dots exists:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">and_colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">]</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">and_colors</span><span class="p">)</span>
+
+<span class="n">y_intercept</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="n">x_intercept</span><span class="o">=</span><span class="mf">1.5</span>
+
+<span class="n">slope</span><span class="o">=-</span><span class="n">y_intercept</span><span class="o">/</span><span class="n">x_intercept</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="n">y_intercept</span><span class="p">,</span><span class="n">y_intercept</span><span class="o">+</span><span class="n">slope</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><em><strong>Optional:</strong></em> Convince yourself that the OR gate is also linearly separable by plotting it in 2 dimensions.</p>
+<p>Now, why is linear separability important here? On the one hand, our network is defined so that when it is given an input <span class="math notranslate nohighlight">\(x\)</span>, it produces an output of <span class="math notranslate nohighlight">\(1\)</span> if
+$<span class="math notranslate nohighlight">\(w\cdot x+b&gt;0\)</span><span class="math notranslate nohighlight">\(
+ and an output of 0 otherwise. It will be able to learn effectively provided that there exist some \)</span>w<span class="math notranslate nohighlight">\( and \)</span>b<span class="math notranslate nohighlight">\( such that \)</span>w\cdot x+b&gt;0<span class="math notranslate nohighlight">\( whenever \)</span>x<span class="math notranslate nohighlight">\( is red and \)</span>&lt;0<span class="math notranslate nohighlight">\( whenever \)</span>x<span class="math notranslate nohighlight">\( is blue (since we want the output to be positive whenever \)</span>x$ is red and negative when blue).</p>
+<p>On the other hand, consider a line with a y-intercept of <span class="math notranslate nohighlight">\(y_0\)</span> and a slope of <span class="math notranslate nohighlight">\(m\)</span>. Then a point <span class="math notranslate nohighlight">\((a,b)\)</span> lies above this line if
+$<span class="math notranslate nohighlight">\(b&gt;ma+y_0\)</span>$</p>
+<p>and lies below the line otherwise. We can rearrange this condition to read
+$<span class="math notranslate nohighlight">\((-m,1)\cdot (a,b) -y_0&gt;0\)</span><span class="math notranslate nohighlight">\(
+ which is the same as the first equation,  provided we take \)</span>w=(-m,1)<span class="math notranslate nohighlight">\(, \)</span>b=-y_0<span class="math notranslate nohighlight">\(, and \)</span>x=(a,b)<span class="math notranslate nohighlight">\(. This means that our original condition \)</span>w\cdot x+b&gt;0<span class="math notranslate nohighlight">\( is equivalent to checking whether \)</span>x<span class="math notranslate nohighlight">\( is above or below some line (with the parameters of the line being determined by \)</span>w<span class="math notranslate nohighlight">\( and \)</span>b$, and vice versa). So in order for our network to learn effectively, it must be the case that all the red points are above some line, and all the blue points are below that same line, i.e. the points must be linearly separable. Since XOR does not satisfy this condition, our network cannot learn the labeling in this case.</p>
+ </details>
+</section>
+</section>
+<section id="appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">
+<h2>Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation<a class="headerlink" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation" title="Link to this heading">#</a></h2>
+<p>Sigmoid neurons take inputs and produce outputs similar to perceptrons, however, the inputs and outputs are not binary. Additionally, rather than applying a simple dot product to the inputs such that
+\begin{equation}
+z(w,x) = w \cdot x + b
+\end{equation}</p>
+<p>these new types of neurons apply the sigmoid function, of the form</p>
+<p>\begin{equation}
+\sigma(z(w,x))=\frac{1}{1+e^{-z(w,x)}}
+\end{equation}</p>
+<p>.
+This function is actually the same as a Logistic function with a bias value of 0 and a gain value of 1. It has an upper bound at 1 and a lower bound at zero. This can be seen by examining the limits: <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to\infty} \sigma(z(w,x))\)</span> and <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to -\infty} \sigma(z(w,x))\)</span>. Although its equation looks complex, a sigmoid function can quickly become intuitive when you try modifying the parameters, as shown in <a class="reference internal" href="2%20Logistic%20Function.html"><span class="std std-doc">logistic function</span></a>.</p>
+<p>In a multilayer network, the output of multiple sigmoid functions in the first non-input layer forms the input to the next layer. However, because of its bounded structure, a sigmoid function only outputs 1 or 0 at the limits (when rounding error kicks in). Typically its output will be somewhere in between. Therefore, there will always be some error between the desired output of a logical function (1 or 0) and the output of a sigmoid. The error of a single output is given by</p>
+<p>\begin{equation}
+E=desired \ output - \sigma(z(w,x))
+\end{equation}</p>
+<p>A common measure of error is called the mean squared error, and is given by</p>
+<p>\begin{equation}
+E =
+\frac{1}{n} \ \sum_{i=1}^{n} (desired \ output_{i} - \sigma(z(w,x))_{i})^2
+\end{equation}</p>
+<p>Although we cannot drive this value to zero (when our desired output is binary), we can minimize it. Because it is a sum of squares, we can minimize it by minimizing each term. Because each term is a convex function of the weights, it is minimized when its derivative as a function of the weights is zero. We can train our neural net to do this using the delta rule, which is very similar to the perceptron learning rule.</p>
+<p>\begin{equation}
+w^{t+1} = \underbrace{w^t}<em>\text{current weight} + \underbrace{\Delta w^t}</em>\text{weight change}
+\end{equation}</p>
+<p>where</p>
+<p>\begin{equation}
+\Delta w^t = - \alpha \underbrace{\frac{\partial E^t}{\partial w^t}}_\text{change in error terms as a function of the weights}
+\end{equation}</p>
+<p>.</p>
+<p>As you can see, when the derivative of the error is zero, the weights stop changing. The error is, at this point, minimized.</p>
+<p>In order to calculate the derviative of the error, we simply employ the chain rule. We will aslo be using a modified form of the error. Instead of scaling each term by <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>, we will scale by <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span></p>
+<p>So, each error term is given by</p>
+<p>\begin{equation}
+E_{i} =
+\frac{1}{2} (desired \ output_{i} - \sigma(h(x))_{i})^2
+\end{equation}</p>
+<p>and its derivative is given by</p>
+<p>\begin{equation}
+\frac{\partial E_{i}}{\partial w} = \underbrace{\frac{\partial E_{i}}{\partial \sigma(h(w,x))}}<em>\text{derivative 1} \quad
+\underbrace{\frac{\partial \sigma(h(w,x))}{\partial h(w,x)}}</em>\text{derivative 2} \quad
+\underbrace{\frac{\partial h(w,x)}{\partial w}}_\text{derivative 3}
+\end{equation}</p>
+<p>Now, because <span class="math notranslate nohighlight">\(h(w,x)\)</span> is a vector equation, its derivative is also a vector. This produces our vector of weight changes, each term of which is determined by derivative 3</p>
+<p>\begin{equation}
+\quad
+\underbrace{\frac{\partial h(w,x)}{\partial w_{i}}}_\text{derivative 3}
+\end{equation}<br />
+.</p>
+<p>This comes out surprisingly tidily:</p>
+<p>\begin{equation}
+{\frac{\partial E^t}{\partial w_{i}^t}}=(desired \ output - \sigma) (\sigma (1 - \sigma))x_{i}
+\end{equation}</p>
+<p>Now
+\begin{equation}
+\Delta w^t_{i} = - \alpha (desired \ output - \sigma) (\sigma (1 - \sigma))x_{i}
+\end{equation}</p>
+<p>Biases are updated in much the same fashion, using</p>
+<p>\begin{equation}
+\Delta b^t_{i} = - \alpha (desired \ output - \sigma) (\sigma (1 - \sigma))1
+\end{equation}</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">and_colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">]</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">and_colors</span><span class="p">)</span>
+
+<span class="n">y_intercept</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="n">x_intercept</span><span class="o">=</span><span class="mf">1.5</span>
+
+<span class="n">slope</span><span class="o">=-</span><span class="n">y_intercept</span><span class="o">/</span><span class="n">x_intercept</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="n">y_intercept</span><span class="p">,</span><span class="n">y_intercept</span><span class="o">+</span><span class="n">slope</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2a08b2950&gt;]
+</pre></div>
+</div>
+<img alt="../../../_images/789b79a010616bf54a50331e8cbe35cc0fc57a65c06982fa437039db83bd56cc.png" src="../../../_images/789b79a010616bf54a50331e8cbe35cc0fc57a65c06982fa437039db83bd56cc.png" />
+</div>
+</div>
 </section>
 </section>
 
@@ -808,7 +961,11 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-layer-network-in-psyneulink">Two Layer Network in PsyNeuLink</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-layer-network-in-psyneulink">Two Layer Network in PsyNeuLink</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation</a></li>
 </ul>
   </nav></div>
 

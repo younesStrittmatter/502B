@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>PNL Two Layer Network &#8212; 502B</title>
+    <title>Exercise 4: Limitations of the Perceptron Learning Rule &#8212; 502B</title>
   
   
   
@@ -172,7 +172,7 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../intro.html">Mathematics Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro.html">Primers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="1%20Scalars%2C%20Vectors%2C%20and%20Matrices.html">Scalars, Vectors, and Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2%20Logistic%20Function.html">Logistic Function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3%20Perceptron%20and%20XOR.html">Perceptron and XOR</a></li>
@@ -366,7 +366,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><a id='m2'> PNL Two Layer Network</a></h1>
+    <h1><a id='e3'>Exercise 4: Limitations of the Perceptron Learning Rule</a></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -376,8 +376,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><a id="m2"> PNL Two Layer Network</a></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-limitations-of-the-perceptron-learning-rule"><a id="e3">Exercise 4: Limitations of the Perceptron Learning Rule</a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><a id="e3">Exercise 4: Limitations of the Perceptron Learning Rule</a></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build">BUILD</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation</a></li>
 </ul>
@@ -392,138 +391,7 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="pnl-two-layer-network">
-<h1><a id='m2'> PNL Two Layer Network</a><a class="headerlink" href="#pnl-two-layer-network" title="Link to this heading">#</a></h1>
-<p>It is reasonably straightforward to create a two layer sigmoid net in numpy. However, doing so in PNL is almost trivial. We will build one for our logic gates now.</p>
-<p>Explore the effectiveness of this 2 layer network by running it at different learning rates, for different numbers of trials, and on different label sets.</p>
-<p>Which sets does it learn effectively? Which sets doesn’t it?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trials</span><span class="o">=</span><span class="mi">10000</span>
-<span class="c1">#to give the network extra flexibility, we include an extra dimension in the input whose value is always equal to 1</span>
-<span class="c1">#another way to get this same flexibility would be to allow our linear layers to have non-zero bias values </span>
-<span class="n">Bool_bias</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
-<span class="n">bool_length</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Bool_bias</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="c1">#Note that our new set of inputs, Bool_bias, has a third term appended to each input. This is a bias.</span>
-<span class="c1">#PNL is capable of training biases, but when using the method we will be incorporating for the</span>
-<span class="c1">#following exercises, the biases implemented by PNL will not be trained.</span>
-<span class="c1">#To resolve that issue, we simply implement them here.</span>
-
-<span class="n">AND_labels_pnl</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="n">OR_labels_pnl</span><span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="n">XOR_labels_pnl</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="n">rat</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">trials</span><span class="o">/</span><span class="n">n_combos</span><span class="p">)</span>
-
-<span class="c1">#Specify which label set you would like to use.</span>
-<span class="n">labels</span><span class="o">=</span><span class="n">AND_labels_pnl</span>
-
-<span class="c1">#Creating a 2 layer net in PNL:</span>
-<span class="c1">#First, we create the input layer. This layer is simply a Transfer Mechanism that brings the examples into the network</span>
-<span class="c1">#We do not have to specify a function (it defaults to linear, slope = 1, intercept = 0), </span>
-<span class="c1">#but we do need to specify the size, which will be the size of our input array.</span>
-
-<span class="n">in_layer</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">bool_length</span><span class="p">,</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Linear</span><span class="p">)</span>
-
-<span class="c1">#Next, we specify our output layer. This is where we do our sigmoid transformation by simply applying the Logistic function.</span>
-<span class="c1">#The size we specify for this layer is the number of output nodes we want. In this case, we want the network to return a scalar</span>
-<span class="c1">#for each example (either a 1 or a zero), so our size is 1</span>
-
-<span class="n">out_layer</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Logistic</span><span class="p">)</span>
-
-<span class="c1">#Finally we create a projection mapping from input to output. We will initialize with random weights.</span>
-
-<span class="n">weights</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">MappingProjection</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;in_to_out&#39;</span><span class="p">,</span>
-                            <span class="n">matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">bool_length</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
-                            <span class="n">sender</span><span class="o">=</span><span class="n">in_layer</span><span class="p">,</span>
-                            <span class="n">receiver</span><span class="o">=</span><span class="n">out_layer</span><span class="p">)</span>
-
-
-<span class="c1">#Now, we will put them together into an Autodiff Composition. These compositions are a faster option</span>
-<span class="c1"># for backpropagation learning that integrate PNL and pytorch.</span>
-
-<span class="n">logic2L</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">AutodiffComposition</span><span class="p">(</span>
-    <span class="n">learning_rate</span><span class="o">=</span><span class="mi">10</span>
-  <span class="p">)</span>
-
-<span class="c1">#We will now add our layers and projection map into our composition</span>
-<span class="n">logic2L</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">in_layer</span><span class="p">)</span>
-<span class="n">logic2L</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">out_layer</span><span class="p">)</span>
-
-<span class="n">out_layer</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">set_log_conditions</span><span class="p">(</span><span class="n">pnl</span><span class="o">.</span><span class="n">VALUE</span><span class="p">)</span>
-
-<span class="n">logic2L</span><span class="o">.</span><span class="n">add_projection</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">in_layer</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">receiver</span><span class="o">=</span><span class="n">out_layer</span><span class="p">)</span>
-
-
-<span class="c1"># To learn our desired gates, we train the autodiff composition by giving it an input dictionary and running it</span>
-<span class="n">input_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;inputs&quot;</span><span class="p">:{</span><span class="n">in_layer</span><span class="p">:</span> <span class="n">Bool_bias</span><span class="p">},</span><span class="s2">&quot;targets&quot;</span><span class="p">:{</span><span class="n">out_layer</span><span class="p">:</span> <span class="n">labels</span><span class="p">},</span><span class="s2">&quot;epochs&quot;</span><span class="p">:</span><span class="mi">50</span><span class="p">}</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">logic2L</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_dict</span><span class="p">)</span>
-
-<span class="c1"># Here, we acquire a log of the losses over time so we can see how our network learned</span>
-<span class="c1">#This portion acquires and plots the losses</span>
-<span class="n">exec_id</span> <span class="o">=</span> <span class="n">logic2L</span><span class="o">.</span><span class="n">default_execution_id</span>
-<span class="n">losses</span> <span class="o">=</span> <span class="n">logic2L</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">exec_id</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The last loss was &quot;</span><span class="p">,</span> <span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Losses of 2 layer net in PNL as a function of trials&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch Number&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Loss&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1">#This portion acquires and plots the labels</span>
-
-<span class="c1">#the logged values of the output layer that were recorded during the training</span>
-<span class="n">data</span><span class="o">=</span><span class="n">out_layer</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray</span><span class="p">()[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
-
-<span class="c1">#psyneulink stores the logged values as a list of length 200 (50 epochs x 4 inputs per epoch)</span>
-<span class="c1">#we will reshape this list into an array of shape 50 x 4, so that each column represents one of the training patterns</span>
-<span class="c1">#and each row represents one training epoch</span>
-<span class="n">num_outs</span><span class="o">=</span><span class="n">n_combos</span>
-<span class="n">length</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">rat</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">length</span><span class="o">/</span><span class="n">num_outs</span><span class="p">)</span>
-
-<span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">,(</span><span class="n">rat</span><span class="p">,</span><span class="n">num_outs</span><span class="p">))</span>
-<span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">labs_1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">labs_2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">labs_3</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">labs_4</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;first pattern&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;second pattern&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_3</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;third pattern&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labs_4</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;fourth pattern&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;labels 1 through 4 versus epoch number&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch Number&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Label Value&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#to give the network extra flexibility, we include an extra dimension in the input whose value is always equal to 1</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">#another way to get this same flexibility would be to allow our linear layers to have non-zero bias values </span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">Bool_bias</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">bool_length</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Bool_bias</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1">#Note that our new set of inputs, Bool_bias, has a third term appended to each input. This is a bias.</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1">#PNL is capable of training biases, but when using the method we will be incorporating for the</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1">#following exercises, the biases implemented by PNL will not be trained.</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1">#To resolve that issue, we simply implement them here.</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">AND_labels_pnl</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]</span>
-
-<span class="ne">NameError</span>: name &#39;np&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<p>To understand why our 2 layer net can’t effectively learn the XOR labels, it may be helpful to consider the follwing graph:</p>
+  <p>To understand why our 2 layer net can’t effectively learn the XOR labels, it may be helpful to consider the follwing graph:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#convert to numpy arrays, as required for plotting functions</span>
@@ -541,7 +409,7 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#convert to numpy arrays, as required for plotting functions</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">Bool_bias_np</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Bool_bias</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">#we will plot each point as red if the XOR relation is satisfied, and blue if not </span>
@@ -552,7 +420,6 @@
 </div>
 </div>
 </div>
-</section>
 <section id="exercise-4-limitations-of-the-perceptron-learning-rule">
 <h1><a id='e3'>Exercise 4: Limitations of the Perceptron Learning Rule</a><a class="headerlink" href="#exercise-4-limitations-of-the-perceptron-learning-rule" title="Link to this heading">#</a></h1>
 <p><strong>Looking at the graph above, why do you think that the network had trouble learning the XOR relation, but not the AND or the OR?</strong></p>
@@ -672,8 +539,7 @@ E_{i} =
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><a id="m2"> PNL Two Layer Network</a></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-limitations-of-the-perceptron-learning-rule"><a id="e3">Exercise 4: Limitations of the Perceptron Learning Rule</a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><a id="e3">Exercise 4: Limitations of the Perceptron Learning Rule</a></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build">BUILD</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation</a></li>
 </ul>
