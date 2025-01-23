@@ -4,7 +4,7 @@
 
 ## Content
 
-1. [Rumelhart](notebooks/1.ipynb)
+1. [Language Processing](notebooks/1%20Language%20Processing.ipynb)
 
 ## Additional Resources
 
