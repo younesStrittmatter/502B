@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Drift Diffusion Models &#8212; 502B</title>
+    <title>Reinforcement Learning &#8212; 502B</title>
   
   
   
@@ -60,12 +60,11 @@
     <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Decision Making/notebooks/1 Drift Diffusion Models';</script>
-    <link rel="canonical" href="https://younesstrittmatter.github.io/502B/content/Decision Making/notebooks/1 Drift Diffusion Models.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Reinforcement Learning/notebooks/1 Reinforcement Learning';</script>
+    <link rel="canonical" href="https://younesstrittmatter.github.io/502B/content/Reinforcement Learning/notebooks/1 Reinforcement Learning.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Reinforcement Learning" href="../../Reinforcement%20Learning/intro.html" />
-    <link rel="prev" title="Decision Making" href="../intro.html" />
+    <link rel="prev" title="Reinforcement Learning" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -182,12 +181,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../Dynamics%20in%20Perception/notebooks/3%20Dynamic%20Systems%20and%20Bistable%20Perception.html">Dynamic Systems and Bistable Perception</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Decision Making</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Drift Diffusion Models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Decision%20Making/intro.html">Decision Making</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Decision%20Making/notebooks/1%20Drift%20Diffusion%20Models.html">Drift Diffusion Models</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../Reinforcement%20Learning/intro.html">Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../Reinforcement%20Learning/notebooks/1%20Reinforcement%20Learning.html">Reinforcement Learning</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Reinforcement Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Reinforcement Learning</a></li>
 </ul>
 </details></li>
 </ul>
@@ -249,7 +248,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book/content/Decision Making/notebooks/1 Drift Diffusion Models.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book/content/Reinforcement Learning/notebooks/1 Reinforcement Learning.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -295,7 +294,7 @@
       
       
       
-      <li><a href="../../../_sources/content/Decision Making/notebooks/1 Drift Diffusion Models.ipynb" target="_blank"
+      <li><a href="../../../_sources/content/Reinforcement Learning/notebooks/1 Reinforcement Learning.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -371,7 +370,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Drift Diffusion Models</h1>
+    <h1>Reinforcement Learning</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -382,9 +381,17 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-drift-diffusion-models-useful">Why are drift diffusion models useful?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-alternative-forced-choice-2afc-tafc-task">The Two Alternative Forced Choice (2AFC / TAFC) Task</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-err-on-the-side-of-caution-or-respond-quickly">To err on the side of caution or respond quickly?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-unsupervised-to-supervised-learning">From Unsupervised to Supervised Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-are-hard">Predictions are Hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-difference-learning">Temporal Difference Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-difference-learning-from-prediction-errors">Temporal Difference Learning from Prediction Errors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-examples">Code Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-setup">Installation &amp; Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Temporal Difference Learning from Prediction Errors</a></li>
 </ul>
 </li>
 </ul>
@@ -398,30 +405,63 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="drift-diffusion-models">
-<h1>Drift Diffusion Models<a class="headerlink" href="#drift-diffusion-models" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="reinforcement-learning">
+<h1>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Link to this heading">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>There is an old philosophical thought experiment that illustrates indecision: a donkey placed equidistant between two piles of hay will starve to death because it cannot choose between them (<a class="reference external" href="https://en.wikipedia.org/wiki/Buridan%27s_ass">Budiran’s Ass</a>). This scenario, while hypothetical, highlights the importance of decision-making mechanisms. A computational model of this behavior could even be demonstrated using a simple tree stump to represent the donkey. Notably, if the donkey’s decision-making process incorporated some degree of noise or randomness, it would ultimately have chosen a pile and survived. Real-world decisions are rarely so static; they are complex, dynamic processes that evolve over time, offering far more intriguing opportunities for modeling than a scenario of perpetual indecision.</p>
-<p>How many decisions do you make each day? Depending on your perspective and the criteria for defining a decision, the number could range from hundreds to thousands. How about a squirrel? Likely, a squirrel makes even more decisions—being in constant motion as it forages, evades predators, and navigates the four fundamental drivers of survival: feeding, fighting, fleeing, and reproduction. Like humans, animals continuously make decisions throughout their waking lives, evaluating evidence across multiple dimensions and timescales. Although human decision-making often involves reason and the capacity to consider vastly more dimensions and extended timescales, studying simpler decision-making processes provides an essential starting point. Interestingly, many of our simpler decisions might rely on the same neural mechanisms that evolved in our near and distant ancestors.</p>
-<section id="why-are-drift-diffusion-models-useful">
-<h3>Why are drift diffusion models useful?<a class="headerlink" href="#why-are-drift-diffusion-models-useful" title="Link to this heading">#</a></h3>
-<p>Decisions typically involve two or more options, one of which is correct or better than the others.  Decision making performance can be quantified in terms of accuracy (how often the correct or best option chosen) as well as speed (how long it takes to decide).  Accuracy and speed are typically at odds – deciding faster means making more errors (a “speed/accuracy tradeoff” explored in this lab).  We can evaluate decision making in terms of speed, accuracy, and reward.</p>
-<p>Drift diffusion models use mathematics originally developed in physics.  You start with a particle of gas in a confined space that jitters from Brownian motion (noise), then add a direction of motion to the air surrounding the particle (drift rate), and explore the time course of how the particle moves and when it is statistically likely to move a particular distance (cross a threshold).  The same parameters can be mapped onto key elements of decision making, replacing the particle with an undecided state, e.g. equidistant between two decision options (thresholds), the motion of air instead becomes the accumulation of evidence moving toward either of the options, and crossing a threshold is making a decision.  These simple parameters allow us to explore decision making speed and accuracy in considerable detail.  For example, we can define the optimal balance between speed and accuracy to maximize reward.  With optimality operationalized it is then possible to evaluate behavioral performance in terms of distance from optimal (the closer to optimal the better, of course).</p>
-<p>The required readings for this week are especially informative and relevant. Here’s the link to Bogacz et al.: <a class="reference external" href="https://sites.engineering.ucsb.edu/~moehlis/moehlis_papers/psych.pdf">https://sites.engineering.ucsb.edu/~moehlis/moehlis_papers/psych.pdf</a></p>
-<p>As Bogacz et al. (2006, see <a class="reference internal" href="../intro.html#additional-resources"><span class="std std-ref">additional resources</span></a>) explain,</p>
-<p>“It has been known since Hernstein’s (1961, 1997) work that animals do not achieve optimality under all conditions, and in behavioral economics, humans often fail to choose optimally (e.g., Kahneman &amp; Tversky, 1984; Loewenstein &amp; Thaler, 1989). For example, in selecting among two items of comparable value and a cash payment worth less than either, participants often opt for cash, possibly to avoid a harder decision between two more valuable but similar items (Shafir &amp; Tversky, 1995). <strong>Such findings raise important questions: Is human decision making always suboptimal?</strong> If it is not, under what conditions is it optimal? When it is suboptimal, does this reflect inherent deficiencies in decision-making mechanisms or other sources of systematic bias? Answers to such questions may provide insights into underlying neural mechanisms. However, to consider them, one must first describe optimal performance, against which actual behavior can be compared.”</p>
+<section id="from-unsupervised-to-supervised-learning">
+<h3>From Unsupervised to Supervised Learning<a class="headerlink" href="#from-unsupervised-to-supervised-learning" title="Link to this heading">#</a></h3>
+<p>Unsupervised learning allows a model to discover structure present in the environment. This is a powerful way to build up a <em>neutral</em> representation of the world. But a representation generated by unsupervised learning does not have any valence (positive or negative value) - it does not tell you what things in the world are good or bad for you. Such a representation might help you infer what to expect,but it does not tell you what to do.  We need a way to learn how to behave - how to make better decisions and act to optimize rewards (increase positive outcomes, decrease negative outcomes).</p>
+<p>Attaching value to things in the world, and making decisions that can arrive at these values introduces a key opportunity for training.  Supervised learning introduces the concepts of correct and incorrect, better and worse. In supervised learning the ends alter the means; the valenced outcome can reach back to change the processing that lead up to that outcome – and when this learning works, it leads to better future decisions and outcomes.</p>
 </section>
-<section id="the-two-alternative-forced-choice-2afc-tafc-task">
-<h3>The Two Alternative Forced Choice (2AFC / TAFC) Task<a class="headerlink" href="#the-two-alternative-forced-choice-2afc-tafc-task" title="Link to this heading">#</a></h3>
-<p>The simplest form of decision making involves only two options (A OR B, deliberately excluding options of neither nor both). We refer to this scenario as the <em>Two Alternative Forced Choice</em> (2AFC / TAFC) Task. Some survival-relevant examples of 2AFC are explore vs. exploit, and fight vs. flight. A common lab 2AFC task involves lots of dots moving on a screen (Random dot kinematogram, RDK). Some are moving leftward and some are moving rightward. The participant’s task on each trial is to determine which direction has more motion, LEFT or RIGHT. The experimenter can manipulate the amount of evidence available: 51% left / 49% right is difficult, while 99% left / 1% right is very easy. It is a good experiment for manipulating task difficulty and measuring performance. Experimenters can also vary the reward rate for correct trials (and/or penalty rate for incorrect trials) and the time delay between trials. All of these experimental parameters can be accounted for in a drift diffusion model.</p>
-<p>Drift diffusion models (DDMs) allow you to simulate behavioral performance on a 2AFC task – adjusting the parameters can produce data that are more-or-less indistinguishable from human performance on a variety of 2AFC tasks. Below is a simple diagram of how the DDM works. Imagine, a human has to respond to a RDK showing most a dots moving to the left. They have to make a decision between “left” (correct response) “right” (wrong response). In this example, the human sees the stimulus (<em>stimulus onset</em>), and then takes some time to process that visual information. Basic visual processing at the start of a trial and motor response processing at the end of a trial (as opposed to decision-relevant processing) is grouped together and called <em>non-decision time</em> (all depicted at the start of the trial in the diagram below). Once the stimulus is perceived, the agent accumulates evidence about the stimulus until it reaches a <em>threshold</em> and is sufficiently confident to choose decision 1 or decision 2. Overall the evidence drifts towards one or the other decision (in this example, typically to the correct response) with a specific <em>drift rate</em> that is dependent on the task difficulty (easier tasks have higher drift rates). In addition, this is a noisy process that unfolds over time so there is some variability in how long it takes the agent to accumulate sufficient evidence to make decisions.</p>
-<p><img alt="Drift Diffusion Model" src="https://younesstrittmatter.github.io/502B/_static/images/ddm.png" /></p>
 </section>
-<section id="to-err-on-the-side-of-caution-or-respond-quickly">
-<h3>To err on the side of caution or respond quickly?<a class="headerlink" href="#to-err-on-the-side-of-caution-or-respond-quickly" title="Link to this heading">#</a></h3>
-<p>How do you know how quickly to respond? Bogacz et al. (2006) state,</p>
-<p>“The DDM is optimal in the sense that it is the fastest decision maker for a given level of accuracy. This assumes a fixed decision threshold, yet the model does not specify what this should be. Absent noise, thresholds have no effect on accuracy. However, with noisy data, accuracy increases as thresholds and decision times (DTs) rise because there is more time to average out uncorrelated noise. This produces a speed–accuracy trade-off: Lower thresholds produce faster but less accurate responding, whereas higher thresholds produce more accurate but slower responses. This speed–accuracy trade-off is critical for interpreting the results of most psychological experiments (Pachella, 1974; Wickelgren, 1977). For example, a manipulation intended to influence task difficulty, and thereby accuracy, could instead simply induce a change in response threshold, thereby changing RTs.”</p>
+<section id="predictions-are-hard">
+<h2>Predictions are Hard<a class="headerlink" href="#predictions-are-hard" title="Link to this heading">#</a></h2>
+<p>At first pass, the only way to make accurate predictions is to travel backward in time. When you first receive a chocolate icecream cone your entire life lead up to this momentous occasion - what part of your life should be credited as its predictor?  Less extravagantly, even the few minutes before getting the icecream your natural environment contained an incredible amount of information and your brain cycled through a vast number of different states.  What feature of the environment might guide you to future icecream cones?  Which stimuli and brain states were the predictors?  Figuring this out is known as the <em>credit assignment problem</em>; it’s an extremely hard problem to solve, and we’ll return to it repeatedly in this course.</p>
+<p>In order to survive, animals need to pursue rewarding things like food and avoid harmful things like getting attacked by other animals. Any ability to predict reward or punishment is generally helpful. Prediction requires associating a reward or punishment with things that consistently precede it.  If seeing over-ripe fruit on the ground is correlated with later finding ripe fruit above in the tree, the neutral stimulus of rotting fruit on the ground should teach you to look up for a rewarding piece of ripe fruit. (In behaviorist jargon, the rotting fruit on the ground begins as a neutral stimulus, looking up begins as an unconditioned response and the fruit in the tree is an unconditioned stimulus – after learning, the rotting fruit is a conditioned stimulus and looking up is a conditioned response.) If an animal growling is correlated with that animal then attacking, hearing growling should make you prepare for an attack.</p>
+<p>How might animals learn to accurately predict rewards? Neural activity associated with a reward could gradually become associated with stimuli that precede the reward. Remember that with Hebbian Learning “neurons that fire together, wire together” and this can operate over both <strong>spatial and temporal proximity</strong>. Temporal proximity can potentially give us prediction. If a small red circle always appears right before a large chocolate icecream cone, the reward signal produced by the icecream cone could eventually become correlated with the small red circle.</p>
+</section>
+<section id="temporal-difference-learning">
+<h2>Temporal Difference Learning<a class="headerlink" href="#temporal-difference-learning" title="Link to this heading">#</a></h2>
+<p>Temporal difference learning is a method that facilitates the backward propagation of predictions through a temporal representation. While it does not literally enable predictions to travel backward in time, it effectively allows them to update prior estimates based on subsequent outcomes, refining the temporal representation of events.</p>
+<p>We start with a temporal sequence of stimuli: A-&gt;B-&gt;C-&gt;D. Let’s call stimuli distributed over time <em>events</em>. Hebbian learning allows us to build up a neutral representation of this temporal sequence of events. Now, at time point D you get a reward. We want to associate the earliest event that reliably predicts this reward with the reward. Temporal difference learning is a way to transfer the prediction backward from D to C, from C to B, and ultimately from B to A.</p>
+<p>The key to understanding temporal difference learning is to shift from viewing time as a chronological construct to conceptualizing it as a linear sequence of events. This linear representation consists of stimulus events interspersed with intervals of waiting. If we imagine time flowing from left (past) to right (future), the objective is to enable information about rewards to propagate from right (future) to left (past) in order to generate accurate predictions.</p>
+<section id="temporal-difference-learning-from-prediction-errors">
+<h3>Temporal Difference Learning from Prediction Errors<a class="headerlink" href="#temporal-difference-learning-from-prediction-errors" title="Link to this heading">#</a></h3>
+<p>In this lab, we will be recreating the model of mesolimbic dopamine cell activity during monkey conditioning proposed by <a class="reference external" href="http://www.jneurosci.org/content/jneuro/16/5/1936.full.pdf">Montague, Dayan, and Sejnowski in their 1996 paper</a>. This model compares temporal difference learning from prediction errors to physiological data. We’ll use this model to replicate Figure 5 from the paper.</p>
+<p>We’ll start by importing Numpy, Matplotlib, and PsyNeuLink, and the 3D toolkit from Matplotlib.</p>
+<p><strong>Note</strong>: <em>Some of the PsyNeuLink syntax in this notebook is a little different than the current syntax that you’ve become familiar with over the previous two labs.  PNL is under active developmen and the TD learning exercises that work so well in this notebook are not ironed out in the current branch of PNL, so we’re installing an older version of PNL in the cell below. Your lab instructor will help you navigate these minor differences.  A couple things to be aware of with this older syntax is that Composition (new syntax) = System (old syntax); an intermediate structure that linked together mechanisms to support learning was called a Process (old syntax).</em></p>
+</section>
+</section>
+<section id="code-examples">
+<h2>Code Examples<a class="headerlink" href="#code-examples" title="Link to this heading">#</a></h2>
+<section id="installation-setup">
+<h3>Installation &amp; Setup<a class="headerlink" href="#installation-setup" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">psyneulink</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psyneulink</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pnl</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Temporal Difference Learning from Prediction Errors<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>In this lab, we will be recreating the model of mesolimbic dopamine cell activity during monkey conditioning proposed by <a class="reference external" href="http://www.jneurosci.org/content/jneuro/16/5/1936.full.pdf">Montague, Dayan, and Sejnowski in their 1996 paper</a>. This model compares temporal difference learning from prediction errors to physiological data. We’ll use this model to replicate Figure 5 from the paper.</p>
+<p><img alt="Montague et al., 1996, Figure 5" src="https://younesstrittmatter.github.io/502B/_static/images/montague_fig_5.jpg" /></p>
+<p>// TODO: Eventually delete:
+<strong>Note</strong>: <em>Some of the PsyNeuLink syntax in this notebook is a little different than the current syntax that you’ve become familiar with over the previous two labs.  PNL is under active developmen and the TD learning exercises that work so well in this notebook are not ironed out in the current branch of PNL, so we’re installing an older version of PNL in the cell below. Your lab instructor will help you navigate these minor differences.  A couple things to be aware of with this older syntax is that Composition (new syntax) = System (old syntax); an intermediate structure that linked together mechanisms to support learning was called a Process (old syntax).</em></p>
 </section>
 </section>
 </section>
@@ -439,7 +479,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./content/Decision Making/notebooks"
+            path: "./content/Reinforcement Learning/notebooks"
         },
         predefinedOutput: true
     }
@@ -462,17 +502,8 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Decision Making</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../../Reinforcement%20Learning/intro.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Reinforcement Learning</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -492,9 +523,17 @@
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-drift-diffusion-models-useful">Why are drift diffusion models useful?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-alternative-forced-choice-2afc-tafc-task">The Two Alternative Forced Choice (2AFC / TAFC) Task</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-err-on-the-side-of-caution-or-respond-quickly">To err on the side of caution or respond quickly?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-unsupervised-to-supervised-learning">From Unsupervised to Supervised Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-are-hard">Predictions are Hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-difference-learning">Temporal Difference Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-difference-learning-from-prediction-errors">Temporal Difference Learning from Prediction Errors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-examples">Code Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-setup">Installation &amp; Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Temporal Difference Learning from Prediction Errors</a></li>
 </ul>
 </li>
 </ul>
