@@ -18,9 +18,9 @@ chapters:
 - file: content/Decision Making/intro
   sections:
     - file: content/Decision Making/notebooks/1 Drift Diffusion Models
-#- file: content/Reinforcement Learning/intro
-#  sections:
-#    - file: content/Reinforcement Learning/notebooks/
+- file: content/Reinforcement Learning/intro
+  sections:
+    - file: content/Reinforcement Learning/notebooks/1 Reinforcement Learning
 #- file: content/Statistical Learning and Backpropagation/intro
 #  sections:
 #    - file: content/Statistical Learning and Backpropagation/notebooks/1 Statistical Learning
