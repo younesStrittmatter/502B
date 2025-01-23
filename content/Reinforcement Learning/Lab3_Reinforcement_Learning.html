@@ -1,0 +1,1229 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 3: Temporal Difference Learning &#8212; 502B</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Reinforcement Learning/Lab3_Reinforcement_Learning';</script>
+    <link rel="canonical" href="https://younesstrittmatter.github.io/502B/content/Reinforcement Learning/Lab3_Reinforcement_Learning.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="502B - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="502B - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    From Molecules to Systems to Behavior
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Primers/intro.html">Primers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Primers/notebooks/1%20Scalars%2C%20Vectors%2C%20and%20Matrices.html">Scalars, Vectors, and Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Primers/notebooks/2%20Logistic%20Function.html">Logistic Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Primers/notebooks/3%20Perceptron%20and%20XOR.html">Perceptron and XOR</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Dynamics%20in%20Perception/intro.html">Dynamics in Perception</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Dynamics%20in%20Perception/notebooks/1%20Hebbian%20Learning.html">Hebbian Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dynamics%20in%20Perception/notebooks/2%20Hopfield%20Networks.html">Hopfield Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dynamics%20in%20Perception/notebooks/3%20Dynamic%20Systems%20and%20Bistable%20Perception.html">Dynamic Systems and Bistable Perception</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Decision%20Making/intro.html">Decision-Making</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Decision%20Making/notebooks/1%20Drift%20Diffusion%20Models.html">Drift Diffusion Models</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book/content/Reinforcement Learning/Lab3_Reinforcement_Learning.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/younesStrittmatter/502B" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/Reinforcement Learning/Lab3_Reinforcement_Learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 3: Temporal Difference Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lab 3: Temporal Difference Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-unsupervised-to-supervised-learning">From Unsupervised to Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-are-hard">Predictions are Hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-difference-learning">Temporal Difference Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-difference-learning-from-prediction-errors">Temporal Difference Learning from Prediction Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercise-1a">Lab Exercise 1a</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercise-1b">Lab Exercise 1b</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-plot-figure-5b">3D Plot, Figure 5B</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-5c">Figure 5C</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercises">Lab Exercises</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-td-model">1.  Your TD Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">2.  Learning Rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-variability">3.  Reward Variability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stimulus-variability">4. Stimulus Variability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-u-i-l-d">5. B.U.I.L.D.</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-3-temporal-difference-learning">
+<h1>Lab 3: Temporal Difference Learning<a class="headerlink" href="#lab-3-temporal-difference-learning" title="Link to this heading">#</a></h1>
+<section id="from-unsupervised-to-supervised-learning">
+<h2>From Unsupervised to Supervised Learning<a class="headerlink" href="#from-unsupervised-to-supervised-learning" title="Link to this heading">#</a></h2>
+<p>Unsupervised learning allows a model to discover structure present in the environment.  This is a powerful way to build up a <em>neutral</em> representation of the world.  But a represntation generated by unsupervised learning does not have any valence (positive or negative value) – it does not tell you what things in the world are good or bad for you.  Such a representation might help you infer what to expect, but it does not tell you what to do.  We need a way to learn how to behave – how to make better decisions and act to optimize rewards (increase positive outcomes, decrease negative outcomes).</p>
+<p>Attaching value to things in the world, and making decisions that can arrive at these values introduces a key opportunity for training.  Supervised learning introduces the concepts of correct and incorrect, better and worse.  In supervised learning the ends alter the means; the valenced outcome can reach back to change the processing that lead up to that outcome – and when this learning works, it leads to better future decisions and outcomes.</p>
+</section>
+<section id="predictions-are-hard">
+<h2>Predictions are Hard<a class="headerlink" href="#predictions-are-hard" title="Link to this heading">#</a></h2>
+<p>At first pass, the only way to make accurate predictions is to travel backward in time.  When you first receive a chocolate icecream cone your entire life lead up to this momentous occasion – what part of your life should be credited as its predictor?  Less extravagantly, even the few minutes before getting the icecream your natural environment contained an incredible amount of information and your brain cycled through a vast number of different states.  What feature of the environment might guide you to future icecream cones?  Which stimuli and brain states were the predictors?  Figuring this out is known as the credit assignment problem; it’s an extremely hard problem to solve and we’ll return to it repeatedly this semester.</p>
+<p>In order to survive, animals need to pursue rewarding things like food and avoid harmful things like getting attacked by other animals.  Any ability to predict reward or punishment is generally helpful.  Prediction requires associating a reward or punishment with things that consistently precede it.  If seeing over-ripe fruit on the ground is correlated with later finding ripe fruit above in the tree, the neutral stimulus of rotting fruit on the ground should teach you to look up for a rewarding piece of ripe fruit.  (In behaviorist jargon, the rotting fruit on the ground begins as a neutral stimulus, looking up begins as an unconditioned response and the fruit in the tree is an unconditioned stimulus – after learning, the rotting fruit is a conditioned stimulus and looking up is a conditioned response.)  If an animal growling is correlated with that animal then attacking, hearing growling should make you prepare for an attack.</p>
+<p>How might animals learn to accurately predict rewards?  Neural activity associated with a reward could gradually become associated with stimuli that precede the reward.  Remember that with Hebbian Learning “neurons that fire together, wire together” and this can operate over both <strong>spatial &amp; temporal proximity</strong>.  Temporal proximity can potentially give us prediction.  If a small red circle always appears right before a large chocolate icecream cone, the reward signal produced by the icecream cone could eventually become correlated with the small red circle.</p>
+</section>
+<section id="temporal-difference-learning">
+<h2>Temporal Difference Learning<a class="headerlink" href="#temporal-difference-learning" title="Link to this heading">#</a></h2>
+<p>Temporal difference learning is a method that allows predictions to travel backward in time.  Okay, not exactly, but kind of – <strong>it allows predictions to propogate backward in our representation of time.</strong></p>
+<p>We start with a temporal sequence of stimuli: A-&gt;B-&gt;C-&gt;D.  Let’s call stimuli distributed over time <em>events</em>.  Hebbian learning allows us to build up a neutral representation of this temporal sequence of events.  Now at timepoint D you get a reward.  We want to associate the earliest event that reliably predicts this reward with the reward.  Temporal difference learning is a way to transfer the prediction backward from D to C, from C to B, and ultimately from B to A.</p>
+<p>The key to understanding temporal difference learning is to stop thinking about time as time, and start thinking about time as a linear object.  The line is a sequence of stimulus events and waiting (between events).  If you imagine time flows from left (past) to right (future), we want information about rewards to flow from right (future) to left (past) to create predictions.</p>
+<section id="temporal-difference-learning-from-prediction-errors">
+<h3>Temporal Difference Learning from Prediction Errors<a class="headerlink" href="#temporal-difference-learning-from-prediction-errors" title="Link to this heading">#</a></h3>
+<p>In this lab, we will be recreating the model of mesolimbic dopamine cell activity during monkey conditioning proposed by <a class="reference external" href="http://www.jneurosci.org/content/jneuro/16/5/1936.full.pdf">Montague, Dayan, and Sejnowski in their 1996 paper</a>. This model compares temporal difference learning from prediction errors to physiological data. We’ll use this model to replicate Figure 5 from the paper.</p>
+<p>We’ll start by importing Numpy, Matplotlib, and PsyNeuLink, and the 3D toolkit from Matplotlib.</p>
+<p><strong>Note</strong>: <em>Some of the PsyNeuLink syntax in this notebook is a little different than the current syntax that you’ve become familiar with over the previous two labs.  PNL is under active developmen and the TD learning exercises that work so well in this notebook are not ironed out in the current branch of PNL, so we’re installing an older version of PNL in the cell below. Your lab instructor will help you navigate these minor differences.  A couple things to be aware of with this older syntax is that Composition (new syntax) = System (old syntax); an intermediate structure that linked together mechanisms to support learning was called a Process (old syntax).</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment to install psyneulink</span>
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>psyneulink
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: psyneulink in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (0.15.3.0)
+Requirement already satisfied: beartype&lt;0.20.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.19.0)
+Requirement already satisfied: dill&lt;0.3.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.3.9)
+Requirement already satisfied: fastkde&lt;2.0.2,&gt;=2.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (2.0.1)
+Requirement already satisfied: graph-scheduler&lt;1.3.0,&gt;=1.2.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.2.2)
+Requirement already satisfied: graphviz&lt;0.21.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.20.3)
+Requirement already satisfied: grpcio&lt;1.69.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.68.1)
+Requirement already satisfied: leabra-psyneulink&lt;0.3.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.3.2)
+Requirement already satisfied: llvmlite&lt;0.44 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.43.0)
+Requirement already satisfied: matplotlib&lt;3.7.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (3.7.5)
+Requirement already satisfied: networkx&lt;3.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (3.4.2)
+Requirement already satisfied: numpy&lt;1.26.5,&gt;=1.21.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.26.4)
+Requirement already satisfied: optuna&lt;4.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (4.1.0)
+Requirement already satisfied: packaging&lt;25.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (24.2)
+Requirement already satisfied: pandas&lt;2.2.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (2.2.3)
+Requirement already satisfied: pillow&lt;11.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (11.0.0)
+Requirement already satisfied: pint&lt;0.22.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.21.1)
+Requirement already satisfied: protobuf&lt;3.20.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (3.20.2)
+Requirement already satisfied: rich&lt;10.13,&gt;=10.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (10.12.0)
+Requirement already satisfied: scipy&lt;1.15,&gt;=1.7.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.14.1)
+Requirement already satisfied: toposort&lt;1.11 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (1.10)
+Requirement already satisfied: modeci-mdf&lt;0.5,&gt;=0.4.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (0.4.10)
+Requirement already satisfied: torch&lt;2.6.0,&gt;=1.10.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from psyneulink) (2.5.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: xarray in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from fastkde&lt;2.0.2,&gt;=2.0.0-&gt;psyneulink) (2025.1.1)
+Requirement already satisfied: bokeh&gt;=0.12.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.6.2)
+Requirement already satisfied: ipywidgets&gt;=7.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (7.7.2)
+Requirement already satisfied: jupyter in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.1.1)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (1.3.1)
+Requirement already satisfied: cycler&gt;=0.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (4.55.3)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (1.4.8)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (3.2.1)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (2.9.0.post0)
+Requirement already satisfied: h5py in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (3.12.1)
+Requirement already satisfied: onnxruntime in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.20.1)
+Requirement already satisfied: onnx in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.17.0)
+Requirement already satisfied: skl2onnx in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.18.0)
+Requirement already satisfied: attrs&gt;=21.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.3.0)
+Requirement already satisfied: cattrs in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.1.2)
+Requirement already satisfied: modelspec&lt;0.4,&gt;=0.3.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (0.3.5)
+Requirement already satisfied: glom in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.11.0)
+Requirement already satisfied: alembic&gt;=1.5.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (1.14.0)
+Requirement already satisfied: colorlog in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (6.9.0)
+Requirement already satisfied: sqlalchemy&gt;=1.4.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (2.0.37)
+Requirement already satisfied: tqdm in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (4.67.1)
+Requirement already satisfied: PyYAML in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (6.0.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pandas&lt;2.2.4-&gt;psyneulink) (2024.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pandas&lt;2.2.4-&gt;psyneulink) (2024.2)
+Requirement already satisfied: colorama&lt;0.5.0,&gt;=0.4.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from rich&lt;10.13,&gt;=10.1-&gt;psyneulink) (0.4.6)
+Requirement already satisfied: commonmark&lt;0.10.0,&gt;=0.9.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from rich&lt;10.13,&gt;=10.1-&gt;psyneulink) (0.9.1)
+Requirement already satisfied: pygments&lt;3.0.0,&gt;=2.6.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from rich&lt;10.13,&gt;=10.1-&gt;psyneulink) (2.19.1)
+Requirement already satisfied: filelock in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (3.16.1)
+Requirement already satisfied: typing-extensions&gt;=4.8.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (4.12.2)
+Requirement already satisfied: jinja2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (3.1.5)
+Requirement already satisfied: fsspec in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (2024.12.0)
+Requirement already satisfied: sympy==1.13.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (1.13.1)
+Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from sympy==1.13.1-&gt;torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (1.3.0)
+Requirement already satisfied: Mako in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from alembic&gt;=1.5.0-&gt;optuna&lt;4.2.0-&gt;psyneulink) (1.3.8)
+Requirement already satisfied: tornado&gt;=6.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bokeh&gt;=0.12.6-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.4.2)
+Requirement already satisfied: xyzservices&gt;=2021.09.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bokeh&gt;=0.12.6-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2025.1.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ipykernel&gt;=4.5.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.29.5)
+Requirement already satisfied: ipython-genutils~=0.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.0)
+Requirement already satisfied: traitlets&gt;=4.3.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (5.14.3)
+Requirement already satisfied: widgetsnbextension~=3.6.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.6.0)
+Requirement already satisfied: ipython&gt;=4.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (8.31.0)
+Requirement already satisfied: jupyterlab-widgets&lt;3,&gt;=1.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.1.11)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jinja2-&gt;torch&lt;2.6.0,&gt;=1.10.0-&gt;psyneulink) (3.0.2)
+Requirement already satisfied: pymongo in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (4.10.1)
+Requirement already satisfied: tabulate in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (0.9.0)
+Requirement already satisfied: docstring-parser in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (0.16)
+Requirement already satisfied: six&gt;=1.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&lt;3.7.6-&gt;psyneulink) (1.17.0)
+Requirement already satisfied: boltons&gt;=19.3.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from glom-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.1.0)
+Requirement already satisfied: face&gt;=20.1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from glom-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.0.0)
+Requirement already satisfied: notebook in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (7.3.2)
+Requirement already satisfied: jupyter-console in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.6.3)
+Requirement already satisfied: nbconvert in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (7.16.5)
+Requirement already satisfied: jupyterlab in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.3.4)
+Requirement already satisfied: coloredlogs in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from onnxruntime-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (15.0.1)
+Requirement already satisfied: flatbuffers in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from onnxruntime-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.12.23)
+Requirement already satisfied: scikit-learn&gt;=1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.6.1)
+Requirement already satisfied: onnxconverter-common&gt;=1.7.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.14.0)
+Requirement already satisfied: appnope in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.4)
+Requirement already satisfied: comm&gt;=0.1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.2)
+Requirement already satisfied: debugpy&gt;=1.6.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.8.12)
+Requirement already satisfied: jupyter-client&gt;=6.1.12 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (8.6.3)
+Requirement already satisfied: jupyter-core!=5.0.*,&gt;=4.12 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (5.7.2)
+Requirement already satisfied: matplotlib-inline&gt;=0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.7)
+Requirement already satisfied: nest-asyncio in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.6.0)
+Requirement already satisfied: psutil in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.1.1)
+Requirement already satisfied: pyzmq&gt;=24 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (26.2.0)
+Requirement already satisfied: decorator in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (5.1.1)
+Requirement already satisfied: jedi&gt;=0.16 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.19.2)
+Requirement already satisfied: pexpect&gt;4.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.9.0)
+Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.48)
+Requirement already satisfied: stack_data in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.6.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: joblib&gt;=1.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=1.1-&gt;skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.4.2)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=1.1-&gt;skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (3.5.0)
+Requirement already satisfied: jupyter-server&lt;3,&gt;=2.4.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.15.0)
+Requirement already satisfied: jupyterlab-server&lt;3,&gt;=2.27.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.27.3)
+Requirement already satisfied: notebook-shim&lt;0.3,&gt;=0.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.4)
+Requirement already satisfied: async-lru&gt;=1.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.0.4)
+Requirement already satisfied: httpx&gt;=0.25.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.28.1)
+Requirement already satisfied: jupyter-lsp&gt;=2.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.2.5)
+Requirement already satisfied: setuptools&gt;=40.8.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (74.1.2)
+Requirement already satisfied: humanfriendly&gt;=9.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from coloredlogs-&gt;onnxruntime-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (10.0)
+Requirement already satisfied: beautifulsoup4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.12.3)
+Requirement already satisfied: bleach!=5.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.2.0)
+Requirement already satisfied: defusedxml in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.7.1)
+Requirement already satisfied: jupyterlab-pygments in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.3.0)
+Requirement already satisfied: mistune&lt;4,&gt;=2.0.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.1.0)
+Requirement already satisfied: nbclient&gt;=0.5.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.10.2)
+Requirement already satisfied: nbformat&gt;=5.7 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (5.10.4)
+Requirement already satisfied: pandocfilters&gt;=1.4.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.5.1)
+Requirement already satisfied: dnspython&lt;3.0.0,&gt;=1.16.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pymongo-&gt;modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (2.7.0)
+Requirement already satisfied: webencodings in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bleach!=5.0.0-&gt;bleach[css]!=5.0.0-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.5.1)
+Requirement already satisfied: tinycss2&lt;1.5,&gt;=1.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.4.0)
+Requirement already satisfied: anyio in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.8.0)
+Requirement already satisfied: certifi in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2024.12.14)
+Requirement already satisfied: httpcore==1.* in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.0.7)
+Requirement already satisfied: idna in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.10)
+Requirement already satisfied: h11&lt;0.15,&gt;=0.13 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpcore==1.*-&gt;httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.14.0)
+Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jedi&gt;=0.16-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.8.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: platformdirs&gt;=2.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-core!=5.0.*,&gt;=4.12-&gt;ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.3.6)
+Requirement already satisfied: argon2-cffi&gt;=21.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (23.1.0)
+Requirement already satisfied: jupyter-events&gt;=0.11.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.11.0)
+Requirement already satisfied: jupyter-server-terminals&gt;=0.4.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.5.3)
+Requirement already satisfied: overrides&gt;=5.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (7.7.0)
+Requirement already satisfied: prometheus-client&gt;=0.9 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.21.1)
+Requirement already satisfied: send2trash&gt;=1.8.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.8.3)
+Requirement already satisfied: terminado&gt;=0.8.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.18.1)
+Requirement already satisfied: websocket-client&gt;=1.7 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.8.0)
+Requirement already satisfied: babel&gt;=2.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.16.0)
+Requirement already satisfied: json5&gt;=0.9.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.10.0)
+Requirement already satisfied: jsonschema&gt;=4.18.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.23.0)
+Requirement already satisfied: requests&gt;=2.31 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.32.3)
+Requirement already satisfied: fastjsonschema&gt;=2.15 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbformat&gt;=5.7-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.21.1)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pexpect&gt;4.3-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.7.0)
+Requirement already satisfied: wcwidth in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.13)
+Requirement already satisfied: soupsieve&gt;1.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from beautifulsoup4-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.6)
+Requirement already satisfied: executing&gt;=1.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.1.0)
+Requirement already satisfied: asttokens&gt;=2.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.0)
+Requirement already satisfied: pure-eval in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.3)
+Requirement already satisfied: sniffio&gt;=1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from anyio-&gt;httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.1)
+Requirement already satisfied: argon2-cffi-bindings in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (21.2.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2024.10.1)
+Requirement already satisfied: referencing&gt;=0.28.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.36.1)
+Requirement already satisfied: rpds-py&gt;=0.7.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.22.3)
+Requirement already satisfied: python-json-logger&gt;=2.0.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.2.1)
+Requirement already satisfied: rfc3339-validator in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.4)
+Requirement already satisfied: rfc3986-validator&gt;=0.1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.1)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.4.1)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.3.0)
+Requirement already satisfied: fqdn in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.5.1)
+Requirement already satisfied: isoduration in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (20.11.0)
+Requirement already satisfied: jsonpointer&gt;1.13 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.0)
+Requirement already satisfied: uri-template in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.0)
+Requirement already satisfied: webcolors&gt;=24.6.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (24.11.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: cffi&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.17.1)
+Requirement already satisfied: pycparser in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.22)
+Requirement already satisfied: arrow&gt;=0.15.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.0)
+Requirement already satisfied: types-python-dateutil&gt;=2.8.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from arrow&gt;=0.15.0-&gt;isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.9.0.20241206)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.2</span> -&gt; <span class=" -Color -Color-Green">24.3.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psyneulink</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pnl</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits</span><span class="w"> </span><span class="kn">import</span> <span class="n">mplot3d</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span> 
+
+<span class="o">%</span><span class="k">autosave</span> 5
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pnl</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;talk&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">IPython.notebook.set_autosave_interval(5000)</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Autosaving every 5 seconds
+0.15.3.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Figure 5A is a “plot of ∂(t) over time for three trials during training (1, 30, and 50)”, where <span class="math notranslate nohighlight">\(∂(t) = r(t) + w(t)x(t) - w(t - 1)x(t - 1)\)</span> is the difference between the stimulus value and the reward.</p>
+<p>For this experiment, the stimulus (a light) starts at timestep 41 and continues for the remainder of the trial, and the reward is delivered at timestep 54, so we’ll create variables to represent that.</p>
+<p>Next, we’ll create the arrays that represent the samples and targets. The sample values in this experiment stay the same across all trials, but the targets do not; every 15 trials, the reward was withheld.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">build_stimulus</span><span class="p">(</span><span class="n">n_trials</span><span class="p">,</span> <span class="n">n_time_steps</span><span class="p">,</span> <span class="n">no_reward_trials</span><span class="p">,</span> <span class="n">stimulus_onset</span><span class="o">=</span><span class="mi">41</span><span class="p">,</span> <span class="n">reward_delivery</span><span class="o">=</span><span class="mi">54</span><span class="p">):</span>
+
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">targets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_trials</span><span class="p">):</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_time_steps</span>
+        <span class="n">target</span><span class="p">[</span><span class="n">reward_delivery</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="k">if</span> <span class="n">trial</span> <span class="ow">in</span> <span class="n">no_reward_trials</span><span class="p">:</span>
+            <span class="n">target</span><span class="p">[</span><span class="n">reward_delivery</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_time_steps</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">stimulus_onset</span><span class="p">,</span> <span class="n">n_time_steps</span><span class="p">):</span>
+            <span class="n">sample</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">samples</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_time_steps</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">n_trials</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">no_reward_trials</span> <span class="o">=</span> <span class="p">{</span><span class="mi">14</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">74</span><span class="p">,</span> <span class="mi">89</span><span class="p">}</span>
+<span class="n">samples</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">build_stimulus</span><span class="p">(</span><span class="n">n_trials</span><span class="p">,</span> <span class="n">n_time_steps</span><span class="p">,</span> <span class="n">no_reward_trials</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following 3 cells are included simply to view (inspect) elements that were created in the previous cell.  Whenever you aren’t certain what some line of code is doing, try creating a new cell and executing parts of the code that are not yet clear.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">inspect: </span>
+
+<span class="sd">samples represents the absence [0] and presence [1] </span>
+<span class="sd">of a stimulus over 120 units of time.</span>
+
+<span class="sd">targets represents the absence [0] and presence [1] </span>
+<span class="sd">of a reward over 120 units of time. </span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">trial_id</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;samples:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">samples</span><span class="p">[</span><span class="n">trial_id</span><span class="p">,])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;targets:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">targets</span><span class="p">[</span><span class="n">trial_id</span><span class="p">,])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>samples:
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+targets:
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trial_id</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">trial_id</span><span class="p">,],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;stimulus&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="n">trial_id</span><span class="p">,],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;reward delivery&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Input and target values over time, trial id = </span><span class="si">{</span><span class="n">trial_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">.5</span><span class="p">,</span><span class="mf">.7</span><span class="p">),</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/af5c746e6d905f57efccc345618488cce50d344e5e96d204e3ea8168196b77ff.png" src="../../_images/af5c746e6d905f57efccc345618488cce50d344e5e96d204e3ea8168196b77ff.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Trial Number&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Stimulus&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Trial Number&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reward&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1a8c29547226039bb4453371e99b0698a7fc1ce297e4acab3a0f9444ba890408.png" src="../../_images/1a8c29547226039bb4453371e99b0698a7fc1ce297e4acab3a0f9444ba890408.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># inspect: We have 120 trials, each with 120 units of time, </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;targets shape: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">targets</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>targets shape:  (120, 60)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll set up the input values for the samples and the targets. We’ll put the <code class="docutils literal notranslate"><span class="pre">samples</span></code> and <code class="docutils literal notranslate"><span class="pre">targets</span></code> variables in dictionaries assigned to the <code class="docutils literal notranslate"><span class="pre">sample</span></code> and <code class="docutils literal notranslate"><span class="pre">action_selection</span></code> mechanisms, respectively. Then we’ll create the System in which the Process will run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_model</span><span class="p">(</span><span class="n">composition_name</span><span class="o">=</span><span class="s1">&#39;TD&#39;</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">.3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;get a model, described in Montague, Dayan, and Sejnowski (1996)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    composition_name : str</span>
+<span class="sd">        the name of the composition</span>
+<span class="sd">    learning_rate : float</span>
+<span class="sd">        learning rate, default to .3</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pnl.composition, list</span>
+<span class="sd">        the model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Create Processing Components</span>
+    <span class="n">sample_mechanism</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">default_variable</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span>
+                                              <span class="n">name</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">SAMPLE</span><span class="p">)</span>
+
+    <span class="n">action_selection</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">default_variable</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span>
+                                              <span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">slope</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                                                                  <span class="n">intercept</span><span class="o">=</span><span class="mf">0.01</span><span class="p">),</span>
+                                              <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Action Selection&#39;</span><span class="p">)</span>
+
+    <span class="n">sample_to_action_selection</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">MappingProjection</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">sample_mechanism</span><span class="p">,</span>
+                                                        <span class="n">receiver</span><span class="o">=</span><span class="n">action_selection</span><span class="p">,</span>
+                                                        <span class="n">matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">)))</span>
+    <span class="c1"># Create Composition</span>
+    <span class="n">composition_name</span> <span class="o">=</span> <span class="s1">&#39;TD_Learning_Figure_5A&#39;</span>
+    <span class="n">comp</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">Composition</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">composition_name</span><span class="p">)</span>
+
+    <span class="c1"># Add Processing Components to the Composition</span>
+    <span class="n">pathway</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample_mechanism</span><span class="p">,</span> <span class="n">sample_to_action_selection</span><span class="p">,</span> <span class="n">action_selection</span><span class="p">]</span>
+
+    <span class="c1"># Add Learning Components to the Composition</span>
+    <span class="n">learning_related_components</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">add_td_learning_pathway</span><span class="p">(</span><span class="n">pathway</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">)</span><span class="o">.</span><span class="n">learning_components</span>
+
+    <span class="c1"># Unpack Relevant Learning Components</span>
+    <span class="n">prediction_error_mechanism</span> <span class="o">=</span> <span class="n">learning_related_components</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">OBJECTIVE_MECHANISM</span><span class="p">]</span>
+    <span class="n">target_mechanism</span> <span class="o">=</span> <span class="n">learning_related_components</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">TARGET_MECHANISM</span><span class="p">]</span>
+
+    <span class="c1"># Create Log</span>
+    <span class="n">prediction_error_mechanism</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">set_log_conditions</span><span class="p">(</span><span class="n">pnl</span><span class="o">.</span><span class="n">VALUE</span><span class="p">)</span>
+
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample_mechanism</span><span class="p">,</span> <span class="n">prediction_error_mechanism</span><span class="p">,</span> <span class="n">target_mechanism</span><span class="p">]</span>
+
+
+    <span class="k">return</span> <span class="n">comp</span><span class="p">,</span> <span class="n">nodes</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">comp</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">()</span>
+<span class="p">[</span><span class="n">sample_mechanism</span><span class="p">,</span> <span class="n">prediction_error_mechanism</span><span class="p">,</span> <span class="n">target_mechanism</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span>
+<span class="n">comp</span><span class="o">.</span><span class="n">show_graph</span><span class="p">(</span><span class="n">output_fmt</span><span class="o">=</span><span class="s1">&#39;jupyter&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f68b2f56164eb9196c772c340a3cb4695f0e102541225e948a4663d1e48803b9.svg" src="../../_images/f68b2f56164eb9196c772c340a3cb4695f0e102541225e948a4663d1e48803b9.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">build_stimulus</span><span class="p">(</span><span class="n">n_trials</span><span class="p">,</span> <span class="n">n_time_steps</span><span class="p">,</span> <span class="n">no_reward_trials</span><span class="p">)</span>
+
+<span class="n">input_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">sample_mechanism</span><span class="p">:</span> <span class="n">samples</span><span class="p">,</span>
+    <span class="n">target_mechanism</span><span class="p">:</span> <span class="n">targets</span>
+<span class="p">}</span>
+
+<span class="n">comp</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.94333984, 0.94268659, 0.94274674, 0.94556307,
+        0.95299467, 0.96509316, 0.97949952, 0.99267827, 1.00204662,
+        1.00717318, 1.00927162, 1.00987907, 1.00999029, 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can create the plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get Delta Values from Log</span>
+<span class="n">delta_vals</span> <span class="o">=</span> <span class="n">prediction_error_mechanism</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray_dictionary</span><span class="p">()[</span>
+    <span class="n">comp</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">pnl</span><span class="o">.</span><span class="n">VALUE</span><span class="p">]</span>
+
+<span class="c1"># Plot Delta Values form trials 1, 30, and 50</span>
+<span class="n">t_start</span> <span class="o">=</span> <span class="mi">35</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delta_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trial 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delta_vals</span><span class="p">[</span><span class="mi">29</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trial 30&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delta_vals</span><span class="p">[</span><span class="mi">49</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trial 50&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Montague et. al. (1996) -- Figure 5A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Timestep&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\delta$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">t_start</span><span class="p">,</span> <span class="n">n_time_steps</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/994b41a55dddabce8f5ca5045db6aceb59058b7f5666bc0cfc8762ae4ff1f693.png" src="../../_images/994b41a55dddabce8f5ca5045db6aceb59058b7f5666bc0cfc8762ae4ff1f693.png" />
+</div>
+</div>
+</section>
+<section id="lab-exercise-1a">
+<h3>Lab Exercise 1a<a class="headerlink" href="#lab-exercise-1a" title="Link to this heading">#</a></h3>
+<p>Write a detailed caption for the figure created above.  You can refer to the original paper, but the caption you write must be your own words.  Your caption should both describe and interpret the information depicted, such that the figure plus your caption can “stand alone” and make sense to someone who has not read the paper.</p>
+</section>
+<section id="lab-exercise-1b">
+<h3>Lab Exercise 1b<a class="headerlink" href="#lab-exercise-1b" title="Link to this heading">#</a></h3>
+<p>Scroll back up to the cell that executes the model and quickly scan over all the delta values on each trial.  Note that trial 0 in the printed output is depicted as trial 1 in the graph above (because Python indexes starting at 0).  At what point has the prediction migrated to the onset of the stimulus with a value above 0.5?</p>
+</section>
+</section>
+<section id="d-plot-figure-5b">
+<h2>3D Plot, Figure 5B<a class="headerlink" href="#d-plot-figure-5b" title="Link to this heading">#</a></h2>
+<p>Now we’ll create a 3D plot showing the entire time course of the experiment. According to the paper, training began at trial 10, so we’ll edit the targets array to match and run the system again.</p>
+<p>(Again, it will take a minute or two to complete running.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">comp</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">()</span>
+<span class="p">[</span><span class="n">sample_mechanism</span><span class="p">,</span> <span class="n">prediction_error_mechanism</span><span class="p">,</span> <span class="n">target_mechanism</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span>
+
+<span class="c1"># Create Stimulus Dictionary</span>
+<span class="n">n_time_steps</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">n_trials</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">no_reward_trials</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">74</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">119</span>
+<span class="p">}</span>
+<span class="n">samples</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">build_stimulus</span><span class="p">(</span><span class="n">n_trials</span><span class="p">,</span> <span class="n">n_time_steps</span><span class="p">,</span> <span class="n">no_reward_trials</span><span class="p">)</span>
+
+
+<span class="n">input_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">sample_mechanism</span><span class="p">:</span> <span class="n">samples</span><span class="p">,</span>
+    <span class="n">target_mechanism</span><span class="p">:</span> <span class="n">targets</span>
+<span class="p">}</span>
+
+<span class="n">comp</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ,
+        0.01      , 0.94333074, 0.94261968, 0.94232084, 0.94357618,
+        0.94604067, 0.94654915, 0.94163884, 0.93378387, 0.9333365 ,
+        0.94887368, 0.97526358, 0.99767106, 1.00795562, 0.01      ,
+        0.01      , 0.01      , 0.01      , 0.01      , 0.01      ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Trials id&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Stimulus&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Trials id&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reward&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7f0045e7a0a4da04a3be3a498a9fb328e5dfa3c27d5bf84f4ca61cb53a531ae7.png" src="../../_images/7f0045e7a0a4da04a3be3a498a9fb328e5dfa3c27d5bf84f4ca61cb53a531ae7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get Delta Values from Log</span>
+<span class="n">delta_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span>
+    <span class="n">prediction_error_mechanism</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray_dictionary</span><span class="p">()[</span><span class="n">comp</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">pnl</span><span class="o">.</span><span class="n">VALUE</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">t_start</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_trials</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t_start</span><span class="p">,</span> <span class="n">n_time_steps</span><span class="p">))</span>
+<span class="n">d_vals</span> <span class="o">=</span> <span class="n">delta_vals</span><span class="p">[:,</span> <span class="n">t_start</span><span class="p">:</span><span class="n">n_time_steps</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">,</span> <span class="n">d_vals</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trial&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Timestep&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;$\delta$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Montague et. al. (1996) -- Figure 5B&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0.92, &#39;Montague et. al. (1996) -- Figure 5B&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/1da8c79ee9e6d039cd780cfce3636448627cfa1195db8055295ea239fa0f1759.png" src="../../_images/1da8c79ee9e6d039cd780cfce3636448627cfa1195db8055295ea239fa0f1759.png" />
+</div>
+</div>
+<p>This 3D figure contains a lot of information.  The z-axis is timesteps within a trial (time within trials is moving from the back “wall” toward the front of the graph).  Although we had 120 time steps in each trial, this figure is zoomed in on the action; between the onset of the stimulus at timestep 41 and the delivery of reward at timestep 54.  To first approximation the y-axis displays predictions and prediction errors – positive values are predictions, and negative values are prediction errors (i.e. when a predicted reward was absent).  The x-axis displays all 120 trials of the experiment, progressing from left to right.  There are some prominent features in the graph.  On the back wall you can see the gradual positive build up (it looks a bit like a wave) of reward prediction accumulating at the onset of the stimulus (timestep 41, when the light turns on) – the model is learning what it is supposed to!  Near the front left you can see predictions starting after the first trial with a reward, and you can see the negative spikes of prediction error on all the trials where reward was withheld.</p>
+</section>
+<section id="figure-5c">
+<h2>Figure 5C<a class="headerlink" href="#figure-5c" title="Link to this heading">#</a></h2>
+<p>Finally, we’ll recreate Figure 5C which demonstrates “extinction of response to the sensory cue.” After trial 70, we’ll stop delivering reward so the system unlearns the response to the sensory cue. In order to show the full effect, this time we will run 150 trials.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">comp</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">()</span>
+<span class="p">[</span><span class="n">sample_mechanism</span><span class="p">,</span> <span class="n">prediction_error_mechanism</span><span class="p">,</span> <span class="n">target_mechanism</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span>
+
+<span class="c1"># Create Stimulus Dictionary</span>
+<span class="n">n_trials</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">reward_removal_onset</span> <span class="o">=</span> <span class="mi">70</span>
+<span class="n">no_reward_trials</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">reward_removal_onset</span><span class="p">,</span> <span class="n">n_trials</span><span class="p">)</span>
+<span class="n">samples</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">build_stimulus</span><span class="p">(</span><span class="n">n_trials</span><span class="p">,</span> <span class="n">n_time_steps</span><span class="p">,</span> <span class="n">no_reward_trials</span><span class="p">)</span>
+
+<span class="c1"># Run Composition</span>
+<span class="n">input_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">sample_mechanism</span><span class="p">:</span> <span class="n">samples</span><span class="p">,</span> <span class="n">target_mechanism</span><span class="p">:</span> <span class="n">targets</span><span class="p">}</span>
+<span class="n">comp</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_dict</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Trials id&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Stimulus&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Trials id&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reward&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/32aee68047e0f6f4dcfbd1ead031b19ae5ee1f64f72b9c598d86f54dd618cb1d.png" src="../../_images/32aee68047e0f6f4dcfbd1ead031b19ae5ee1f64f72b9c598d86f54dd618cb1d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get Delta Values from Log</span>
+<span class="n">delta_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span>
+    <span class="n">prediction_error_mechanism</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray_dictionary</span><span class="p">()[</span><span class="n">comp</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">pnl</span><span class="o">.</span><span class="n">VALUE</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">t_start</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_trials</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t_start</span><span class="p">,</span> <span class="n">n_time_steps</span><span class="p">))</span>
+<span class="n">d_vals</span> <span class="o">=</span> <span class="n">delta_vals</span><span class="p">[:,</span> <span class="n">t_start</span><span class="p">:</span><span class="n">n_time_steps</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">,</span> <span class="n">d_vals</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">275</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trial&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Timestep&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;$\delta$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Montague et. al. (1996) -- Figure 5C&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0.92, &#39;Montague et. al. (1996) -- Figure 5C&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/a67e556537cd37aeac7dac3963eb831b802cb05746612fd534472a6b22e05b05.png" src="../../_images/a67e556537cd37aeac7dac3963eb831b802cb05746612fd534472a6b22e05b05.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="lab-exercises">
+<h1>Lab Exercises<a class="headerlink" href="#lab-exercises" title="Link to this heading">#</a></h1>
+<section id="your-td-model">
+<h2>1.  Your TD Model<a class="headerlink" href="#your-td-model" title="Link to this heading">#</a></h2>
+<p>Create a new TD learning model with 60 trials and 40 timesteps. In every trial the stimulus should appear at timestep 10 and persist through the rest of the trial.  Reward appears at timestep 25 in all trials except trials 15, 25, 35, 45.  Run the model and create a figures comparable to 5A, plotting trials 1, 25, &amp; 55.  Describe any noteworthy learning differences between the results in your figure and the original.</p>
+<p>Tips: Reuse the code from the model that produces figure 5A.  Create two variables, numTrials = 60, and numSteps = 40, then replace the 120’s throughout the code with the appropriate variable names.  When you make the figure, change the title to “(Your Last Name) TD Learning Model (2018)” and change other labels to be accurate.</p>
+</section>
+<section id="learning-rate">
+<h2>2.  Learning Rate<a class="headerlink" href="#learning-rate" title="Link to this heading">#</a></h2>
+<p>Try modifying the learning rate in your TD model to see what happens.  Create three 5A style figures with three different learning rates: 0.1, 0.3, and 0.7.  (0.3 is the learning rate in the original model).  Update your figure titles to reflect the learning rate, and save your figures to include in your homework notebook.  Write a paragraph or two describing interesting features when comparing the different learning rates.</p>
+</section>
+<section id="reward-variability">
+<h2>3.  Reward Variability<a class="headerlink" href="#reward-variability" title="Link to this heading">#</a></h2>
+<p>Remove the reward on every third trial and run your model again with a learning rate of 0.3.  Create a 3D figure like 5B, and include it in your homework notebook.  Describe these results and how you interpret them.</p>
+</section>
+<section id="stimulus-variability">
+<h2>4. Stimulus Variability<a class="headerlink" href="#stimulus-variability" title="Link to this heading">#</a></h2>
+<p>Your TD learning model gradually learns to associate the earliest stimulus that reliably predicts the reward.  Try adding a gap in the persistence of the stimulus at time step 15.  Here’s some code to help</p>
+<p>Now the stimulus will onset at timestep 10, disappear at timestep 15, then reappear at timestep 16 and remain present for the rest of each trial.</p>
+<p>Run the model, describe what happens, and explain why.</p>
+</section>
+<section id="b-u-i-l-d">
+<h2>5. B.U.I.L.D.<a class="headerlink" href="#b-u-i-l-d" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/Reinforcement Learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lab 3: Temporal Difference Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-unsupervised-to-supervised-learning">From Unsupervised to Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-are-hard">Predictions are Hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-difference-learning">Temporal Difference Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-difference-learning-from-prediction-errors">Temporal Difference Learning from Prediction Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercise-1a">Lab Exercise 1a</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercise-1b">Lab Exercise 1b</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-plot-figure-5b">3D Plot, Figure 5B</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-5c">Figure 5C</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercises">Lab Exercises</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-td-model">1.  Your TD Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">2.  Learning Rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-variability">3.  Reward Variability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stimulus-variability">4. Stimulus Variability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-u-i-l-d">5. B.U.I.L.D.</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ...
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

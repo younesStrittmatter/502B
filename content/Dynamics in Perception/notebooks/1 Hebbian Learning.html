@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -172,9 +172,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../Mathematics%20Primer/intro.html">Mathematics Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../Mathematics%20Primer/notebooks/1%20Scalars%2C%20Vectors%2C%20and%20Matrices.html">Scalars, Vectors, and Matrices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../Mathematics%20Primer/notebooks/2%20Logistic%20Function.html">Logistic Function</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Primers/intro.html">Primers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Primers/notebooks/1%20Scalars%2C%20Vectors%2C%20and%20Matrices.html">Scalars, Vectors, and Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Primers/notebooks/2%20Logistic%20Function.html">Logistic Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Primers/notebooks/3%20Perceptron%20and%20XOR.html">Perceptron and XOR</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Dynamics in Perception</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -183,7 +184,10 @@
 <li class="toctree-l2"><a class="reference internal" href="3%20Dynamic%20Systems%20and%20Bistable%20Perception.html">Dynamic Systems and Bistable Perception</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../chapter_2/intro.html">Decision-Making</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Decision%20Making/intro.html">Decision-Making</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Decision%20Making/notebooks/1%20Drift%20Diffusion%20Models.html">Drift Diffusion Models</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -1218,7 +1222,9 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/compositions/composition.py:4652: UserWarning: NodeRole.LEARNING should be assigned with caution to Composition-2. Learning Components are generally constructed automatically as part of a learning Pathway. Doing so otherwise may cause unexpected results.
   warnings.warn(f&quot;{role} should be assigned with caution to {self.name}. &quot;
-/Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/compositions/composition.py:11665: UserWarning: learn() method called on &#39;Composition-2&#39;, but it has no learning components; it will be run but no learning will occur.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/compositions/composition.py:11665: UserWarning: learn() method called on &#39;Composition-2&#39;, but it has no learning components; it will be run but no learning will occur.
   warnings.warn(f&quot;learn() method called on &#39;{self.name}&#39;, but it has no learning components; &quot;
 </pre></div>
 </div>
@@ -1292,10 +1298,17 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 <img alt="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" src="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" />
 <img alt="../../../_images/ecf41acb1fa68d98325ef7173ffa13a76bdfd9bc3bcfd83ba4dc728ef656b90e.png" src="../../../_images/ecf41acb1fa68d98325ef7173ffa13a76bdfd9bc3bcfd83ba4dc728ef656b90e.png" />
 <img alt="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" src="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2a7226e90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2acf47550&gt;
 </pre></div>
 </div>
 <img alt="../../../_images/3b04a1fa34ccd67f0ad93b90d1f0a12965f2b6f4c360456d077410d61605ca08.png" src="../../../_images/3b04a1fa34ccd67f0ad93b90d1f0a12965f2b6f4c360456d077410d61605ca08.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: Add exercises 5- 9</span>
+</pre></div>
+</div>
 </div>
 </div>
 </section>
