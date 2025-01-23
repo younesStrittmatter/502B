@@ -1,7 +1,6 @@
 # Statistical Learning and Language Processing
 
 ## Overview
- 
 
 ## Content
 
