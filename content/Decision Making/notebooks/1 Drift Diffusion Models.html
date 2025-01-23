@@ -190,6 +190,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../Reinforcement%20Learning/notebooks/1%20Reinforcement%20Learning.html">Reinforcement Learning</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Statistical%20Learning%20and%20Backpropagation/intro.html">Statistical Learning and Backpropagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Statistical%20Learning%20and%20Backpropagation/notebooks/1%20Rumelhart.html">Rumelhart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Statistical%20Learning%20and%20Language%20Processing/intro.html">Statistical Learning and Language Processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Selective%20Attention%20Automaticity%20and%20Control/intro.html">Selective Attention, Automaticity, and Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Conflict%20Monitoring%20Effort%20and%20Control/intro.html">Conflict Monitoring, Effort, and Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -383,8 +396,17 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-drift-diffusion-models-useful">Why are drift diffusion models useful?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-examples">Code Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-setup">Installation and Setup</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-alternative-forced-choice-2afc-tafc-task">The Two Alternative Forced Choice (2AFC / TAFC) Task</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-err-on-the-side-of-caution-or-respond-quickly">To err on the side of caution or respond quickly?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk-in-the-context-of-ddm">Random Walk in the context of DDM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drift-diffusion-model-in-psyneulink">Drift Diffusion Model in PsyNeuLink</a></li>
 </ul>
 </li>
 </ul>
@@ -412,6 +434,30 @@
 <p>As Bogacz et al. (2006, see <a class="reference internal" href="../intro.html#additional-resources"><span class="std std-ref">additional resources</span></a>) explain,</p>
 <p>“It has been known since Hernstein’s (1961, 1997) work that animals do not achieve optimality under all conditions, and in behavioral economics, humans often fail to choose optimally (e.g., Kahneman &amp; Tversky, 1984; Loewenstein &amp; Thaler, 1989). For example, in selecting among two items of comparable value and a cash payment worth less than either, participants often opt for cash, possibly to avoid a harder decision between two more valuable but similar items (Shafir &amp; Tversky, 1995). <strong>Such findings raise important questions: Is human decision making always suboptimal?</strong> If it is not, under what conditions is it optimal? When it is suboptimal, does this reflect inherent deficiencies in decision-making mechanisms or other sources of systematic bias? Answers to such questions may provide insights into underlying neural mechanisms. However, to consider them, one must first describe optimal performance, against which actual behavior can be compared.”</p>
 </section>
+</section>
+<section id="code-examples">
+<h2>Code Examples<a class="headerlink" href="#code-examples" title="Link to this heading">#</a></h2>
+<section id="installation-and-setup">
+<h3>Installation and Setup<a class="headerlink" href="#installation-and-setup" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">psyneulink</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psyneulink</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pnl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="the-two-alternative-forced-choice-2afc-tafc-task">
 <h3>The Two Alternative Forced Choice (2AFC / TAFC) Task<a class="headerlink" href="#the-two-alternative-forced-choice-2afc-tafc-task" title="Link to this heading">#</a></h3>
 <p>The simplest form of decision making involves only two options (A OR B, deliberately excluding options of neither nor both). We refer to this scenario as the <em>Two Alternative Forced Choice</em> (2AFC / TAFC) Task. Some survival-relevant examples of 2AFC are explore vs. exploit, and fight vs. flight. A common lab 2AFC task involves lots of dots moving on a screen (Random dot kinematogram, RDK). Some are moving leftward and some are moving rightward. The participant’s task on each trial is to determine which direction has more motion, LEFT or RIGHT. The experimenter can manipulate the amount of evidence available: 51% left / 49% right is difficult, while 99% left / 1% right is very easy. It is a good experiment for manipulating task difficulty and measuring performance. Experimenters can also vary the reward rate for correct trials (and/or penalty rate for incorrect trials) and the time delay between trials. All of these experimental parameters can be accounted for in a drift diffusion model.</p>
@@ -422,6 +468,160 @@
 <h3>To err on the side of caution or respond quickly?<a class="headerlink" href="#to-err-on-the-side-of-caution-or-respond-quickly" title="Link to this heading">#</a></h3>
 <p>How do you know how quickly to respond? Bogacz et al. (2006) state,</p>
 <p>“The DDM is optimal in the sense that it is the fastest decision maker for a given level of accuracy. This assumes a fixed decision threshold, yet the model does not specify what this should be. Absent noise, thresholds have no effect on accuracy. However, with noisy data, accuracy increases as thresholds and decision times (DTs) rise because there is more time to average out uncorrelated noise. This produces a speed–accuracy trade-off: Lower thresholds produce faster but less accurate responding, whereas higher thresholds produce more accurate but slower responses. This speed–accuracy trade-off is critical for interpreting the results of most psychological experiments (Pachella, 1974; Wickelgren, 1977). For example, a manipulation intended to influence task difficulty, and thereby accuracy, could instead simply induce a change in response threshold, thereby changing RTs.”</p>
+</section>
+<section id="exercise-1">
+<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
+<p>In your own words, define the following terms:</p>
+<ol class="arabic simple">
+<li><p>Decision threshold</p></li>
+<li><p>The speed/accuracy tradeoff</p></li>
+<li><p>Is this correct: The higher the decision threshold, the faster the decision is made?</p></li>
+<li><p>Is this correct: The higher the decision threshold, the more accurate the decision is?</p></li>
+</ol>
+<details><summary><b>Solution</b></summary>
+<ol class="arabic simple">
+<li><p>The decision threshold is the amount of evidence that must be accumulated before a decision is made. If the evidence reaches the threshold for decision 1, the agent will choose decision 1. If the evidence reaches the threshold for decision 2, the agent will choose decision 2. The decision threshold is a parameter that can be manipulated through factors like the reward for being accurate on any given trial.</p></li>
+<li><p>The speed/accuracy tradeoff is the relationship between how quickly a decision is made and how accurate that decision is. In general, the faster a decision is made, the less accurate it is. Conversely, the more accurate a decision is, the longer it takes to make that decision. The speed/accuracy tradeoff is a fundamental aspect of decision-making that can be manipulated through the decision threshold parameter in the drift diffusion model.</p></li>
+<li><p>No, this is not correct. The higher the decision threshold, the slower the decision is made. This is because more evidence must be accumulated before a decision is made. Conversely, the lower the decision threshold, the faster the decision is made. This is because less evidence must be accumulated before a decision is made.</p></li>
+<li><p>Yes, this is correct. The higher the decision threshold, the more accurate the decision is. This is because more evidence must be accumulated before a decision is made, which means that the agent is more confident in their decision. Conversely, the lower the decision threshold, the less accurate the decision is. This is because less evidence must be accumulated before a decision is made, which means that the agent is less confident in their decision.</p></li>
+</ol>
+</details><p>As Bogacz et al. (2006) explain,</p>
+<p>“..the TAFC and DDM have played important roles in human history: “In applying the DDM to the TAFC, we assume that the difference in the (noisy) information favoring each alternative is integrated over each trial and that a decision is reached when the resulting accumulated value crosses a critical threshold. Discrete analogues of the DDM were first applied to decision making in World War II, via the sequential probability ratio test (SPRT), the theory being developed independently by Barnard (1946) and Wald (1947; cf. Lehmann, 1959). (For histories, see DeGroot, 1988; Good, 1979; Wallis, 1980.) It was subsequently shown that the DDM and its discrete analogue, a directed random walk, describe accuracy and reaction times (RTs) in humans performing TAFC tasks (Laming, 1968; Ratcliff, 1978; Stone, 1960). In particular, DDM first passages account for a robust feature of human performance: RT distributions are heavily skewed toward longer times.”</p>
+</section>
+<section id="random-walk">
+<h3>Random Walk<a class="headerlink" href="#random-walk" title="Link to this heading">#</a></h3>
+<p>A random walk starts at some point (<em>bias</em>) and at each time step moves some amount chosen at random - usually the randomness is drawn from a bounded distribution centered around 0. This process is cumulative, and it is possible to move far away from the starting point but if the random distribution is centered around 0 then moving far away typically takes many steps. The following cell generates a random walk. Run the cell multiple times to observe the variety of trajectories that can be generated. Experiment with the parameters—such as the probability, bias, and threshold—to understand how they influence the behavior of the random walk. For example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">probability</span></code>: Adjust this to control the likelihood of moving in one direction versus the other.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bias</span></code>: Introduce a bias in the starting point.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">threshold</span></code>: Set the limits at which the random walk stops.</p></li>
+</ul>
+<p>These changes will help you get a better intuition for how random walks behave under different conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining the probability to move up (probability to move down is 1 - prob)</span>
+<span class="n">probability</span> <span class="o">=</span> <span class="mf">.5</span>
+ 
+<span class="c1"># Defining the starting position </span>
+<span class="n">bias</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">bias</span><span class="p">]</span>
+
+<span class="c1"># Defining the maximum number of steps</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Defining the threshold of the walk</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Creating a list of random numbers to decide the direction of the walk</span>
+<span class="n">random_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n_steps</span><span class="p">)</span>
+<span class="n">direction</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">probability</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">random_list</span><span class="p">]</span>
+ 
+<span class="c1"># Bounds the walk at +/-threshold</span>
+<span class="k">for</span> <span class="n">dr</span> <span class="ow">in</span> <span class="n">direction</span><span class="p">:</span>
+    <span class="n">positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dr</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="ow">or</span> <span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">threshold</span><span class="p">:</span>
+        <span class="k">break</span>
+ 
+
+<span class="c1"># plotting down the graph of the random walk in 1D</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random walk starting at </span><span class="si">{</span><span class="n">bias</span><span class="si">}</span><span class="s1"> for </span><span class="si">{</span><span class="n">n_steps</span><span class="si">}</span><span class="s1"> time steps or until +/-</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s1"> is reached.&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/a4876766eb999b03efb6bf128aac67aefdbc1ab64983d626d6b0357e8415a098.png" src="../../../_images/a4876766eb999b03efb6bf128aac67aefdbc1ab64983d626d6b0357e8415a098.png" />
+</div>
+</div>
+</section>
+<section id="random-walk-in-the-context-of-ddm">
+<h3>Random Walk in the context of DDM<a class="headerlink" href="#random-walk-in-the-context-of-ddm" title="Link to this heading">#</a></h3>
+<p>Within a DDM the noise parameter is a random walk - and a higher value of noise means taking bigger steps. When we add a drift rate that adds a non-random motion component, so the drift rate moves the walk in a particular direction. You can think of drift rate as accumulating signal, with noise added on top as a random component.</p>
+</section>
+<section id="exercise-2">
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
+<p>Add a constant drift rate to the above implementation of a random walk and observe how it changes the behavior of the random walk. Experiment with different values of the drift rate and observe how it influences the behavior of the random walk.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining the probability to move up (probability to move down is 1 - prob)</span>
+<span class="n">probability</span> <span class="o">=</span> <span class="mf">.5</span>
+ 
+<span class="c1"># Defining the starting position </span>
+<span class="n">bias</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">bias</span><span class="p">]</span>
+
+<span class="c1"># Defining the maximum number of steps</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Defining the threshold of the walk</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Defining the drift rate (constant drift in one direction)</span>
+<span class="n">drift_rate</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># Creating a list of random numbers to decide the direction of the walk</span>
+<span class="n">random_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n_steps</span><span class="p">)</span>
+<span class="n">direction</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">probability</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">random_list</span><span class="p">]</span>
+ 
+<span class="c1"># Adjust your random walk to include the drift rate</span>
+<span class="k">for</span> <span class="n">dr</span> <span class="ow">in</span> <span class="n">direction</span><span class="p">:</span>
+    <span class="o">...</span>
+ 
+<span class="c1"># plotting down the graph of the random walk in 1D</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random walk starting at </span><span class="si">{</span><span class="n">bias</span><span class="si">}</span><span class="s1"> for </span><span class="si">{</span><span class="n">n_steps</span><span class="si">}</span><span class="s1"> time steps or until +/-</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s1"> is reached.&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/9e9a37058a53ccd6b9c3bbc3bf7c4797f5b18eb9d471d272759852d4828f5205.png" src="../../../_images/9e9a37058a53ccd6b9c3bbc3bf7c4797f5b18eb9d471d272759852d4828f5205.png" />
+</div>
+</div>
+<details><summary><b>Solution</b></summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining the probability to move up (probability to move down is 1 - prob)</span>
+<span class="n">probability</span> <span class="o">=</span> <span class="mf">.5</span>
+ 
+<span class="c1"># Defining the starting position </span>
+<span class="n">bias</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">bias</span><span class="p">]</span>
+
+<span class="c1"># Defining the maximum number of steps</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Defining the threshold of the walk</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Defining the drift rate (constant drift in one direction)</span>
+<span class="n">drift_rate</span> <span class="o">=</span> <span class="mf">.1</span>  <span class="c1"># play with this value to see how it influences the behavior of the random walk, also try negative values</span>
+
+<span class="c1"># Creating a list of random numbers to decide the direction of the walk</span>
+<span class="n">random_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n_steps</span><span class="p">)</span>
+<span class="n">direction</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">probability</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">random_list</span><span class="p">]</span>
+ 
+<span class="c1"># Bounds the walk at +/-threshold</span>
+<span class="k">for</span> <span class="n">dr</span> <span class="ow">in</span> <span class="n">direction</span><span class="p">:</span>
+    <span class="n">positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dr</span> <span class="o">+</span> <span class="n">drift_rate</span><span class="p">)</span>  <span class="c1"># add the drift rate to the position</span>
+    <span class="k">if</span> <span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="ow">or</span> <span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">threshold</span><span class="p">:</span>
+        <span class="k">break</span>
+ 
+
+<span class="c1"># plotting down the graph of the random walk in 1D</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random walk starting at </span><span class="si">{</span><span class="n">bias</span><span class="si">}</span><span class="s1"> for </span><span class="si">{</span><span class="n">n_steps</span><span class="si">}</span><span class="s1"> time steps or until +/-</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s1"> is reached.&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</details></section>
+<section id="drift-diffusion-model-in-psyneulink">
+<h3>Drift Diffusion Model in PsyNeuLink<a class="headerlink" href="#drift-diffusion-model-in-psyneulink" title="Link to this heading">#</a></h3>
 </section>
 </section>
 </section>
@@ -493,8 +693,17 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-drift-diffusion-models-useful">Why are drift diffusion models useful?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-examples">Code Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-setup">Installation and Setup</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-alternative-forced-choice-2afc-tafc-task">The Two Alternative Forced Choice (2AFC / TAFC) Task</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-err-on-the-side-of-caution-or-respond-quickly">To err on the side of caution or respond quickly?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk-in-the-context-of-ddm">Random Walk in the context of DDM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drift-diffusion-model-in-psyneulink">Drift Diffusion Model in PsyNeuLink</a></li>
 </ul>
 </li>
 </ul>
