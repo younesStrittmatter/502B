@@ -2,7 +2,7 @@
 
 ## Overview
 
-Computational modeling in psychology and cognitive neuroscience relies heavily on mathematical concepts. This primer reviews foundational topics such as vectors, matrices, derivatives, and logistic functions. It also introduces concepts of a simple neural network (perceptron) through the example of the XOR task, providing a hands-on understanding of the math behind more complex models.
+Computational modeling in psychology and cognitive neuroscience relies heavily on mathematical concepts. This primer reviews foundational topics such as *vectors*, *matrices*, and the *logistic function*. It also introduces concepts of a simple neural network (*perceptron*) through the example of the XOR task, providing a hands-on understanding of the math behind more complex models.
 
 
 ## Content

@@ -15,5 +15,20 @@ chapters:
     - file: content/Dynamics in Perception/notebooks/1 Hebbian Learning
     - file: content/Dynamics in Perception/notebooks/2 Hopfield Networks
     - file: content/Dynamics in Perception/notebooks/3 Dynamic Systems and Bistable Perception
-- file: content/chapter_2/intro
+- file: content/Decision Making/intro
+  sections:
+    - file: content/Decision Making/notebooks/1 Drift Diffusion Models
+#- file: content/Reinforcement Learning/intro
+#  sections:
+#    - file: content/Reinforcement Learning/notebooks/
+#- file: content/Statistical Learning and Backpropagation/intro
+#  sections:
+#    - file: content/Statistical Learning and Backpropagation/notebooks/1 Statistical Learning
+#- file: content/Selective Attention, Automaticity, and Control
+#  sections:
+#    - file: content/Selective Attention, Automaticity, and Control/notebooks/1 Attention
+#- file: content/Conflict Monitoring, Effort, and Control/intro
+#  sections:
+#    - file: content/Perception and Action/notebooks/1 Perception and Action
+
 
