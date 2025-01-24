@@ -1,6 +1,6 @@
 # Dynamics in Perception
 
-![duck rabbit](https://younesstrittmatter.github.io/502B/assets/images/duckrabbit.jpeg)
+![duck rabbit](https://younesstrittmatter.github.io/502B/_static/images/duckrabbit.jpeg)
 
 ## Overview
 
