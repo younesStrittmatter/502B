@@ -39,4 +39,4 @@ parse:
   myst_substitutions:
     repo_url: "https://github.com/younesStrittmatter/502B"
     base_url: "https://younesstrittmatter.github.io/502B"
-    assets_url: "https://younesstrittmatter.github.io/502B/assets/"
+    assets_url: "https://younesstrittmatter.github.io/502B/assets"
