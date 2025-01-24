@@ -1,0 +1,29 @@
+author: '...'
+bibtex_bibfiles:
+- references.bib
+execute:
+  allow_errors: true
+  execute_notebooks: auto
+html:
+  baseurl: https://younesstrittmatter.github.io/502B/
+  use_repository_button: true
+latex:
+  latex_documents:
+    targetname: book.tex
+launch_buttons:
+  colab_url: https://colab.research.google.com
+  thebe: false
+logo: logo.svg
+parse:
+  myst_substitutions:
+    psyneulink_url: https://princetonuniversity.github.io/PsyNeuLink/
+    version: 1.0.0
+repository:
+  branch: master
+  path_to_book: book_build
+  url: https://github.com/younesStrittmatter/502B
+sphinx:
+  config:
+    html_extra_path:
+    - assets
+title: 502B
