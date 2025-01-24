@@ -10,9 +10,9 @@ import filecmp
 
 # Directory paths
 SOURCE_DIR = "./book"
-BUILD_DIR = "./book_build"
-JUPYTER_BOOK_BUILD_CMD = ["jupyter-book", "build", "book_build"]
-PUBLISH_CMD = "ghp-import -n -p -f book_build/_build/html"
+BUILD_DIR = "./_book_build"
+JUPYTER_BOOK_BUILD_CMD = ["jupyter-book", "build", "_book_build"]
+PUBLISH_CMD = "ghp-import -n -p -f _book_build/_build/html"
 
 
 skip_dirs = ["_build"]
@@ -96,7 +96,7 @@ def build():
     _d = None
     with open(f"{BUILD_DIR}/_config.yml") as f:
         _d = yaml.safe_load(f)
-        _d["repository"]["path_to_book"] = "book_build"
+        _d["repository"]["path_to_book"] = "_book_build"
 
     yaml.safe_dump(_d, open(f"{BUILD_DIR}/_config.yml", "w"))
 
