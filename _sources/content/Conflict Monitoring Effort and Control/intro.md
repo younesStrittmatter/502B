@@ -8,4 +8,3 @@
 1. [Conflict Monitoring](notebooks/1%20Conflict%20Monitoring.ipynb)
 
 ## Additional Resources
-

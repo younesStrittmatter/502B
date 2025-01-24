@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -165,7 +165,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../../intro.html">
-                    From Molecules to Systems to Behavior
+                    A Guide to Computational Modeling with PsyNeuLink in Cognitive Neuroscience
                 </a>
             </li>
         </ul>
@@ -194,7 +194,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../Statistical%20Learning%20and%20Backpropagation/notebooks/1%20Rumelhart.html">Rumelhart</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../Statistical%20Learning%20and%20Language%20Processing/intro.html">Statistical Learning and Language Processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Statistical%20Learning%20and%20Language%20Processing/intro.html">Statistical Learning and Language Processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Statistical%20Learning%20and%20Language%20Processing/notebooks/1%20Language%20Processing.html">Language Processing</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../Selective%20Attention%20Automaticity%20and%20Control/intro.html">Selective Attention, Automaticity, and Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
@@ -262,7 +263,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book/content/Decision Making/notebooks/1 Drift Diffusion Models.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book_build/content/Decision Making/notebooks/1 Drift Diffusion Models.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -407,6 +408,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk-in-the-context-of-ddm">Random Walk in the context of DDM</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drift-diffusion-model-in-psyneulink">Drift Diffusion Model in PsyNeuLink</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
 </ul>
 </li>
 </ul>
@@ -533,7 +535,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/a4876766eb999b03efb6bf128aac67aefdbc1ab64983d626d6b0357e8415a098.png" src="../../../_images/a4876766eb999b03efb6bf128aac67aefdbc1ab64983d626d6b0357e8415a098.png" />
+<img alt="../../../_images/bdce246a52cb379632685df023f717697e2a54971f1c27542a993dc3c2caa85f.png" src="../../../_images/bdce246a52cb379632685df023f717697e2a54971f1c27542a993dc3c2caa85f.png" />
 </div>
 </div>
 </section>
@@ -622,6 +624,83 @@
 </details></section>
 <section id="drift-diffusion-model-in-psyneulink">
 <h3>Drift Diffusion Model in PsyNeuLink<a class="headerlink" href="#drift-diffusion-model-in-psyneulink" title="Link to this heading">#</a></h3>
+<p>The input to a DDM reflects the stimulus, which can be neutral or provide evidence in favor of a decision - evidence that accumulates over successive time steps.</p>
+<p>Imagine the experiment in which subjects described above where have to respond with one of two buttons. They click the “l” button if they see more dots moving to the left, they click the “r” button if they see more dots moving to the right.</p>
+<p>Your integrator will get evidence from the visual system about the movement direction of dots on the screen. Since DDMs model two choice decisions, we can model left moving dots as evidence towards the L-boundary. Let’s assume the L-boundary is above the starting point (aka positive bound) and the R-boundary is below the starting point (aka negative bound).</p>
+<p>Let’s now assume a trial where most dots are moving to the left. The valence of the stimulus determines which direction the integrator drifts. Positive evidence (aka a dot moving to the left) drifts towards the L-boundary, negative evidence drifts towards the R boundary.</p>
+<p>For simplicity, we can assume that the visual system “samples” one dot at a time. Here, are a few concrete examples of how the integrator might work in different situations:</p>
+<ol class="arabic simple">
+<li><p>All dots are moving to the left:
+The visual system samples the following sequence of evidence: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">1]</span></code></p></li>
+<li><p>All dots are moving to the right:
+The visual system samples the following sequence of evidence: <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">-1]</span></code></p></li>
+<li><p>70% of the dots are moving to the left, 30% to the right:
+A possible sequence of evidence the visual might sample: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">-1,</span> <span class="pre">1]</span></code></p></li>
+</ol>
+</section>
+<section id="exercise-3">
+<h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Link to this heading">#</a></h3>
+<p>Think about these questions as you go through the exercises. If you don’t know the answer to any of the questions, see if the following exercises help you understand the answers better.</p>
+<ol class="arabic simple">
+<li><p>Tasks vary in difficulty. Under what task conditions would it be most realistic for your DDM to have a high drift rate?  What about a low drift rate?</p></li>
+<li><p>Assuming that you are modeling lots of individual trials, which kind of integrator would most likely produce the single fastest response time (minimum of all response times): A integrator with high noise or low noise? Why?</p></li>
+<li><p>How does raising your threshold affect your accuracy? Under which task conditions would it be adaptive to raise your threshold?</p></li>
+</ol>
+<details><summary><b>Solution</b></summary>
+<ol class="arabic simple">
+<li><p>A high drift rate is most realistic under conditions where the task is easy. In this case, the evidence in favor of one decision is strong, and the agent can accumulate evidence quickly. A low drift rate is most realistic under conditions where the task is difficult. In this case, the evidence in favor of one decision is weak, and the agent accumulates evidence slowly.</p></li>
+<li><p>An integrator with high noise would most likely produce the single fastest response time. This is because the noise would cause the integrator to reach the decision threshold more quickly. However, with a very high noise, the decision is practically random and not based on the evidence.</p></li>
+<li><p>Raising your threshold increases your accuracy. It would be adaptive to raise your threshold under conditions where the stakes for getting the answer right is high. For example, if you decide whether to invest a large sum of money in stocks.On the other hand, if a fast decision is more important, you would lower the threshold. For example, if you decide whether to brake to avoid a car accident.</p></li>
+</ol>
+</details><p>In the following cell, we demonstrate the implementation of a drift diffusion integrator in PsyNeuLink:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_trials</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># Instate the DDM mechanism</span>
+<span class="n">ddm_integrator</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">DDM</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">DriftDiffusionIntegrator</span><span class="p">(</span>
+    <span class="n">noise</span><span class="o">=</span><span class="mf">.25</span><span class="p">,</span>
+    <span class="n">starting_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">non_decision_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">rate</span><span class="o">=</span><span class="mf">.05</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Tell the DDM to store its outputs at each trial</span>
+<span class="n">ddm_integrator</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">set_log_conditions</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">])</span>
+
+<span class="c1"># Create a compositions with only the integrator</span>
+<span class="n">DDM</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">Composition</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;DDM&#39;</span><span class="p">)</span>
+<span class="n">DDM</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">ddm_integrator</span><span class="p">)</span>
+
+<span class="c1"># Run it</span>
+<span class="n">DDM</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="n">ddm_integrator</span><span class="p">:</span> <span class="mf">1.</span><span class="p">},</span> <span class="n">num_trials</span><span class="o">=</span><span class="n">num_trials</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;execid&#39;</span><span class="p">)</span>
+
+<span class="c1"># Extract the logged data</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">ddm_integrator</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray_dictionary</span><span class="p">()[</span><span class="s1">&#39;execid&#39;</span><span class="p">]</span>
+<span class="n">decision_pos</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">]</span>
+<span class="n">time_pos</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">]</span>
+
+<span class="c1"># For each decision variable, plot the response time frequency</span>
+<span class="n">time_pos_pos_decision</span> <span class="o">=</span> <span class="n">time_pos</span><span class="p">[</span><span class="n">decision_pos</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">time_pos_neg_decision</span> <span class="o">=</span> <span class="n">time_pos</span><span class="p">[</span><span class="n">decision_pos</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">time_pos_pos_decision</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Positive Decisions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">time_pos_neg_decision</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Negative Decisions&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Response Time Distribution for Positive and Negative Decisions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Response Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/9b07def0ded0a764556eb259ff5897a092cc3036861c79b83d8c9eb128a0add0.png" src="../../../_images/9b07def0ded0a764556eb259ff5897a092cc3036861c79b83d8c9eb128a0add0.png" />
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -704,6 +783,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk-in-the-context-of-ddm">Random Walk in the context of DDM</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drift-diffusion-model-in-psyneulink">Drift Diffusion Model in PsyNeuLink</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
 </ul>
 </li>
 </ul>

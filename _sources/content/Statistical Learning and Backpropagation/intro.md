@@ -8,4 +8,3 @@
 1. [Rumelhart](notebooks/1%20Rumelhart.ipynb)
 
 ## Additional Resources
-
