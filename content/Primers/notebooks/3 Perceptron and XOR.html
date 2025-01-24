@@ -431,16 +431,19 @@
 <p>Artificial neurons were conceived to behave in a similar manner to real ones. Early artifical neurons were dubbed perceptrons; they received multiple binary inputs, multiplied each one by an appropriate “weight”, added them together (this should sound familiar), and produced a single binary output that depends on whether the sum passes a certain threshold.  In short, they applied a step function to the transformed input.  This is referred to as an LBF (linear basis function) activation function.</p>
 <p><img alt="LBF" src="https://younesstrittmatter.github.io/502B/_static/images/lbf_perceptron.jpeg" /></p>
 <p>If we define the threshold <span class="math notranslate nohighlight">\( \equiv-b \)</span>, then we can rewrite our conditional output</p>
-<p>\begin{equation}
-output=
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{equation}
+ output=
 \begin{cases}
-0 &amp; if : w \cdot x + b \leq 0
-\
-1  &amp; if : w \cdot x + b &gt;  0
+ 0 &amp; if \: w \cdot x + b \leq 0
+\\
+1  &amp; if \: w \cdot x + b &gt;  0
 \end{cases}
-\end{equation}</p>
+\end{equation}
+\end{split}\]</div>
 <p>The term <span class="math notranslate nohighlight">\(b\)</span> is called a bias, and perceptrons are a special kind of linear classifier called a binary classifier. It is known as a binary classifier because it is assigning one of two labels (the binary output) to the inputs it receives, according to their dot product with the weights (a linear operation). The line defined by <span class="math notranslate nohighlight">\( w \cdot x+b=0 \)</span> is the line that separates the classes from each other. Our “red square, blue circle” class example from earlier in the lab is an example of binarily classifiable data.</p>
-<p><img alt="multilayer ffn" src="https://younesstrittmatter.github.io/502B/_static/_static/images/multilayer_ffn.jpeg" /></p>
+<p><img alt="multilayer ffn" src="https://younesstrittmatter.github.io/502B/_static/images/multilayer_ffn.jpeg" /></p>
 <p>In a multilayer feedforward network, artificial neurons are clustered into layers, where the output of one layer forms the input of the next. The first layer is known as the input layer, the last is the output layer, and the operational layers, where the dot products are computed, are called “hidden layers”.</p>
 <p>Binary classification is simple but powerful. We will show this by using them to construct a set of logic gates.</p>
 </section>
@@ -823,65 +826,98 @@ $<span class="math notranslate nohighlight">\((-m,1)\cdot (a,b) -y_0&gt;0\)</spa
 </section>
 <section id="appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">
 <h2>Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation<a class="headerlink" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation" title="Link to this heading">#</a></h2>
-<p>Sigmoid neurons take inputs and produce outputs similar to perceptrons, however, the inputs and outputs are not binary. Additionally, rather than applying a simple dot product to the inputs such that
+<p>Sigmoid neurons take inputs and produce outputs similar to perceptrons, however, the inputs and outputs are not binary. Additionally, rather than applying a simple dot product to the inputs such that</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{equation}
 z(w,x) = w \cdot x + b
-\end{equation}</p>
+\end{equation}
+\]</div>
 <p>these new types of neurons apply the sigmoid function, of the form</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 \sigma(z(w,x))=\frac{1}{1+e^{-z(w,x)}}
-\end{equation}</p>
-<p>.
-This function is actually the same as a logistic function with a bias value of 0 and a gain value of 1. It has an upper bound at 1 and a lower bound at zero. This can be seen by examining the limits: <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to\infty} \sigma(z(w,x))\)</span> and <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to -\infty} \sigma(z(w,x))\)</span>. Although its equation looks complex, a logistic function can quickly become intuitive when you try modifying the parameters, as shown in <a class="reference external" href="https://younesstrittmatter.github.io/502B/content/Primers/notebooks/2%20Logistic%20Function.ipynb">logistic function</a>.</p>
+\end{equation}
+\]</div>
+<p>This function is actually the same as a logistic function with a bias value of 0 and a gain value of 1. It has an upper bound at 1 and a lower bound at zero. This can be seen by examining the limits: <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to\infty} \sigma(z(w,x))\)</span> and <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to -\infty} \sigma(z(w,x))\)</span>. Although its equation looks complex, a logistic function can quickly become intuitive when you try modifying the parameters, as shown in <a class="reference external" href="https://younesstrittmatter.github.io/502B/content/Primers/notebooks/2%20Logistic%20Function.ipynb">logistic function</a>.</p>
 <p>In a multilayer network, the output of multiple sigmoid functions in the first non-input layer forms the input to the next layer. However, because of its bounded structure, a sigmoid function only outputs 1 or 0 at the limits (when rounding error kicks in). Typically its output will be somewhere in between. Therefore, there will always be some error between the desired output of a logical function (1 or 0) and the output of a sigmoid. The error of a single output is given by</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 E=desired \ output - \sigma(z(w,x))
-\end{equation}</p>
+\end{equation}
+\]</div>
 <p>A common measure of error is called the mean squared error, and is given by</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 E =
 \frac{1}{n} \ \sum_{i=1}^{n} (desired \ output_{i} - \sigma(z(w,x))_{i})^2
-\end{equation}</p>
+\end{equation}
+\]</div>
 <p>Although we cannot drive this value to zero (when our desired output is binary), we can minimize it. Because it is a sum of squares, we can minimize it by minimizing each term. Because each term is a convex function of the weights, it is minimized when its derivative as a function of the weights is zero. We can train our neural net to do this using the delta rule, which is very similar to the perceptron learning rule.</p>
-<p>\begin{equation}
-w^{t+1} = \underbrace{w^t}<em>\text{current weight} + \underbrace{\Delta w^t}</em>\text{weight change}
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+w^{t+1} = \underbrace{w^t}_\text{current weight} + \underbrace{\Delta w^t}_\text{weight change}
+\end{equation}
+\]</div>
 <p>where</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 \Delta w^t = - \alpha \underbrace{\frac{\partial E^t}{\partial w^t}}_\text{change in error terms as a function of the weights}
-\end{equation}</p>
-<p>.</p>
+\end{equation}
+\]</div>
 <p>As you can see, when the derivative of the error is zero, the weights stop changing. The error is, at this point, minimized.</p>
 <p>In order to calculate the derviative of the error, we simply employ the chain rule. We will aslo be using a modified form of the error. Instead of scaling each term by <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>, we will scale by <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span></p>
 <p>So, each error term is given by</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 E_{i} =
 \frac{1}{2} (desired \ output_{i} - \sigma(h(x))_{i})^2
-\end{equation}</p>
+\end{equation} 
+\]</div>
 <p>and its derivative is given by</p>
-<p>\begin{equation}
-\frac{\partial E_{i}}{\partial w} = \underbrace{\frac{\partial E_{i}}{\partial \sigma(h(w,x))}}<em>\text{derivative 1} \quad
-\underbrace{\frac{\partial \sigma(h(w,x))}{\partial h(w,x)}}</em>\text{derivative 2} \quad
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\frac{\partial E_{i}}{\partial w} = \underbrace{\frac{\partial E_{i}}{\partial \sigma(h(w,x))}}_\text{derivative 1} \quad
+\underbrace{\frac{\partial \sigma(h(w,x))}{\partial h(w,x)}}_\text{derivative 2} \quad
 \underbrace{\frac{\partial h(w,x)}{\partial w}}_\text{derivative 3}
-\end{equation}</p>
+\end{equation}
+\]</div>
 <p>Now, because <span class="math notranslate nohighlight">\(h(w,x)\)</span> is a vector equation, its derivative is also a vector. This produces our vector of weight changes, each term of which is determined by derivative 3</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 \quad
 \underbrace{\frac{\partial h(w,x)}{\partial w_{i}}}_\text{derivative 3}
-\end{equation}<br />
-.</p>
+\end{equation}  
+\]</div>
 <p>This comes out surprisingly tidily:</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 {\frac{\partial E^t}{\partial w_{i}^t}}=(desired \ output - \sigma) (\sigma (1 - \sigma))x_{i}
-\end{equation}</p>
-<p>Now
+\end{equation}
+\]</div>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{equation}
 \Delta w^t_{i} = - \alpha (desired \ output - \sigma) (\sigma (1 - \sigma))x_{i}
-\end{equation}</p>
+\end{equation}
+\]</div>
 <p>Biases are updated in much the same fashion, using</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 \Delta b^t_{i} = - \alpha (desired \ output - \sigma) (\sigma (1 - \sigma))1
-\end{equation}</p>
+\end{equation}
+\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">and_colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">]</span>
@@ -898,7 +934,7 @@ E_{i} =
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2b4a9e850&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2b6c4e410&gt;]
 </pre></div>
 </div>
 <img alt="../../../_images/789b79a010616bf54a50331e8cbe35cc0fc57a65c06982fa437039db83bd56cc.png" src="../../../_images/789b79a010616bf54a50331e8cbe35cc0fc57a65c06982fa437039db83bd56cc.png" />
