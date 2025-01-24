@@ -1,4 +1,6 @@
 import subprocess
+import sys
+
 import jinja2
 import yaml
 import json
@@ -10,6 +12,8 @@ import filecmp
 SOURCE_DIR = "./book"
 BUILD_DIR = "./book_build"
 JUPYTER_BOOK_BUILD_CMD = ["jupyter-book", "build", "book_build"]
+PUBLISH_CMD = "ghp-import -n -p -f book_build/_build/html"
+
 
 skip_dirs = ["_build"]
 
@@ -49,7 +53,7 @@ def copy_if_changed(src_dir, dest_dir):
 
 
 def build_notebook(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
-    print(f"Building notebook: {path}")
+
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(searchpath="."),
         autoescape=False
@@ -61,7 +65,7 @@ def build_notebook(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
     template = env.get_template(path)
 
     rendered_notebook_str = template.render(**variables)
-    print(rendered_notebook_str)
+
     rendered_nbjson = json.loads(rendered_notebook_str)
     rendered_notebook_str = json.dumps(rendered_nbjson, indent=1)
     # Write out the final notebook with the same name but with _colab appended
@@ -69,7 +73,7 @@ def build_notebook(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
         f.write(rendered_notebook_str)
 
 def build_markdown(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
-    print(f"Building markdown: {path}")
+
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(searchpath="."),
         autoescape=False
@@ -83,7 +87,7 @@ def build_markdown(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
     rendered_notebook_str = template.render(**variables)
     with open(path, "w", encoding="utf-8") as f:
         f.write(rendered_notebook_str)
-    print(f"Rendered Markdown saved to {path}")
+
 
 
 def build():
@@ -103,8 +107,18 @@ def build():
             elif file.endswith(".md"):
                 build_markdown(os.path.join(root, file))
 
-    print(f"Preprocessed notebooks saved to: {BUILD_DIR}")
+
+
+def main():
+    args = sys.argv[1:]
+    build()
+    if '--a' in args:
+        build()
+        subprocess.run(JUPYTER_BOOK_BUILD_CMD)
+        subprocess.run(PUBLISH_CMD, shell=True)
+    else:
+        build()
 
 
 if __name__ == '__main__':
-    build()
+    main()
