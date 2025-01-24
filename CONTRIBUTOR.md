@@ -39,6 +39,26 @@ in to these files (in the *.md or *.ipynb files) have the following format
 `{{ assets_url }}/<relative_path_from_assets_folder>`. If you want to link to other parts of the book use
 `{{ book_url }}/<relative_path_from_book_folder>` or `{{ content_url }}/<relative_path_from_content_folder>`.
 
+### Data
+Data is stored in the folder `data` in the root directory
+
+To load data in the notebooks, you should use the following code snippet:
+
+```bash
+!git clone {{ repo_url }}/data/<relative_path_from_data_folder> data
+```
+
+During development you can replace {{ repo_url }} with the actual repository url.
+
+Load it via:
+
+```python
+data = pd.read_csv('data/<file_name>')
+```
+
+
+## Development
+
 You can still run `jupyter-book build .` in the `book` folder, to test if everything works as expected but 
 the links will not work in this build.
 
