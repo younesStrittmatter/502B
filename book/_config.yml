@@ -37,8 +37,11 @@ launch_buttons:
   thebe: false
 
 
-
-
 sphinx:
   config:
     html_extra_path: ['assets']
+
+parse:
+  myst_substitutions:
+    psyneulink_url: "https://princetonuniversity.github.io/PsyNeuLink/"
+    version: "1.0.0"
