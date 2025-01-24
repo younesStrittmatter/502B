@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -165,7 +165,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../../intro.html">
-                    A Guide to Computational Modeling with PsyNeuLink in Cognitive Neuroscience
+                    A Guide to Computational Modeling with PsyNeuLink
                 </a>
             </li>
         </ul>
@@ -263,7 +263,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book_build/content/Decision Making/notebooks/1 Drift Diffusion Models.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/_book_build/content/Decision Making/notebooks/1 Drift Diffusion Models.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -433,7 +433,7 @@
 <p>Decisions typically involve two or more options, one of which is correct or better than the others.  Decision making performance can be quantified in terms of accuracy (how often the correct or best option chosen) as well as speed (how long it takes to decide).  Accuracy and speed are typically at odds – deciding faster means making more errors (a “speed/accuracy tradeoff” explored in this lab).  We can evaluate decision making in terms of speed, accuracy, and reward.</p>
 <p>Drift diffusion models use mathematics originally developed in physics.  You start with a particle of gas in a confined space that jitters from Brownian motion (noise), then add a direction of motion to the air surrounding the particle (drift rate), and explore the time course of how the particle moves and when it is statistically likely to move a particular distance (cross a threshold).  The same parameters can be mapped onto key elements of decision making, replacing the particle with an undecided state, e.g. equidistant between two decision options (thresholds), the motion of air instead becomes the accumulation of evidence moving toward either of the options, and crossing a threshold is making a decision.  These simple parameters allow us to explore decision making speed and accuracy in considerable detail.  For example, we can define the optimal balance between speed and accuracy to maximize reward.  With optimality operationalized it is then possible to evaluate behavioral performance in terms of distance from optimal (the closer to optimal the better, of course).</p>
 <p>The required readings for this week are especially informative and relevant. Here’s the link to Bogacz et al.: <a class="reference external" href="https://sites.engineering.ucsb.edu/~moehlis/moehlis_papers/psych.pdf">https://sites.engineering.ucsb.edu/~moehlis/moehlis_papers/psych.pdf</a></p>
-<p>As Bogacz et al. (2006, see <a class="reference internal" href="../intro.html#additional-resources"><span class="std std-ref">additional resources</span></a>) explain,</p>
+<p>As Bogacz et al. (2006, see <a class="reference external" href="https://younesstrittmatter.github.io/502B/content/Decision%20Making/intro.md#additional-resources">additional resources</a>) explain,</p>
 <p>“It has been known since Hernstein’s (1961, 1997) work that animals do not achieve optimality under all conditions, and in behavioral economics, humans often fail to choose optimally (e.g., Kahneman &amp; Tversky, 1984; Loewenstein &amp; Thaler, 1989). For example, in selecting among two items of comparable value and a cash payment worth less than either, participants often opt for cash, possibly to avoid a harder decision between two more valuable but similar items (Shafir &amp; Tversky, 1995). <strong>Such findings raise important questions: Is human decision making always suboptimal?</strong> If it is not, under what conditions is it optimal? When it is suboptimal, does this reflect inherent deficiencies in decision-making mechanisms or other sources of systematic bias? Answers to such questions may provide insights into underlying neural mechanisms. However, to consider them, one must first describe optimal performance, against which actual behavior can be compared.”</p>
 </section>
 </section>
@@ -464,7 +464,7 @@
 <h3>The Two Alternative Forced Choice (2AFC / TAFC) Task<a class="headerlink" href="#the-two-alternative-forced-choice-2afc-tafc-task" title="Link to this heading">#</a></h3>
 <p>The simplest form of decision making involves only two options (A OR B, deliberately excluding options of neither nor both). We refer to this scenario as the <em>Two Alternative Forced Choice</em> (2AFC / TAFC) Task. Some survival-relevant examples of 2AFC are explore vs. exploit, and fight vs. flight. A common lab 2AFC task involves lots of dots moving on a screen (Random dot kinematogram, RDK). Some are moving leftward and some are moving rightward. The participant’s task on each trial is to determine which direction has more motion, LEFT or RIGHT. The experimenter can manipulate the amount of evidence available: 51% left / 49% right is difficult, while 99% left / 1% right is very easy. It is a good experiment for manipulating task difficulty and measuring performance. Experimenters can also vary the reward rate for correct trials (and/or penalty rate for incorrect trials) and the time delay between trials. All of these experimental parameters can be accounted for in a drift diffusion model.</p>
 <p>Drift diffusion models (DDMs) allow you to simulate behavioral performance on a 2AFC task – adjusting the parameters can produce data that are more-or-less indistinguishable from human performance on a variety of 2AFC tasks. Below is a simple diagram of how the DDM works. Imagine, a human has to respond to a RDK showing most a dots moving to the left. They have to make a decision between “left” (correct response) “right” (wrong response). In this example, the human sees the stimulus (<em>stimulus onset</em>), and then takes some time to process that visual information. Basic visual processing at the start of a trial and motor response processing at the end of a trial (as opposed to decision-relevant processing) is grouped together and called <em>non-decision time</em> (all depicted at the start of the trial in the diagram below). Once the stimulus is perceived, the agent accumulates evidence about the stimulus until it reaches a <em>threshold</em> and is sufficiently confident to choose decision 1 or decision 2. Overall the evidence drifts towards one or the other decision (in this example, typically to the correct response) with a specific <em>drift rate</em> that is dependent on the task difficulty (easier tasks have higher drift rates). In addition, this is a noisy process that unfolds over time so there is some variability in how long it takes the agent to accumulate sufficient evidence to make decisions.</p>
-<p><img alt="Drift Diffusion Model" src="https://younesstrittmatter.github.io/502B/_static/images/ddm.png" /></p>
+<p><img alt="Drift Diffusion Model" src="https://younesstrittmatter.github.io/502B/assets//images/ddm.png" /></p>
 </section>
 <section id="to-err-on-the-side-of-caution-or-respond-quickly">
 <h3>To err on the side of caution or respond quickly?<a class="headerlink" href="#to-err-on-the-side-of-caution-or-respond-quickly" title="Link to this heading">#</a></h3>
@@ -535,7 +535,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2c4790cb06671a6f80dc03fc93101b806f444d6d5755383cc6186d77495cb16f.png" src="../../../_images/2c4790cb06671a6f80dc03fc93101b806f444d6d5755383cc6186d77495cb16f.png" />
+<img alt="../../../_images/300c595ebe48f43423a2c81b09006104aaa9f692d8f685a9a48b95eb01ec25d6.png" src="../../../_images/300c595ebe48f43423a2c81b09006104aaa9f692d8f685a9a48b95eb01ec25d6.png" />
 </div>
 </div>
 </section>
@@ -698,7 +698,7 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/0f1224d53b14a88166a70524f0b1d2f87beec4f1a8d5c0644b9a18a8eba180e8.png" src="../../../_images/0f1224d53b14a88166a70524f0b1d2f87beec4f1a8d5c0644b9a18a8eba180e8.png" />
+<img alt="../../../_images/4b966b7683bc6cafaf70e3967e01bf25dafdc10d24010fe7d6c52409135e54d1.png" src="../../../_images/4b966b7683bc6cafaf70e3967e01bf25dafdc10d24010fe7d6c52409135e54d1.png" />
 </div>
 </div>
 </section>

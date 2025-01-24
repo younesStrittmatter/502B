@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -167,7 +167,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../../intro.html">
-                    A Guide to Computational Modeling with PsyNeuLink in Cognitive Neuroscience
+                    A Guide to Computational Modeling with PsyNeuLink
                 </a>
             </li>
         </ul>
@@ -265,7 +265,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book_build/content/Primers/notebooks/3 Perceptron and XOR.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/_book_build/content/Primers/notebooks/3 Perceptron and XOR.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -429,7 +429,7 @@
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>To first approximation, activity of a neuron in the brain is determined by the integration of excitatory and inhibitory impulses received by its dendrites and passed to the cell body. If excitatory signals outweigh inhibitory signals sufficiently to pass a threshold, the neuron will fire, sending out an action potential via its axon.</p>
 <p>Artificial neurons were conceived to behave in a similar manner to real ones. Early artifical neurons were dubbed perceptrons; they received multiple binary inputs, multiplied each one by an appropriate “weight”, added them together (this should sound familiar), and produced a single binary output that depends on whether the sum passes a certain threshold.  In short, they applied a step function to the transformed input.  This is referred to as an LBF (linear basis function) activation function.</p>
-<p><img alt="LBF" src="https://younesstrittmatter.github.io/502B/_static/images/lbf_perceptron.jpeg" /></p>
+<p><img alt="LBF" src="https://younesstrittmatter.github.io/502B/assets//images/lbf_perceptron.jpeg" /></p>
 <p>If we define the threshold <span class="math notranslate nohighlight">\( \equiv-b \)</span>, then we can rewrite our conditional output</p>
 <p>\begin{equation}
 output=
@@ -440,7 +440,7 @@ output=
 \end{cases}
 \end{equation}</p>
 <p>The term <span class="math notranslate nohighlight">\(b\)</span> is called a bias, and perceptrons are a special kind of linear classifier called a binary classifier. It is known as a binary classifier because it is assigning one of two labels (the binary output) to the inputs it receives, according to their dot product with the weights (a linear operation). The line defined by <span class="math notranslate nohighlight">\( w \cdot x+b=0 \)</span> is the line that separates the classes from each other. Our “red square, blue circle” class example from earlier in the lab is an example of binarily classifiable data.</p>
-<p><img alt="multilayer ffn" src="https://younesstrittmatter.github.io/502B/_static/images/multilayer_ffn.jpeg" /></p>
+<p><img alt="multilayer ffn" src="https://younesstrittmatter.github.io/502B/assets//_static/images/multilayer_ffn.jpeg" /></p>
 <p>In a multilayer feedforward network, artificial neurons are clustered into layers, where the output of one layer forms the input of the next. The first layer is known as the input layer, the last is the output layer, and the operational layers, where the dot products are computed, are called “hidden layers”.</p>
 <p>Binary classification is simple but powerful. We will show this by using them to construct a set of logic gates.</p>
 </section>
@@ -633,7 +633,7 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 </div>
 </details>
 <p>This method works well for a single layer of perceptrons. Now, consider multiple layers of perceptrons, each operating linearly, but producing a step function output. When they produce an incorrect result, how do we know which layer is responsible for the mistake and what step size would be useful to correct it?</p>
-<p>Because of their binary output, linearly updating weights of perceptrons in a multilayer network produces unpredictable and problematic results. A natural solution is to replace the step function with a function that more gradually interpolates between 0 and 1. A good choice here is the <a class="reference internal" href="2%20Logistic%20Function.html"><span class="std std-doc">logistic function</span></a>, which we have encountered in the previous section. It is possible to generalize the Perceptron Learning Rule to this case using calculus; the details are presented in the Appendix at the end of this notebook. We suggest that you skim the Appendix now, and then read it more carefully after you have finished this lab. Once you understand this derivation, you will be in good shape for when we discuss the Backpropagation algorithm in the next lab.</p>
+<p>Because of their binary output, linearly updating weights of perceptrons in a multilayer network produces unpredictable and problematic results. A natural solution is to replace the step function with a function that more gradually interpolates between 0 and 1. A good choice here is the <a class="reference external" href="https://younesstrittmatter.github.io/502B/content/Primers/notebooks/2%20Logistic%20Function.ipynb">logistic function</a>, which we have encountered in the previous section. It is possible to generalize the Perceptron Learning Rule to this case using calculus; the details are presented in the Appendix at the end of this notebook. We suggest that you skim the Appendix now, and then read it more carefully after you have finished this lab. Once you understand this derivation, you will be in good shape for when we discuss the Backpropagation algorithm in the next lab.</p>
 </section>
 </section>
 <section id="two-layer-network-in-psyneulink">
@@ -761,9 +761,9 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 <p>Hint: Consider the following graph that shows the values of the XOR gate for different inputs:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#convert to numpy arrays, as required for plotting functions</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert to numpy arrays, as required for plotting functions</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
-<span class="c1">#we will plot each point as red if the XOR relation is satisfied, and blue if not </span>
+<span class="c1"># We will plot each point as red if the XOR relation is satisfied, and blue if not </span>
 <span class="n">xor_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
 
@@ -832,7 +832,7 @@ z(w,x) = w \cdot x + b
 \sigma(z(w,x))=\frac{1}{1+e^{-z(w,x)}}
 \end{equation}</p>
 <p>.
-This function is actually the same as a Logistic function with a bias value of 0 and a gain value of 1. It has an upper bound at 1 and a lower bound at zero. This can be seen by examining the limits: <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to\infty} \sigma(z(w,x))\)</span> and <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to -\infty} \sigma(z(w,x))\)</span>. Although its equation looks complex, a sigmoid function can quickly become intuitive when you try modifying the parameters, as shown in <a class="reference internal" href="2%20Logistic%20Function.html"><span class="std std-doc">logistic function</span></a>.</p>
+This function is actually the same as a logistic function with a bias value of 0 and a gain value of 1. It has an upper bound at 1 and a lower bound at zero. This can be seen by examining the limits: <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to\infty} \sigma(z(w,x))\)</span> and <span class="math notranslate nohighlight">\(\lim_{z(w,x)\to -\infty} \sigma(z(w,x))\)</span>. Although its equation looks complex, a logistic function can quickly become intuitive when you try modifying the parameters, as shown in <a class="reference external" href="https://younesstrittmatter.github.io/502B/content/Primers/notebooks/2%20Logistic%20Function.ipynb">logistic function</a>.</p>
 <p>In a multilayer network, the output of multiple sigmoid functions in the first non-input layer forms the input to the next layer. However, because of its bounded structure, a sigmoid function only outputs 1 or 0 at the limits (when rounding error kicks in). Typically its output will be somewhere in between. Therefore, there will always be some error between the desired output of a logical function (1 or 0) and the output of a sigmoid. The error of a single output is given by</p>
 <p>\begin{equation}
 E=desired \ output - \sigma(z(w,x))
@@ -898,7 +898,7 @@ E_{i} =
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2b4b6f590&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x296f78610&gt;]
 </pre></div>
 </div>
 <img alt="../../../_images/789b79a010616bf54a50331e8cbe35cc0fc57a65c06982fa437039db83bd56cc.png" src="../../../_images/789b79a010616bf54a50331e8cbe35cc0fc57a65c06982fa437039db83bd56cc.png" />

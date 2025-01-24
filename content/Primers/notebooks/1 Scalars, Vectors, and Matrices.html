@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -167,7 +167,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../../intro.html">
-                    A Guide to Computational Modeling with PsyNeuLink in Cognitive Neuroscience
+                    A Guide to Computational Modeling with PsyNeuLink
                 </a>
             </li>
         </ul>
@@ -265,7 +265,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/book_build/content/Primers/notebooks/1 Scalars, Vectors, and Matrices.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/younesStrittmatter/502B/blob/master/_book_build/content/Primers/notebooks/1 Scalars, Vectors, and Matrices.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -425,9 +425,9 @@
 <h1>Scalars, Vectors, and Matrices<a class="headerlink" href="#scalars-vectors-and-matrices" title="Link to this heading">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>A <em>scalar</em> is a number used to quantify magnitude (e.g. temperature), while a <em>vector</em> is a number used to quantify magnitude and direction (e.g. wind).</p>
+<p>A <em>scalar</em> is a number used to quantify magnitude (e.g. temperature), while a <em>vector</em> is used to quantify magnitude and direction (e.g. wind).</p>
 <p>Vectors are typically formatted as a list of numbers with each number corresponding to one direction. Familiar Cartesian coordinates have 2 dimensions, X &amp; Y, and a vector in Cartesian coordinates is 1x2, a one dimensional list with two numbers.
-For example, west-east is the X axis and south-north is the Y axis. The vector (3, 4) indicates wind moving both 3 mph west and 4 mph north, but the combination of these components is a vector of wind moving 5 mph northwest (thanks to the pythagorean theorem, <span class="math notranslate nohighlight">\(a^2 + b^2 = c^2\)</span>). The magnitude is the distance from the origin (0,0), in this case 5. The vector itself is one dimensional and can be depicted as an arrow starting at (0,0) and extending to (3,4) in these Cartesian coordinates.</p>
+For example, west-east is the X axis and south-north is the Y axis. The vector (3, 4) indicates wind moving both 3 mph west and 4 mph north, but the combination of these components is a vector of wind moving 5 mph northwest (thanks to the pythagorean theorem, <span class="math notranslate nohighlight">\(a^2 + b^2 = c^2\)</span>). The <em>magnitude</em> is the distance from the origin (0,0), in this case 5. The vector itself is one dimensional and can be depicted as an arrow starting at (0,0) and extending to (3,4) in these Cartesian coordinates.</p>
 <p><em><strong>Note:</strong></em> A number with magnitude AND two or more directions is called a <em>tensor</em>. One way to think of a basic tensor is pinching and pulling a rubber sheet toward you: there is a magnitude of force pulling back toward the initial position (you could use this to launch a pebble like a slingshot) and there is also a magnitude of tension in the rubber sheet itself that will contract back when you let go. Tensors are used to describe gravity in general relativity.</p>
 <p>Vectors are typically formatted as one-dimensional data structures or lists, 1xN, with N as the length of the list.  A <em>matrix</em> is a two-dimensional, MxN, data structures.</p>
 <p>Here, we introduce common mathematical notation and the equivalent code implementation in <a class="reference external" href="https://numpy.org/">Numpy</a>.</p>
@@ -512,7 +512,7 @@ c((3, 3)):
 </section>
 <section id="transpose">
 <h3>Transpose<a class="headerlink" href="#transpose" title="Link to this heading">#</a></h3>
-<p>When performing operations on vectors, it is easiest to represent a vector as a column vector, and a corresponding row vector as its *transpose&amp;.
+<p>When performing operations on vectors, it is easiest to represent a vector as a column vector, and a corresponding row vector as its <em>transpose</em>.
 $<span class="math notranslate nohighlight">\(
 \begin{equation}
 \overrightarrow{a}=
@@ -728,8 +728,8 @@ a_{1} \\ a_{2} \\ a_{3}
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dot product between a and b:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
 
 <span class="c1"># Define vectors where the inner dimensions don&#39;t match</span>
-<span class="n">c</span> <span class="o">=</span> <span class="o">...</span>
-<span class="n">d</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">c</span> <span class="o">=</span> <span class="c1"># TODO: Your code here</span>
+<span class="n">d</span> <span class="o">=</span> <span class="c1"># TODO: Your code here</span>
 
 <span class="c1"># Calculate the dot product</span>
 <span class="n">dot_cd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
