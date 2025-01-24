@@ -49,6 +49,7 @@ def copy_if_changed(src_dir, dest_dir):
 
 
 def build_notebook(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
+    print(f"Building notebook: {path}")
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(searchpath="."),
         autoescape=False
@@ -60,11 +61,29 @@ def build_notebook(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
     template = env.get_template(path)
 
     rendered_notebook_str = template.render(**variables)
+    print(rendered_notebook_str)
     rendered_nbjson = json.loads(rendered_notebook_str)
     rendered_notebook_str = json.dumps(rendered_nbjson, indent=1)
     # Write out the final notebook with the same name but with _colab appended
-    with open(path.replace(".ipynb", ".ipynb"), "w") as f:
+    with open(path, "w") as f:
         f.write(rendered_notebook_str)
+
+def build_markdown(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
+    print(f"Building markdown: {path}")
+    env = jinja2.Environment(
+        loader=jinja2.FileSystemLoader(searchpath="."),
+        autoescape=False
+    )
+    # Load yaml file
+    with open(yaml_path) as f:
+        variables = yaml.safe_load(f)["parse"]["myst_substitutions"]
+
+    template = env.get_template(path)
+
+    rendered_notebook_str = template.render(**variables)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(rendered_notebook_str)
+    print(f"Rendered Markdown saved to {path}")
 
 
 def build():
@@ -79,8 +98,10 @@ def build():
 
     for root, dirs, files in os.walk(BUILD_DIR):
         for file in files:
-            if file.endswith(".ipynb") and not file.endswith("_colab.ipynb"):
+            if file.endswith(".ipynb"):
                 build_notebook(os.path.join(root, file))
+            elif file.endswith(".md"):
+                build_markdown(os.path.join(root, file))
 
     print(f"Preprocessed notebooks saved to: {BUILD_DIR}")
 
