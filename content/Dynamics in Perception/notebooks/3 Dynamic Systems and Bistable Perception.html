@@ -559,8 +559,8 @@
  [-1.  1.]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2b2529e10&gt;,
- &lt;matplotlib.lines.Line2D at 0x2b2560510&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2b015c210&gt;,
+ &lt;matplotlib.lines.Line2D at 0x2b015c790&gt;]
 </pre></div>
 </div>
 <img alt="../../../_images/c13db06eb4d316430e49284dab7663e5f6cdaf5c12e9968f5727754dac97b18a.png" src="../../../_images/c13db06eb4d316430e49284dab7663e5f6cdaf5c12e9968f5727754dac97b18a.png" />
@@ -571,57 +571,73 @@
 <p>Remember that the activation of each node is calculated as:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
+\begin{align}
 act_{1}(t) &amp;= (1 - integration\_rate) * act_{1}(t-1) + integration\_rate * input_{1} \\
 &amp;= (1 - integration\_rate) * act_{1}(t-1) + integration\_rate * (input_{i, external} - act_{2}(t-1))
+\end{align}
 \end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}
+\begin{align}
 act_{1}(t) &amp;= (1 - integration\_rate) * act_{1}(t-1) + integration\_rate * input_{1} \\
 &amp;= (1 - integration\_rate) * act_{1}(t-1) + integration\_rate * (input_{i, external} - act_{2}(t-1))
+\end{align}
 \end{split}\]</div>
 <section id="step-1">
 <h4>Step 1<a class="headerlink" href="#step-1" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}
+\begin{align}
 act_{1}(1) &amp;= (1 - integration\_rate) * act_{1}(0) + integration\_rate * (input_{i, external} - act_{2}(0)) \\
 &amp;= (1 - 0.5) * 0 + 0.5 * (2 - 0) \\
 &amp;= 1
+\end{align}
 \end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}
+\begin{align}
 act_{2}(1) &amp;= (1 - integration\_rate) * act_{2}(0) + integration\_rate * (input_{i, external} - act_{1}(0)) \\
 &amp;= (1 - 0.5) * 0 + 0.5 * (6 - 0) \\
 &amp;= 3
+\end{align}
 \end{split}\]</div>
 </section>
 <section id="step-2">
 <h4>Step 2<a class="headerlink" href="#step-2" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}
+\begin{align}
 act_{1}(2) &amp;= (1 - integration\_rate) * act_{1}(1) + integration\_rate * (input_{i, external} - act_{2}(1)) \\
 &amp;= (1 - 0.5) * 1 + 0.5 * (0 - 3) \\
 &amp;= -1
+\end{align}
 \end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}
+\begin{align}
 act_{2}(2) &amp;= (1 - integration\_rate) * act_{2}(1) + integration\_rate * (input_{i, external} - act_{1}(1)) \\
 &amp;= (1 - 0.5) * 3 + 0.5 * (0 - 1) \\
 &amp;= 1
+\end{align}
 \end{split}\]</div>
 </section>
 <section id="step-3">
 <h4>Step 3<a class="headerlink" href="#step-3" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}
+\begin{align}
 act_{1}(3) &amp;= (1 - integration\_rate) * act_{1}(2) + integration\_rate * (input_{i, external} - act_{2}(2)) \\
 &amp;= (1 - 0.5) * -1 + 0.5 * (0 - 1) \\
 &amp;= -1
+\end{align}
 \end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}
+\begin{align}
 act_{2}(2) &amp;= (1 - integration\_rate) * act_{2}(1) + integration\_rate * (input_{i, external} - act_{1}(1)) \\
 &amp;= (1 - 0.5) * 1 + 0.5 * (0 - (-1)) \\
 &amp;= 1
+\end{align}
 \end{split}\]</div>
 <p>So the system has stabilized at <span class="math notranslate nohighlight">\(act_{1} = -1\)</span> and <span class="math notranslate nohighlight">\(act_{2} = 1\)</span>.</p>
 <p>Try to predict what happens if we change the input values of <code class="docutils literal notranslate"><span class="pre">node_attract1</span></code> and <code class="docutils literal notranslate"><span class="pre">node_attract2</span></code>.</p>
@@ -661,8 +677,8 @@ act_{2}(2) &amp;= (1 - integration\_rate) * act_{2}(1) + integration\_rate * (in
  [-0.5  1.5]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x174a0b690&gt;,
- &lt;matplotlib.lines.Line2D at 0x174a0ba90&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x174773810&gt;,
+ &lt;matplotlib.lines.Line2D at 0x174773b90&gt;]
 </pre></div>
 </div>
 <img alt="../../../_images/d8c1a20953befd5c59e190c10ff6983d678bed0e5b8331b3be73e13df96d1c76.png" src="../../../_images/d8c1a20953befd5c59e190c10ff6983d678bed0e5b8331b3be73e13df96d1c76.png" />
@@ -758,8 +774,8 @@ act_{2}(2) &amp;= (1 - integration\_rate) * act_{2}(1) + integration\_rate * (in
  [0.39816431 0.40412669]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2b288de10&gt;,
- &lt;matplotlib.lines.Line2D at 0x2b2b69390&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2b05625d0&gt;,
+ &lt;matplotlib.lines.Line2D at 0x2b056fe90&gt;]
 </pre></div>
 </div>
 <img alt="../../../_images/52f478225132af29956b868c84ef8a087af89fec9c01e4171041ef1346902c21.png" src="../../../_images/52f478225132af29956b868c84ef8a087af89fec9c01e4171041ef1346902c21.png" />
