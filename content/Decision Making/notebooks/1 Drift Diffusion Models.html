@@ -498,7 +498,8 @@ document.write(`
 <li><p>Yes, this is correct. The higher the decision threshold, the more accurate the decision is. This is because more evidence must be accumulated before a decision is made, which means that the agent is more confident in their decision. Conversely, the lower the decision threshold, the less accurate the decision is. This is because less evidence must be accumulated before a decision is made, which means that the agent is less confident in their decision.</p></li>
 </ol>
 </details>
----<p>As Bogacz et al. (2006) explain,</p>
+<hr class="docutils" />
+<p>As Bogacz et al. (2006) explain,</p>
 <p>“..the TAFC and DDM have played important roles in human history: “In applying the DDM to the TAFC, we assume that the difference in the (noisy) information favoring each alternative is integrated over each trial and that a decision is reached when the resulting accumulated value crosses a critical threshold. Discrete analogues of the DDM were first applied to decision making in World War II, via the sequential probability ratio test (SPRT), the theory being developed independently by Barnard (1946) and Wald (1947; cf. Lehmann, 1959). (For histories, see DeGroot, 1988; Good, 1979; Wallis, 1980.) It was subsequently shown that the DDM and its discrete analogue, a directed random walk, describe accuracy and reaction times (RTs) in humans performing TAFC tasks (Laming, 1968; Ratcliff, 1978; Stone, 1960). In particular, DDM first passages account for a robust feature of human performance: RT distributions are heavily skewed toward longer times.”</p>
 </section>
 <section id="random-walk">
@@ -546,7 +547,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/dda1ab281300e925f976101c9e1b98fab9a23c186775e2b3bacd6f422a938724.png" src="../../../_images/dda1ab281300e925f976101c9e1b98fab9a23c186775e2b3bacd6f422a938724.png" />
+<img alt="../../../_images/4e44d7d2486fe38e074b80940a53def85e091a33584b7950a51bb5d87e0e9a9b.png" src="../../../_images/4e44d7d2486fe38e074b80940a53def85e091a33584b7950a51bb5d87e0e9a9b.png" />
 </div>
 </div>
 </section>
@@ -638,7 +639,8 @@ document.write(`
 </pre></div>
 </div>
 </details>
----</section>
+</section>
+<hr class="docutils" />
 <section id="drift-diffusion-model-in-psyneulink">
 <h3>Drift Diffusion Model in PsyNeuLink<a class="headerlink" href="#drift-diffusion-model-in-psyneulink" title="Link to this heading">#</a></h3>
 <p>The input to a DDM reflects the stimulus, which can be neutral or provide evidence in favor of a decision - evidence that accumulates over successive time steps.</p>
@@ -670,7 +672,8 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 <li><p>Raising your threshold increases your accuracy. It would be adaptive to raise your threshold under conditions where the stakes for getting the answer right is high. For example, if you decide whether to invest a large sum of money in stocks.On the other hand, if a fast decision is more important, you would lower the threshold. For example, if you decide whether to brake to avoid a car accident.</p></li>
 </ol>
 </details>
----<p>In the following cell, we demonstrate the implementation of a drift diffusion integrator in PsyNeuLink:</p>
+<hr class="docutils" />
+<p>In the following cell, we demonstrate the implementation of a drift diffusion integrator in PsyNeuLink:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_trials</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -715,7 +718,7 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/335a3a511278459bfcc959bc6edfdbd770e6b63fb70c23af1e765fee317422e2.png" src="../../../_images/335a3a511278459bfcc959bc6edfdbd770e6b63fb70c23af1e765fee317422e2.png" />
+<img alt="../../../_images/a0d56e30e61d44d517de93e6ba9722d6aff3ccfd00bf9526b9e2b0d9d2603638.png" src="../../../_images/a0d56e30e61d44d517de93e6ba9722d6aff3ccfd00bf9526b9e2b0d9d2603638.png" />
 </div>
 </div>
 <p>The default behaviour of the <code class="docutils literal notranslate"><span class="pre">DDM</span></code> is to execute multiple time steps per call until the threshold is reached. This behavior can be changed by setting the <code class="docutils literal notranslate"><span class="pre">execute_until_finished</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">False</span></code>. Then, the integrator will only execute one time step per call.</p>
@@ -756,7 +759,7 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/49e7525938e55ecbd91b809f155e2cf5cf81c78f2f892161f9a93f5dcc152c8a.png" src="../../../_images/49e7525938e55ecbd91b809f155e2cf5cf81c78f2f892161f9a93f5dcc152c8a.png" />
+<img alt="../../../_images/639df93ba9e9f6cae8f0465d3ab3843dacfe91067185c09c9438a645fa5f885c.png" src="../../../_images/639df93ba9e9f6cae8f0465d3ab3843dacfe91067185c09c9438a645fa5f885c.png" />
 </div>
 </div>
 <p>Try changing the rate in the above cell to see how it affects the decision-making process.</p>
@@ -801,7 +804,7 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/91b1cbc1631cc47521671fd787b63e72f897a00d07a4db983eb28ba53695050c.png" src="../../../_images/91b1cbc1631cc47521671fd787b63e72f897a00d07a4db983eb28ba53695050c.png" />
+<img alt="../../../_images/19f7d89abba723428f0b90d0e3638c128beb9bc67696e1afe6531e263a486d4c.png" src="../../../_images/19f7d89abba723428f0b90d0e3638c128beb9bc67696e1afe6531e263a486d4c.png" />
 </div>
 </div>
 <p>The above cell simulates the random walk implemented in the beginning.</p>

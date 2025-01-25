@@ -470,7 +470,8 @@ document.write(`
 <li><p>Jack and Jill went up the hill</p></li>
 </ul>
 </details>
----<p>You can automatically fill in most or all of the blanks using associations you have learned in the past. Associations are everywhere in cognition. You learn to associate all the different properties of individual objects, all the objects that make up familiar scenes, and generally any groups of people, properties, and/or things that tend to co-occur.</p>
+<hr class="docutils" />
+<p>You can automatically fill in most or all of the blanks using associations you have learned in the past. Associations are everywhere in cognition. You learn to associate all the different properties of individual objects, all the objects that make up familiar scenes, and generally any groups of people, properties, and/or things that tend to co-occur.</p>
 <p>When you simply look at your laptop, you know about its weight, texture, range of likely temperatures, approximately how long the battery will operate before dying, and lots of other associated details. When you see only the top of a chair on the other side of a solid table, you automatically infer details about the rest of the chair that is out of sight - the top part of the chair that you see is strongly associated with the rest of a representation of a chair.</p>
 <p>What do you expect to see in the waiting room of a doctor’s office? As each detail comes to mind, it triggers associations with other details: chairs to sit in while you wait -&gt; coffee table -&gt; magazines -&gt; Oprah magazine, Sports Illustrated, The Economist -&gt; cheap art on walls -&gt; laminate flooring -&gt; hand sanitizer -&gt; clipboards with forms -&gt;, etc.
 When you see lightning, what do you expect to hear? Associations can build up in <em>temporal proximity</em> (events occurring together in time, like lightning and thunder) and <em>spatial proximity</em> (objects that co-occur in space, like a chair and a table). Your stream of consciousness is partly built out of strong and weak associations.</p>
@@ -768,7 +769,8 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </pre></div>
 </div>
 </details>
----<hr class="docutils" />
+<hr class="docutils" />
+<hr class="docutils" />
 <h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 2</h3>
 <p>In the example of <a class="reference internal" href="#hebbian-model-2"><span class="xref myst">Hebbian Model #2</span></a> above, we used 3 loops to update all the values in cor_mat. You should reason through how and why this works by considering a few specific examples. When i = 0, what are the values of stim?  When x and y equal 0, what number will be updated in cor_mat?</p>
 <hr class="docutils" />
@@ -830,7 +832,8 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </pre></div>
 </div>
 </details>
----<hr class="docutils" />
+<hr class="docutils" />
+<hr class="docutils" />
 <h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 2b</h3>
 <p>Matrix multiplication can simplify the code even more, eliminating the need for any loops.  Use the transpose function .T and matrix multiplication function &#64; to matrix multiply stim_mat by itself transposed.  As a final step, multiply this entire function by a value that will reproduce the same matrix values in cor_mat above.</p>
 <div class="cell tag_remove-output docutils container">
@@ -856,7 +859,8 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </pre></div>
 </div>
 </details>
----</section>
+</section>
+<hr class="docutils" />
 <section id="hebbian-learning-processing">
 <h3>Hebbian Learning Processing<a class="headerlink" href="#hebbian-learning-processing" title="Link to this heading">#</a></h3>
 <p>In the following section, we will explore how Hebbian learning correlation matrices can be processed to achieve “normalization” and to remove “self-correlation”. Similar to Exercise 1, in the next cell ,we create a matrix <code class="docutils literal notranslate"><span class="pre">sm_nonuniform</span></code> of stimuli that includes 100 small red circles, 70 medium yellow rectangles, and 40 large blue triangles. Then, we will use transpose and matrix multiplication to build a matrix of connection strengths <code class="docutils literal notranslate"><span class="pre">cor_mat_nonuniform</span></code>.</p>
@@ -937,7 +941,8 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 &amp;= \sum_{i} diag\_purple_{i, j} \cdot cor\_mat\_nonuniform_{i, j}
 \end{split}\]</div>
 </details>
----<div class="cell docutils container">
+<hr class="docutils" />
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_activation_line</span><span class="p">(</span><span class="n">active_mat_purple</span><span class="p">,</span> <span class="s2">&quot;Activation from Purple Stimulus with Cor_mat_nonuniform&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1081,8 +1086,9 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 </pre></div>
 </div>
 </details>
----</section>
 </section>
+</section>
+<hr class="docutils" />
 <section id="hebbian-learning-in-psyneulink">
 <h2>Hebbian Learning In PsyNeuLink<a class="headerlink" href="#hebbian-learning-in-psyneulink" title="Link to this heading">#</a></h2>
 <p>Hebbian learning is achieved in PsyNeuLink by creating an appropriately sized recurrent transfer mechanism, and enabling learning. To do this we simply set the argument <code class="docutils literal notranslate"><span class="pre">enable_learning</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> when defining your transfer mechanism.</p>
@@ -1303,7 +1309,7 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 <img alt="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" src="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" />
 <img alt="../../../_images/ecf41acb1fa68d98325ef7173ffa13a76bdfd9bc3bcfd83ba4dc728ef656b90e.png" src="../../../_images/ecf41acb1fa68d98325ef7173ffa13a76bdfd9bc3bcfd83ba4dc728ef656b90e.png" />
 <img alt="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" src="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2ac2fb750&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2b3e4e2d0&gt;
 </pre></div>
 </div>
 <img alt="../../../_images/3b04a1fa34ccd67f0ad93b90d1f0a12965f2b6f4c360456d077410d61605ca08.png" src="../../../_images/3b04a1fa34ccd67f0ad93b90d1f0a12965f2b6f4c360456d077410d61605ca08.png" />
