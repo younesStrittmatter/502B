@@ -43,6 +43,7 @@ hint_template = Template(
 {{ content }}
                          
 </details>
+
 ---
 """
 )
@@ -55,6 +56,7 @@ solution_template = Template(
 {{ content }}
 
 </details>
+
 ---
 """)
 
