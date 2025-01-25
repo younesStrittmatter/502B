@@ -404,10 +404,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#addition">Addition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-multiplication">Scalar Multiplication</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-product">Dot Product</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-of-matrix-and-a-vector-multiplication">Multiplication of Matrix and a Vector Multiplication</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix Multiplication</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 </ul>
 </li>
 </ul>
@@ -713,9 +711,8 @@ a_{1} \\ a_{2} \\ a_{3}
 </div>
 </div>
 </div>
-</section>
-<section id="exercise-1">
-<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 1</h3>
 <p>What happens if we try to compute a dot product from vectors whose inner dimensions are different? Write some code in Python that tries to compute the dot product from vectors with different inner dimensions. Report and interpret the error.</p>
 <div class="cell tag_remove_output docutils container">
 <div class="cell_input docutils container">
@@ -737,10 +734,26 @@ a_{1} \\ a_{2} \\ a_{3}
 </div>
 </div>
 </div>
-<details><summary>Solution</summary>
+<hr class="docutils" />
+<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution 1</summary>
 <p>The following solution is just one of many. Make sure to understand why a dot product is not possible when the dimensions don’t match.</p>
-</details>
-</section>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example for vectors where the inner dimension match</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;dim(a)=</span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">, dim(b)=</span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dot product between a and b:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+
+<span class="c1"># Define vectors where the inner dimensions don&#39;t match</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+
+<span class="c1"># Calculate the dot product</span>
+<span class="n">dot_cd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
 <section id="multiplication-of-matrix-and-a-vector-multiplication">
 <h3>Multiplication of Matrix and a Vector Multiplication<a class="headerlink" href="#multiplication-of-matrix-and-a-vector-multiplication" title="Link to this heading">#</a></h3>
 <p>The concept of a dot product can be extended to multiplying a matrix with a vector. We can think of this as multiply a single vector <span class="math notranslate nohighlight">\(b\)</span> by a set of vectors <span class="math notranslate nohighlight">\({A}\)</span>. Rather than doing so individually, we can form the vectors in <span class="math notranslate nohighlight">\({A}\)</span> into a matrix (which we will also call <span class="math notranslate nohighlight">\(A\)</span>), by storing their transposes in the rows of <span class="math notranslate nohighlight">\(A\)</span>. Then, we can sequentially compute the dot product of each vector in <span class="math notranslate nohighlight">\(A\)</span> with <span class="math notranslate nohighlight">\(b\)</span>, and store their results in a new vector, <span class="math notranslate nohighlight">\(c\)</span>. The dimensions of <span class="math notranslate nohighlight">\(c\)</span> will depend on how many vectors we stored in <span class="math notranslate nohighlight">\(A\)</span>.</p>
@@ -957,14 +970,14 @@ B * A [[47 64 81]
 </div>
 </div>
 </div>
-</section>
-<section id="exercise-2">
-<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 2</h3>
 <p>Let D be a 4x2 matrix and E be a 2x7 matrix, what are the dimensions of DE? What are the dimensions of ED?</p>
-<details><summary><b>Solution</b></summary>
+<hr class="docutils" />
+<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution 2</summary>
 <ul class="simple">
 <li><p>The dimensions of DE are (4, 7)</p></li>
-<li><p>ED is not defined since the inner dimensions (7 and 4) don’t match.</p></li>
+<li><p>ED is not defined since the inner dimensions (7 and 4) don’t match</p></li>
 </ul>
 </details></section>
 </section>
@@ -1042,10 +1055,8 @@ B * A [[47 64 81]
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#addition">Addition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-multiplication">Scalar Multiplication</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-product">Dot Product</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-of-matrix-and-a-vector-multiplication">Multiplication of Matrix and a Vector Multiplication</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix Multiplication</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 </ul>
 </li>
 </ul>

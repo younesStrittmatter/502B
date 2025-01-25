@@ -398,10 +398,7 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-offset-and-bias">Gain, Offset, and Bias</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-offset-and-bias">Gain, Offset, and Bias</a></li>
 </ul>
             </nav>
         </div>
@@ -485,18 +482,17 @@ f(x) = \frac{1}{1 + e^{-gain * (x - bias)}} + offset
         ></iframe>
         </div></div>
 </div>
-<section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 1</h3>
 <p>Can you find a parameter settings that makes the logistic function output 1 when the input is 1?</p>
-<details><summary><b>Solution</b></summary>
+<hr class="docutils" />
+<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution 1</summary>
 <p>An easy way to do this is to shift the curve by 1 to the right and 0.5 up. This can be achieved by setting the bias to 1 and the offset to 0.5.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_transfer</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Logistic</span><span class="p">(</span><span class="n">gain</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
 <span class="n">logistic_transfer</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</details>
-</section>
-</section>
+</details></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -565,10 +561,7 @@ f(x) = \frac{1}{1 + e^{-gain * (x - bias)}} + offset
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-offset-and-bias">Gain, Offset, and Bias</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gain-offset-and-bias">Gain, Offset, and Bias</a></li>
 </ul>
   </nav></div>
 

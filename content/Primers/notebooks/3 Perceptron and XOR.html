@@ -404,13 +404,9 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-weights">Learning the Weights</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-layer-network-in-psyneulink">Two Layer Network in PsyNeuLink</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-layer-network-in-psyneulink">Two Layer Network in PsyNeuLink</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation</a></li>
 </ul>
             </nav>
@@ -567,10 +563,8 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 <img alt="../../../_images/c68ee78e3265162740f05e5eccc0afb5475f91dfbd15c82b37aecae13112920a.png" src="../../../_images/c68ee78e3265162740f05e5eccc0afb5475f91dfbd15c82b37aecae13112920a.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="exercise-1">
-<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 1</h3>
 <p>Implement the OR gate using the perceptron learning rule. The OR gate is a logic gate that answers the question, “is A or B true?”. Remember, OR(X, Y) is true if either X or Y (or both) are true.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -579,7 +573,8 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 </div>
 </div>
 </div>
-<details><summary><b>Solution</b></summary>
+<hr class="docutils" />
+<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution 1</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can use the same input_set but use different labels</span>
 <span class="n">or_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">or_labels</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_combos</span><span class="p">)</span>
@@ -635,8 +630,9 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 </pre></div>
 </div>
 </details>
-<p>This method works well for a single layer of perceptrons. Now, consider multiple layers of perceptrons, each operating linearly, but producing a step function output. When they produce an incorrect result, how do we know which layer is responsible for the mistake and what step size would be useful to correct it?</p>
+</details><p>This method works well for a single layer of perceptrons. Now, consider multiple layers of perceptrons, each operating linearly, but producing a step function output. When they produce an incorrect result, how do we know which layer is responsible for the mistake and what step size would be useful to correct it?</p>
 <p>Because of their binary output, linearly updating weights of perceptrons in a multilayer network produces unpredictable and problematic results. A natural solution is to replace the step function with a function that more gradually interpolates between 0 and 1. A good choice here is the <a class="reference external" href="https://younesstrittmatter.github.io/502B/content/Primers/notebooks/2%20Logistic%20Function.ipynb">logistic function</a>, which we have encountered in the previous section. It is possible to generalize the Perceptron Learning Rule to this case using calculus; the details are presented in the Appendix at the end of this notebook. We suggest that you skim the Appendix now, and then read it more carefully after you have finished this lab. Once you understand this derivation, you will be in good shape for when we discuss the Backpropagation algorithm in the next lab.</p>
+</section>
 </section>
 </section>
 <section id="two-layer-network-in-psyneulink">
@@ -758,8 +754,8 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 </div>
 <p>Explore the effectiveness of this 2 layer network by running it at different learning rates, for different numbers of trials, and on different label sets.</p>
 <p>Which sets does it learn effectively? Which sets doesn’t it?</p>
-<section id="exercise-2">
-<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 2</h3>
 <p>Try the running the two layer network on the XOR gate. You will observe that the network is not able to learn the XOR gate. Why do you think this is the case?</p>
 <p>Hint: Consider the following graph that shows the values of the XOR gate for different inputs:</p>
 <div class="cell docutils container">
@@ -780,7 +776,8 @@ w_{ij} \rightarrow w_{ij}+ \eta (desired \ label - predicted \ label) in_{i}
 <img alt="../../../_images/15516556ba4447d71ed0a3231decff2ce95e661cdf305c51b2c8755a71ad5f05.png" src="../../../_images/15516556ba4447d71ed0a3231decff2ce95e661cdf305c51b2c8755a71ad5f05.png" />
 </div>
 </div>
-<details><summary><b>Solution</b></summary>
+<hr class="docutils" />
+<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution 2</summary>
 <p>The important difference between the XOR compared to AND, and OR is that XOR is not <em>linearly separable</em>, while the other two are. This means that in the graph above, that it is not possible to draw a straight line such that</p>
 <ol class="arabic simple">
 <li><p>Both red points are on the same side of the line</p></li>
@@ -821,9 +818,7 @@ $<span class="math notranslate nohighlight">\(b&gt;ma+y_0\)</span>$</p>
 <p>and lies below the line otherwise. We can rearrange this condition to read
 $<span class="math notranslate nohighlight">\((-m,1)\cdot (a,b) -y_0&gt;0\)</span><span class="math notranslate nohighlight">\(
  which is the same as the first equation,  provided we take \)</span>w=(-m,1)<span class="math notranslate nohighlight">\(, \)</span>b=-y_0<span class="math notranslate nohighlight">\(, and \)</span>x=(a,b)<span class="math notranslate nohighlight">\(. This means that our original condition \)</span>w\cdot x+b&gt;0<span class="math notranslate nohighlight">\( is equivalent to checking whether \)</span>x<span class="math notranslate nohighlight">\( is above or below some line (with the parameters of the line being determined by \)</span>w<span class="math notranslate nohighlight">\( and \)</span>b$, and vice versa). So in order for our network to learn effectively, it must be the case that all the red points are above some line, and all the blue points are below that same line, i.e. the points must be linearly separable. Since XOR does not satisfy this condition, our network cannot learn the labeling in this case.</p>
- </details>
-</section>
-</section>
+</details></section>
 <section id="appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">
 <h2>Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation<a class="headerlink" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation" title="Link to this heading">#</a></h2>
 <p>Sigmoid neurons take inputs and produce outputs similar to perceptrons, however, the inputs and outputs are not binary. Additionally, rather than applying a simple dot product to the inputs such that</p>
@@ -934,7 +929,7 @@ E_{i} =
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2a7de78d0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2b35dc690&gt;]
 </pre></div>
 </div>
 <img alt="../../../_images/789b79a010616bf54a50331e8cbe35cc0fc57a65c06982fa437039db83bd56cc.png" src="../../../_images/789b79a010616bf54a50331e8cbe35cc0fc57a65c06982fa437039db83bd56cc.png" />
@@ -1015,13 +1010,9 @@ E_{i} =
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-weights">Learning the Weights</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-layer-network-in-psyneulink">Two Layer Network in PsyNeuLink</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-layer-network-in-psyneulink">Two Layer Network in PsyNeuLink</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-derivation-of-learning-rule-for-two-layer-network-with-sigmoidal-activation">Appendix: Derivation of Learning Rule for two-layer network with sigmoidal activation</a></li>
 </ul>
   </nav></div>
