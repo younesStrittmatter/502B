@@ -10,4 +10,4 @@ The study of decision-making processes across species can benefit from approache
 
 ## Additional Resources
 
-- [The Physics of Optimal Decision Making](https://sites.engineering.ucsb.edu/~moehlis/moehlis_papers/psych.pdf)
+- [Bogacz et al (2006)](https://sites.engineering.ucsb.edu/~moehlis/moehlis_papers/psych.pdf)

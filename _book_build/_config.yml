@@ -18,6 +18,7 @@ parse:
   myst_substitutions:
     assets_url: https://younesstrittmatter.github.io/502B/_static
     base_url: https://younesstrittmatter.github.io/502B
+    raw_data_url: https://github.com/younesStrittmatter/502B/raw/refs/heads/main/data
     repo_url: https://github.com/younesStrittmatter/502B
 repository:
   branch: master

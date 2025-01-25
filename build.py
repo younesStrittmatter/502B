@@ -2,11 +2,14 @@ import subprocess
 import sys
 
 import jinja2
+from jinja2 import Template
 import yaml
 import json
 import os
 import shutil
 import filecmp
+
+from markdown import markdown
 
 # Directory paths
 SOURCE_DIR = "./book"
@@ -16,6 +19,40 @@ PUBLISH_CMD = "ghp-import -n -p -f _book_build/_build/html"
 
 
 skip_dirs = ["_build"]
+
+
+from nbconvert.preprocessors import Preprocessor
+import nbformat
+
+exercise_template = Template(
+"""
+<h3 style="background: #add8e644; color: #eee">{{ title }}</h3>
+
+{{ content }}
+
+"""
+)
+
+
+hint_template = Template(
+"""
+<details><summary style="background: #e6d8ad44; color: #eee">{{ title }}</summary>
+
+{{ content }}
+                         
+</details>
+"""
+)
+
+solution_template = Template(
+"""
+<details><summary style='background: #ade6bb44; color:#eee'>{{ title }}</summary>
+
+{{ content }}</details>
+
+</details>
+""")
+
 
 
 def copy_if_changed(src_dir, dest_dir):
@@ -72,6 +109,30 @@ def build_notebook(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
     with open(path, "w") as f:
         f.write(rendered_notebook_str)
 
+
+def process_notebook(path=BUILD_DIR):
+    with open(path, 'r', encoding='utf-8') as f:
+        notebook = nbformat.read(f, as_version=4)
+    for cell in notebook['cells']:
+        if cell['cell_type'] == 'markdown':
+            if '### Exercise' in cell['source']:
+                title = cell['source'].split('\n')[0][4:]
+                content = ''.join(cell['source'].split('\n')[1:]) if len(cell['source'].split('\n')) > 1 else ''
+                print(title, content)
+                cell['source'] = exercise_template.render(title=title, content=content)
+            if '### Hint' in cell['source']:
+                title = cell['source'].split('\n')[0][4:]
+                content = ''.join(cell['source'].split('\n')[1:]) if len(cell['source'].split('\n')) > 1 else ''
+                cell['source'] = hint_template.render(title=title, content=content)
+            if '### Solution' in cell['source']:
+                title = cell['source'].split('\n')[0][4:]
+                content = ''.join(cell['source'].split('\n')[1:]) if len(cell['source'].split('\n')) > 1 else ''
+                cell['source'] = solution_template.render(title=title, content=content)
+    with open(path, 'w', encoding='utf-8') as f:
+        nbformat.write(notebook, f)
+
+
+
 def build_markdown(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
 
     env = jinja2.Environment(
@@ -104,6 +165,7 @@ def build():
         for file in files:
             if file.endswith(".ipynb"):
                 build_notebook(os.path.join(root, file))
+                process_notebook(os.path.join(root, file))
             elif file.endswith(".md"):
                 build_markdown(os.path.join(root, file))
 
