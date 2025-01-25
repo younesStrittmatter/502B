@@ -16,19 +16,17 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -38,11 +36,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -68,7 +65,6 @@
     <link rel="prev" title="Decision Making" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -84,8 +80,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -93,6 +100,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -100,8 +108,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -117,8 +125,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -133,8 +140,6 @@
         <div class="sidebar-primary-item">
 
   
-    
-  
 
 <a class="navbar-brand logo" href="../../../intro.html">
   
@@ -148,17 +153,21 @@
     
     
     <img src="../../../_static/logo.svg" class="logo__image only-light" alt="502B - Home"/>
-    <img src="../../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="502B - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.svg" class="logo__image only-dark" alt="502B - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -212,14 +221,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -362,16 +366,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -405,7 +417,6 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-err-on-the-side-of-caution-or-respond-quickly">To err on the side of caution or respond quickly?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk-in-the-context-of-ddm">Random Walk in the context of DDM</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drift-diffusion-model-in-psyneulink">Drift Diffusion Model in PsyNeuLink</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-solutions-to-the-ddm">Analytical Solutions to the DDM</a></li>
 </ul>
@@ -486,7 +497,8 @@
 <li><p>No, this is not correct. The higher the decision threshold, the slower the decision is made. This is because more evidence must be accumulated before a decision is made. Conversely, the lower the decision threshold, the faster the decision is made. This is because less evidence must be accumulated before a decision is made.</p></li>
 <li><p>Yes, this is correct. The higher the decision threshold, the more accurate the decision is. This is because more evidence must be accumulated before a decision is made, which means that the agent is more confident in their decision. Conversely, the lower the decision threshold, the less accurate the decision is. This is because less evidence must be accumulated before a decision is made, which means that the agent is less confident in their decision.</p></li>
 </ol>
-</details><p>As Bogacz et al. (2006) explain,</p>
+</details>
+---<p>As Bogacz et al. (2006) explain,</p>
 <p>“..the TAFC and DDM have played important roles in human history: “In applying the DDM to the TAFC, we assume that the difference in the (noisy) information favoring each alternative is integrated over each trial and that a decision is reached when the resulting accumulated value crosses a critical threshold. Discrete analogues of the DDM were first applied to decision making in World War II, via the sequential probability ratio test (SPRT), the theory being developed independently by Barnard (1946) and Wald (1947; cf. Lehmann, 1959). (For histories, see DeGroot, 1988; Good, 1979; Wallis, 1980.) It was subsequently shown that the DDM and its discrete analogue, a directed random walk, describe accuracy and reaction times (RTs) in humans performing TAFC tasks (Laming, 1968; Ratcliff, 1978; Stone, 1960). In particular, DDM first passages account for a robust feature of human performance: RT distributions are heavily skewed toward longer times.”</p>
 </section>
 <section id="random-walk">
@@ -534,18 +546,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/acfe489d1fb7f22190daa1fedf185ac41539e18e98886b4ec1e82cf25774302d.png" src="../../../_images/acfe489d1fb7f22190daa1fedf185ac41539e18e98886b4ec1e82cf25774302d.png" />
+<img alt="../../../_images/dda1ab281300e925f976101c9e1b98fab9a23c186775e2b3bacd6f422a938724.png" src="../../../_images/dda1ab281300e925f976101c9e1b98fab9a23c186775e2b3bacd6f422a938724.png" />
 </div>
 </div>
-<hr class="docutils" />
-<h3 style="background: #256ca2; color: #e9e9e9">&#129504 </h3>
 </section>
 <section id="random-walk-in-the-context-of-ddm">
 <h3>Random Walk in the context of DDM<a class="headerlink" href="#random-walk-in-the-context-of-ddm" title="Link to this heading">#</a></h3>
 <p>Within a DDM the noise parameter is a random walk - and a higher value of noise means taking bigger steps. When we add a drift rate that adds a non-random motion component, so the drift rate moves the walk in a particular direction. You can think of drift rate as accumulating signal, with noise added on top as a random component.</p>
-</section>
-<section id="exercise-2">
-<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 2</h3>
 <p>Add a constant drift rate to the above implementation of a random walk and observe how it changes the behavior of the random walk. Experiment with different values of the drift rate and observe how it influences the behavior of the random walk.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -628,7 +637,8 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</details></section>
+</details>
+---</section>
 <section id="drift-diffusion-model-in-psyneulink">
 <h3>Drift Diffusion Model in PsyNeuLink<a class="headerlink" href="#drift-diffusion-model-in-psyneulink" title="Link to this heading">#</a></h3>
 <p>The input to a DDM reflects the stimulus, which can be neutral or provide evidence in favor of a decision - evidence that accumulates over successive time steps.</p>
@@ -659,7 +669,8 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 <li><p>An integrator with high noise would most likely produce the single fastest response time. This is because the noise would cause the integrator to reach the decision threshold more quickly. However, with a very high noise, the decision is practically random and not based on the evidence.</p></li>
 <li><p>Raising your threshold increases your accuracy. It would be adaptive to raise your threshold under conditions where the stakes for getting the answer right is high. For example, if you decide whether to invest a large sum of money in stocks.On the other hand, if a fast decision is more important, you would lower the threshold. For example, if you decide whether to brake to avoid a car accident.</p></li>
 </ol>
-</details><p>In the following cell, we demonstrate the implementation of a drift diffusion integrator in PsyNeuLink:</p>
+</details>
+---<p>In the following cell, we demonstrate the implementation of a drift diffusion integrator in PsyNeuLink:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_trials</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -704,7 +715,7 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/889f45caa514b6915fa8e0fd4a6df78869184e9c30a87a01cd0dacc5915a4011.png" src="../../../_images/889f45caa514b6915fa8e0fd4a6df78869184e9c30a87a01cd0dacc5915a4011.png" />
+<img alt="../../../_images/335a3a511278459bfcc959bc6edfdbd770e6b63fb70c23af1e765fee317422e2.png" src="../../../_images/335a3a511278459bfcc959bc6edfdbd770e6b63fb70c23af1e765fee317422e2.png" />
 </div>
 </div>
 <p>The default behaviour of the <code class="docutils literal notranslate"><span class="pre">DDM</span></code> is to execute multiple time steps per call until the threshold is reached. This behavior can be changed by setting the <code class="docutils literal notranslate"><span class="pre">execute_until_finished</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">False</span></code>. Then, the integrator will only execute one time step per call.</p>
@@ -745,7 +756,7 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/522410d35c24584ae15fff105b7bd956e085a473aabb5e72a18a5494616c0829.png" src="../../../_images/522410d35c24584ae15fff105b7bd956e085a473aabb5e72a18a5494616c0829.png" />
+<img alt="../../../_images/49e7525938e55ecbd91b809f155e2cf5cf81c78f2f892161f9a93f5dcc152c8a.png" src="../../../_images/49e7525938e55ecbd91b809f155e2cf5cf81c78f2f892161f9a93f5dcc152c8a.png" />
 </div>
 </div>
 <p>Try changing the rate in the above cell to see how it affects the decision-making process.</p>
@@ -790,7 +801,7 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/c6f0f0a86b12e6eba020ce16b6cfedf707a1d5ae390d338ef51b1caaa69dab06.png" src="../../../_images/c6f0f0a86b12e6eba020ce16b6cfedf707a1d5ae390d338ef51b1caaa69dab06.png" />
+<img alt="../../../_images/91b1cbc1631cc47521671fd787b63e72f897a00d07a4db983eb28ba53695050c.png" src="../../../_images/91b1cbc1631cc47521671fd787b63e72f897a00d07a4db983eb28ba53695050c.png" />
 </div>
 </div>
 <p>The above cell simulates the random walk implemented in the beginning.</p>
@@ -911,8 +922,7 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -931,7 +941,6 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-err-on-the-side-of-caution-or-respond-quickly">To err on the side of caution or respond quickly?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk-in-the-context-of-ddm">Random Walk in the context of DDM</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drift-diffusion-model-in-psyneulink">Drift Diffusion Model in PsyNeuLink</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-solutions-to-the-ddm">Analytical Solutions to the DDM</a></li>
 </ul>
@@ -984,8 +993,8 @@ By ...
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>

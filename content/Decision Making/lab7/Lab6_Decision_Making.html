@@ -16,19 +16,17 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -38,11 +36,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -66,7 +63,6 @@
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -82,8 +78,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -91,6 +98,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -98,8 +106,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -117,8 +125,7 @@
       
         
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -133,8 +140,6 @@
         <div class="sidebar-primary-item">
 
   
-    
-  
 
 <a class="navbar-brand logo" href="../../../intro.html">
   
@@ -148,17 +153,21 @@
     
     
     <img src="../../../_static/logo.svg" class="logo__image only-light" alt="502B - Home"/>
-    <img src="../../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="502B - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.svg" class="logo__image only-dark" alt="502B - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -212,14 +221,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -362,16 +366,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -530,7 +542,9 @@ Requirement already satisfied: xarray in /Users/younesstrittmatter/Documents/Git
 Requirement already satisfied: bokeh&gt;=0.12.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.6.2)
 Requirement already satisfied: ipywidgets&gt;=7.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (7.7.2)
 Requirement already satisfied: jupyter in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.1.1)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (1.3.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (1.3.1)
 Requirement already satisfied: cycler&gt;=0.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (0.12.1)
 Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (4.55.3)
 Requirement already satisfied: kiwisolver&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from matplotlib&lt;3.7.6-&gt;psyneulink) (1.4.8)
@@ -544,14 +558,14 @@ Requirement already satisfied: attrs&gt;=21.1.0 in /Users/younesstrittmatter/Doc
 Requirement already satisfied: cattrs in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.1.2)
 Requirement already satisfied: modelspec&lt;0.4,&gt;=0.3.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (0.3.5)
 Requirement already satisfied: glom in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.11.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: alembic&gt;=1.5.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (1.14.0)
+Requirement already satisfied: alembic&gt;=1.5.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (1.14.0)
 Requirement already satisfied: colorlog in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (6.9.0)
 Requirement already satisfied: sqlalchemy&gt;=1.4.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (2.0.37)
 Requirement already satisfied: tqdm in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (4.67.1)
 Requirement already satisfied: PyYAML in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from optuna&lt;4.2.0-&gt;psyneulink) (6.0.2)
-Requirement already satisfied: pytz&gt;=2020.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pandas&lt;2.2.4-&gt;psyneulink) (2024.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pytz&gt;=2020.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pandas&lt;2.2.4-&gt;psyneulink) (2024.2)
 Requirement already satisfied: tzdata&gt;=2022.7 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pandas&lt;2.2.4-&gt;psyneulink) (2024.2)
 Requirement already satisfied: colorama&lt;0.5.0,&gt;=0.4.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from rich&lt;10.13,&gt;=10.1-&gt;psyneulink) (0.4.6)
 Requirement already satisfied: commonmark&lt;0.10.0,&gt;=0.9.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from rich&lt;10.13,&gt;=10.1-&gt;psyneulink) (0.9.1)
@@ -566,9 +580,7 @@ Requirement already satisfied: Mako in /Users/younesstrittmatter/Documents/GitHu
 Requirement already satisfied: tornado&gt;=6.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bokeh&gt;=0.12.6-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.4.2)
 Requirement already satisfied: xyzservices&gt;=2021.09.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bokeh&gt;=0.12.6-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2025.1.0)
 Requirement already satisfied: ipykernel&gt;=4.5.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (6.29.5)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ipython-genutils~=0.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.0)
+Requirement already satisfied: ipython-genutils~=0.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.0)
 Requirement already satisfied: traitlets&gt;=4.3.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (5.14.3)
 Requirement already satisfied: widgetsnbextension~=3.6.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.6.0)
 Requirement already satisfied: ipython&gt;=4.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (8.31.0)
@@ -577,7 +589,9 @@ Requirement already satisfied: MarkupSafe&gt;=2.0 in /Users/younesstrittmatter/D
 Requirement already satisfied: pymongo in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (4.10.1)
 Requirement already satisfied: tabulate in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (0.9.0)
 Requirement already satisfied: docstring-parser in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (0.16)
-Requirement already satisfied: six&gt;=1.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&lt;3.7.6-&gt;psyneulink) (1.17.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&lt;3.7.6-&gt;psyneulink) (1.17.0)
 Requirement already satisfied: boltons&gt;=19.3.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from glom-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.1.0)
 Requirement already satisfied: face&gt;=20.1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from glom-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.0.0)
 Requirement already satisfied: notebook in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (7.3.2)
@@ -588,7 +602,9 @@ Requirement already satisfied: coloredlogs in /Users/younesstrittmatter/Document
 Requirement already satisfied: flatbuffers in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from onnxruntime-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (24.12.23)
 Requirement already satisfied: scikit-learn&gt;=1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.6.1)
 Requirement already satisfied: onnxconverter-common&gt;=1.7.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.14.0)
-Requirement already satisfied: appnope in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: appnope in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.4)
 Requirement already satisfied: comm&gt;=0.1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.2)
 Requirement already satisfied: debugpy&gt;=1.6.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.8.12)
 Requirement already satisfied: jupyter-client&gt;=6.1.12 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipykernel&gt;=4.5.1-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (8.6.3)
@@ -602,14 +618,14 @@ Requirement already satisfied: jedi&gt;=0.16 in /Users/younesstrittmatter/Docume
 Requirement already satisfied: pexpect&gt;4.3 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.9.0)
 Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.48)
 Requirement already satisfied: stack_data in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.6.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: joblib&gt;=1.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=1.1-&gt;skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.4.2)
+Requirement already satisfied: joblib&gt;=1.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=1.1-&gt;skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (1.4.2)
 Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=1.1-&gt;skl2onnx-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (3.5.0)
 Requirement already satisfied: jupyter-server&lt;3,&gt;=2.4.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.15.0)
 Requirement already satisfied: jupyterlab-server&lt;3,&gt;=2.27.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.27.3)
 Requirement already satisfied: notebook-shim&lt;0.3,&gt;=0.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.4)
-Requirement already satisfied: async-lru&gt;=1.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.0.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: async-lru&gt;=1.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.0.4)
 Requirement already satisfied: httpx&gt;=0.25.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.28.1)
 Requirement already satisfied: jupyter-lsp&gt;=2.0.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.2.5)
 Requirement already satisfied: setuptools&gt;=40.8.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (74.1.2)
@@ -625,10 +641,10 @@ Requirement already satisfied: pandocfilters&gt;=1.4.1 in /Users/younesstrittmat
 Requirement already satisfied: dnspython&lt;3.0.0,&gt;=1.16.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pymongo-&gt;modelspec&lt;0.4,&gt;=0.3.0-&gt;modeci-mdf&lt;0.5,&gt;=0.4.3-&gt;psyneulink) (2.7.0)
 Requirement already satisfied: webencodings in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bleach!=5.0.0-&gt;bleach[css]!=5.0.0-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.5.1)
 Requirement already satisfied: tinycss2&lt;1.5,&gt;=1.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.4.0)
-Requirement already satisfied: anyio in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.8.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: certifi in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2024.12.14)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: anyio in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.8.0)
+Requirement already satisfied: certifi in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2024.12.14)
 Requirement already satisfied: httpcore==1.* in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.0.7)
 Requirement already satisfied: idna in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.10)
 Requirement already satisfied: h11&lt;0.15,&gt;=0.13 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from httpcore==1.*-&gt;httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.14.0)
@@ -647,15 +663,17 @@ Requirement already satisfied: json5&gt;=0.9.0 in /Users/younesstrittmatter/Docu
 Requirement already satisfied: jsonschema&gt;=4.18.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (4.23.0)
 Requirement already satisfied: requests&gt;=2.31 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.32.3)
 Requirement already satisfied: fastjsonschema&gt;=2.15 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from nbformat&gt;=5.7-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.21.1)
-Requirement already satisfied: ptyprocess&gt;=0.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pexpect&gt;4.3-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.7.0)
-Requirement already satisfied: wcwidth in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.13)
-Requirement already satisfied: soupsieve&gt;1.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from beautifulsoup4-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.6)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: executing&gt;=1.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.1.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ptyprocess&gt;=0.5 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from pexpect&gt;4.3-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.7.0)
+Requirement already satisfied: wcwidth in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.13)
+Requirement already satisfied: soupsieve&gt;1.2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from beautifulsoup4-&gt;nbconvert-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.6)
+Requirement already satisfied: executing&gt;=1.2.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.1.0)
 Requirement already satisfied: asttokens&gt;=2.1.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.0)
 Requirement already satisfied: pure-eval in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from stack_data-&gt;ipython&gt;=4.0.0-&gt;ipywidgets&gt;=7.0-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.2.3)
-Requirement already satisfied: sniffio&gt;=1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from anyio-&gt;httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sniffio&gt;=1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from anyio-&gt;httpx&gt;=0.25.0-&gt;jupyterlab-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.1)
 Requirement already satisfied: argon2-cffi-bindings in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (21.2.0)
 Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2024.10.1)
 Requirement already satisfied: referencing&gt;=0.28.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.36.1)
@@ -663,16 +681,18 @@ Requirement already satisfied: rpds-py&gt;=0.7.1 in /Users/younesstrittmatter/Do
 Requirement already satisfied: python-json-logger&gt;=2.0.4 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.2.1)
 Requirement already satisfied: rfc3339-validator in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.4)
 Requirement already satisfied: rfc3986-validator&gt;=0.1.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (0.1.1)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.4.1)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.3.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fqdn in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.5.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.4.1)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;jupyterlab-server&lt;3,&gt;=2.27.1-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.3.0)
+Requirement already satisfied: fqdn in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.5.1)
 Requirement already satisfied: isoduration in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (20.11.0)
 Requirement already satisfied: jsonpointer&gt;1.13 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (3.0.0)
 Requirement already satisfied: uri-template in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.0)
 Requirement already satisfied: webcolors&gt;=24.6.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (24.11.1)
-Requirement already satisfied: cffi&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.17.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: cffi&gt;=1.0.1 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.17.1)
 Requirement already satisfied: pycparser in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.22)
 Requirement already satisfied: arrow&gt;=0.15.0 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (1.3.0)
 Requirement already satisfied: types-python-dateutil&gt;=2.8.10 in /Users/younesstrittmatter/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages (from arrow&gt;=0.15.0-&gt;isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;notebook-&gt;jupyter-&gt;leabra-psyneulink&lt;0.3.3-&gt;psyneulink) (2.9.0.20241206)
@@ -744,7 +764,7 @@ This will be our color palette
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/f8f863d12556c163c7527e761c2989eef283e368b162f91c279bc9bd0ce692c7.png" src="../../../_images/f8f863d12556c163c7527e761c2989eef283e368b162f91c279bc9bd0ce692c7.png" />
+<img alt="../../../_images/76b0105814086fe9769a6d93ab01d023132b73e9bee11226fb214f5667017c2c.png" src="../../../_images/76b0105814086fe9769a6d93ab01d023132b73e9bee11226fb214f5667017c2c.png" />
 </div>
 </div>
 <hr class="docutils" />
@@ -859,7 +879,7 @@ np.array([-1, -1, -1, -1, -1]).</p>
 <span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 <span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
 
-<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.integratorfunctions.DriftDiffusionIntegrator.__init__) at 0x175385da0&gt;:373,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6261238448, __beartype_object_6099708272, __beartype_object_6099711088, __beartype_object_6099710000, __beartype_object_6099714624, __beartype_object_6099716560, __beartype_object_6099715584, __beartype_object_6099718288, __beartype_object_6099720016, __beartype_object_6099721744, __beartype_object_6099723472, __beartype_object_6099725200, __beartype_object_6099726928, __beartype_object_6099728656, __beartype_object_4833583728, __beartype_object_4351348592, __beartype_object_4575499504, __beartype_object_4343447792, __beartype_object_4836819504, __beartype_object_4836800944, __beartype_object_4836819632, __beartype_object_4359192584, __beartype_object_4833294960, __beartype_object_4833116064, __beartype_get_violation, __beartype_conf, __beartype_object_6101868000, __beartype_object_6102387392, __beartype_object_5129746048, __beartype_object_6096813904, __beartype_object_6096935792, __beartype_object_6096935856, __beartype_object_6096813984, __beartype_object_6096935984, __beartype_object_6096977968, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
+<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.integratorfunctions.DriftDiffusionIntegrator.__init__) at 0x175a7c860&gt;:373,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6268545040, __beartype_object_6231481728, __beartype_object_6231464496, __beartype_object_6231484224, __beartype_object_5035204336, __beartype_object_4383461168, __beartype_object_4713911536, __beartype_object_4376396016, __beartype_object_5038128752, __beartype_object_5038126640, __beartype_object_5038128880, __beartype_object_4392140808, __beartype_object_5034844720, __beartype_object_4801753408, __beartype_object_5093482944, __beartype_object_5093484720, __beartype_object_5093486448, __beartype_object_5093488176, __beartype_object_5093489904, __beartype_object_5093491632, __beartype_object_5093493360, __beartype_object_5093495664, __beartype_object_5093498160, __beartype_object_5093499888, __beartype_get_violation, __beartype_conf, __beartype_object_6242376992, __beartype_object_6268889408, __beartype_object_6241448576, __beartype_object_6237900032, __beartype_object_6237854512, __beartype_object_6237854576, __beartype_object_6237900112, __beartype_object_6237854640, __beartype_object_6237900192, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
 
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/functions/stateful/integratorfunctions.py:2470,</span> in <span class="ni">DriftDiffusionIntegrator.__init__</span><span class="nt">(self, default_variable, rate, noise, offset, starting_value, non_decision_time, threshold, time_step_size, seed, params, owner, prefs, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">2467</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;incompatible value (</span><span class="si">{</span><span class="n">rate</span><span class="si">}</span><span class="s2">) for rate parameter, must be 1D array or scalar&quot;</span><span class="p">)</span>
@@ -885,7 +905,7 @@ np.array([-1, -1, -1, -1, -1]).</p>
 <span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 <span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
 
-<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.integratorfunctions.IntegratorFunction.__init__) at 0x16bb62840&gt;:88,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6102387392, __beartype_get_violation, __beartype_conf, __beartype_object_5129746048, __beartype_object_6096813904, __beartype_object_6096935792, __beartype_object_6096935856, __beartype_object_6096813984, __beartype_object_6096935984, __beartype_object_6096977968, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
+<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.integratorfunctions.IntegratorFunction.__init__) at 0x1741767a0&gt;:88,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6268889408, __beartype_get_violation, __beartype_conf, __beartype_object_6241448576, __beartype_object_6237900032, __beartype_object_6237854512, __beartype_object_6237854576, __beartype_object_6237900112, __beartype_object_6237854640, __beartype_object_6237900192, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
 
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/functions/stateful/integratorfunctions.py:239,</span> in <span class="ni">IntegratorFunction.__init__</span><span class="nt">(self, default_variable, rate, noise, initializer, params, owner, prefs, context, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">226</span> <span class="nd">@check_user_specified</span>
@@ -922,7 +942,7 @@ np.array([-1, -1, -1, -1, -1]).</p>
 <span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 <span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
 
-<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.statefulfunction.StatefulFunction.__init__) at 0x17536ac00&gt;:88,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6102387392, __beartype_get_violation, __beartype_conf, __beartype_object_5129746048, __beartype_object_6096813904, __beartype_object_6096935792, __beartype_object_6096935856, __beartype_object_6096813984, __beartype_object_6096935984, __beartype_object_6096977968, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
+<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.statefulfunction.StatefulFunction.__init__) at 0x175a62c00&gt;:88,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6268889408, __beartype_get_violation, __beartype_conf, __beartype_object_6241448576, __beartype_object_6237900032, __beartype_object_6237854512, __beartype_object_6237854576, __beartype_object_6237900112, __beartype_object_6237854640, __beartype_object_6237900192, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
 
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/functions/stateful/statefulfunction.py:251,</span> in <span class="ni">StatefulFunction.__init__</span><span class="nt">(self, default_variable, rate, noise, initializer, params, owner, prefs, context, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">248</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;stateful_attributes&quot;</span><span class="p">):</span>
@@ -1065,7 +1085,7 @@ np.array([-1, -1, -1, -1, -1]).</p>
 <span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 <span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
 
-<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.integratorfunctions.DriftDiffusionIntegrator.__init__) at 0x175385da0&gt;:373,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6261238448, __beartype_object_6099708272, __beartype_object_6099711088, __beartype_object_6099710000, __beartype_object_6099714624, __beartype_object_6099716560, __beartype_object_6099715584, __beartype_object_6099718288, __beartype_object_6099720016, __beartype_object_6099721744, __beartype_object_6099723472, __beartype_object_6099725200, __beartype_object_6099726928, __beartype_object_6099728656, __beartype_object_4833583728, __beartype_object_4351348592, __beartype_object_4575499504, __beartype_object_4343447792, __beartype_object_4836819504, __beartype_object_4836800944, __beartype_object_4836819632, __beartype_object_4359192584, __beartype_object_4833294960, __beartype_object_4833116064, __beartype_get_violation, __beartype_conf, __beartype_object_6101868000, __beartype_object_6102387392, __beartype_object_5129746048, __beartype_object_6096813904, __beartype_object_6096935792, __beartype_object_6096935856, __beartype_object_6096813984, __beartype_object_6096935984, __beartype_object_6096977968, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
+<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.integratorfunctions.DriftDiffusionIntegrator.__init__) at 0x175a7c860&gt;:373,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6268545040, __beartype_object_6231481728, __beartype_object_6231464496, __beartype_object_6231484224, __beartype_object_5035204336, __beartype_object_4383461168, __beartype_object_4713911536, __beartype_object_4376396016, __beartype_object_5038128752, __beartype_object_5038126640, __beartype_object_5038128880, __beartype_object_4392140808, __beartype_object_5034844720, __beartype_object_4801753408, __beartype_object_5093482944, __beartype_object_5093484720, __beartype_object_5093486448, __beartype_object_5093488176, __beartype_object_5093489904, __beartype_object_5093491632, __beartype_object_5093493360, __beartype_object_5093495664, __beartype_object_5093498160, __beartype_object_5093499888, __beartype_get_violation, __beartype_conf, __beartype_object_6242376992, __beartype_object_6268889408, __beartype_object_6241448576, __beartype_object_6237900032, __beartype_object_6237854512, __beartype_object_6237854576, __beartype_object_6237900112, __beartype_object_6237854640, __beartype_object_6237900192, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
 
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/functions/stateful/integratorfunctions.py:2470,</span> in <span class="ni">DriftDiffusionIntegrator.__init__</span><span class="nt">(self, default_variable, rate, noise, offset, starting_value, non_decision_time, threshold, time_step_size, seed, params, owner, prefs, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">2467</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;incompatible value (</span><span class="si">{</span><span class="n">rate</span><span class="si">}</span><span class="s2">) for rate parameter, must be 1D array or scalar&quot;</span><span class="p">)</span>
@@ -1091,7 +1111,7 @@ np.array([-1, -1, -1, -1, -1]).</p>
 <span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 <span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
 
-<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.integratorfunctions.IntegratorFunction.__init__) at 0x16bb62840&gt;:88,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6102387392, __beartype_get_violation, __beartype_conf, __beartype_object_5129746048, __beartype_object_6096813904, __beartype_object_6096935792, __beartype_object_6096935856, __beartype_object_6096813984, __beartype_object_6096935984, __beartype_object_6096977968, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
+<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.integratorfunctions.IntegratorFunction.__init__) at 0x1741767a0&gt;:88,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6268889408, __beartype_get_violation, __beartype_conf, __beartype_object_6241448576, __beartype_object_6237900032, __beartype_object_6237854512, __beartype_object_6237854576, __beartype_object_6237900112, __beartype_object_6237854640, __beartype_object_6237900192, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
 
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/functions/stateful/integratorfunctions.py:239,</span> in <span class="ni">IntegratorFunction.__init__</span><span class="nt">(self, default_variable, rate, noise, initializer, params, owner, prefs, context, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">226</span> <span class="nd">@check_user_specified</span>
@@ -1128,7 +1148,7 @@ np.array([-1, -1, -1, -1, -1]).</p>
 <span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 <span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
 
-<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.statefulfunction.StatefulFunction.__init__) at 0x17536ac00&gt;:88,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6102387392, __beartype_get_violation, __beartype_conf, __beartype_object_5129746048, __beartype_object_6096813904, __beartype_object_6096935792, __beartype_object_6096935856, __beartype_object_6096813984, __beartype_object_6096935984, __beartype_object_6096977968, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
+<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.statefulfunction.StatefulFunction.__init__) at 0x175a62c00&gt;:88,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6268889408, __beartype_get_violation, __beartype_conf, __beartype_object_6241448576, __beartype_object_6237900032, __beartype_object_6237854512, __beartype_object_6237854576, __beartype_object_6237900112, __beartype_object_6237854640, __beartype_object_6237900192, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
 
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/functions/stateful/statefulfunction.py:251,</span> in <span class="ni">StatefulFunction.__init__</span><span class="nt">(self, default_variable, rate, noise, initializer, params, owner, prefs, context, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">248</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;stateful_attributes&quot;</span><span class="p">):</span>
@@ -1389,154 +1409,26 @@ np.array([-1, -1, -1, -1, -1]).</p>
 <span class="g g-Whitespace">   </span><span class="mi">4277</span> <span class="c1"># Call after above so shadow_projections have relevant organization</span>
 <span class="g g-Whitespace">   </span><span class="mi">4278</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_shadow_projections</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
 
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/compositions/composition.py:5950,</span> in <span class="ni">Composition._create_CIM_ports</span><span class="nt">(self, context)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5947</span> <span class="n">proj_name</span> <span class="o">=</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="n">output_port</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;) to (&quot;</span> <span class="o">+</span> <span class="n">interface_input_port</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">5949</span> <span class="c1"># create Projection from the OutputPort of the output Node to InputPort on the output CIM</span>
-<span class="ne">-&gt; </span><span class="mi">5950</span> <span class="n">proj</span> <span class="o">=</span> <span class="n">MappingProjection</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">5951</span>     <span class="n">sender</span><span class="o">=</span><span class="n">output_port</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">5952</span>     <span class="n">receiver</span><span class="o">=</span><span class="n">interface_input_port</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">5953</span>     <span class="c1"># FIX:  This fails if OutputPorts don&#39;t all have the same dimensionality (number of axes);</span>
-<span class="g g-Whitespace">   </span><span class="mi">5954</span>     <span class="c1">#       see example in test_output_ports/TestOutputPorts</span>
-<span class="g g-Whitespace">   </span><span class="mi">5955</span>     <span class="n">matrix</span><span class="o">=</span><span class="n">IDENTITY_MATRIX</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">5956</span>     <span class="n">learnable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">5957</span>     <span class="n">name</span><span class="o">=</span><span class="n">proj_name</span>
-<span class="g g-Whitespace">   </span><span class="mi">5958</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5960</span> <span class="c1"># activate the projection</span>
-<span class="g g-Whitespace">   </span><span class="mi">5961</span> <span class="n">proj</span><span class="o">.</span><span class="n">_activate_for_compositions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/compositions/composition.py:5930,</span> in <span class="ni">Composition._create_CIM_ports</span><span class="nt">(self, context)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5926</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_CIM</span><span class="o">.</span><span class="n">add_ports</span><span class="p">([</span><span class="n">interface_input_port</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">5927</span>                           <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5929</span> <span class="c1"># instantiate the OutputPort on the output CIM to correspond to the node&#39;s OutputPort</span>
+<span class="ne">-&gt; </span><span class="mi">5930</span> <span class="n">interface_output_port</span> <span class="o">=</span> <span class="n">OutputPort</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5931</span>         <span class="n">owner</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_CIM</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5932</span>         <span class="n">variable</span><span class="o">=</span><span class="p">(</span><span class="n">OWNER_VALUE</span><span class="p">,</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_CIM</span><span class="o">.</span><span class="n">get_input_port_position</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5933</span>                                                  <span class="n">interface_input_port</span><span class="p">)),</span>
+<span class="g g-Whitespace">   </span><span class="mi">5934</span>         <span class="n">function</span><span class="o">=</span><span class="n">Identity</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5935</span>         <span class="n">reference_value</span><span class="o">=</span><span class="n">copy_parameter_value</span><span class="p">(</span><span class="n">output_port</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">value</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">5936</span>         <span class="n">name</span><span class="o">=</span><span class="n">OUTPUT_CIM_NAME</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">output_port</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5937</span>         <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5939</span> <span class="c1"># add port to the output CIM</span>
+<span class="g g-Whitespace">   </span><span class="mi">5940</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_CIM</span><span class="o">.</span><span class="n">add_ports</span><span class="p">([</span><span class="n">interface_output_port</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">5941</span>                           <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
 
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
 <span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 <span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/projections/pathway/mappingprojection.py:483,</span> in <span class="ni">MappingProjection.__init__</span><span class="nt">(self, sender, receiver, weight, exponent, matrix, function, learnable, params, name, prefs, context, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">480</span>     <span class="bp">self</span><span class="o">.</span><span class="n">initialization_status</span> <span class="o">=</span> <span class="n">ContextFlags</span><span class="o">.</span><span class="n">DEFERRED_INIT</span>
-<span class="g g-Whitespace">    </span><span class="mi">482</span> <span class="c1"># Validate sender (as variable) and params</span>
-<span class="ne">--&gt; </span><span class="mi">483</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">sender</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">484</span>                  <span class="n">receiver</span><span class="o">=</span><span class="n">receiver</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">485</span>                  <span class="n">weight</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">486</span>                  <span class="n">exponent</span><span class="o">=</span><span class="n">exponent</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">487</span>                  <span class="n">matrix</span><span class="o">=</span><span class="n">matrix</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">488</span>                  <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">489</span>                  <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">490</span>                  <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">491</span>                  <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">492</span>                  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">494</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">495</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_ports</span><span class="p">[</span><span class="n">MATRIX</span><span class="p">]</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
-<span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/projections/projection.py:776,</span> in <span class="ni">Projection_Base.__init__</span><span class="nt">(self, receiver, sender, weight, exponent, function, feedback, exclude_in_autodiff, params, name, prefs, context, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">772</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_creates_scheduling_dependency</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">774</span> <span class="c1"># Validate variable, function and params</span>
-<span class="g g-Whitespace">    </span><span class="mi">775</span>  <span class="c1"># Note: pass name of Projection (to override assignment of componentName in super.__init__)</span>
-<span class="ne">--&gt; </span><span class="mi">776</span>  <span class="nb">super</span><span class="p">(</span><span class="n">Projection_Base</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">777</span>      <span class="n">default_variable</span><span class="o">=</span><span class="n">variable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">778</span>      <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">779</span>      <span class="n">param_defaults</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">780</span>      <span class="n">weight</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">781</span>      <span class="n">exponent</span><span class="o">=</span><span class="n">exponent</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">782</span>      <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">783</span>      <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">784</span>      <span class="o">**</span><span class="n">kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">785</span>  <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">787</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_assign_default_projection_name</span><span class="p">()</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
-<span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/component.py:1261,</span> in <span class="ni">Component.__init__</span><span class="nt">(self, default_variable, param_defaults, input_shapes, function, name, reset_stateful_function_when, prefs, function_params, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1254</span> <span class="bp">self</span><span class="o">.</span><span class="n">most_recent_context</span> <span class="o">=</span> <span class="n">context</span>
-<span class="g g-Whitespace">   </span><span class="mi">1256</span> <span class="c1"># INSTANTIATE ATTRIBUTES BEFORE FUNCTION</span>
-<span class="g g-Whitespace">   </span><span class="mi">1257</span> <span class="c1"># Stub for methods that need to be executed before instantiating function</span>
-<span class="g g-Whitespace">   </span><span class="mi">1258</span> <span class="c1">#    (e.g., _instantiate_sender and _instantiate_receiver in Projection)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1259</span> <span class="c1"># Allow _instantiate_attributes_before_function of subclass</span>
-<span class="nn">   1260 #    to modify/replace function arg provided</span> in <span class="ni">constructor </span><span class="nt">(e.g. TransferWithCosts)</span>
-<span class="ne">-&gt; </span><span class="mi">1261</span> <span class="n">function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instantiate_attributes_before_function</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span> <span class="ow">or</span> <span class="n">function</span>
-<span class="g g-Whitespace">   </span><span class="mi">1263</span> <span class="c1"># INSTANTIATE FUNCTION</span>
-<span class="g g-Whitespace">   </span><span class="mi">1264</span> <span class="c1">#    - assign initial function parameter values from ParameterPorts,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1265</span> <span class="c1">#    - assign function&#39;s output to self.defaults.value (based on call of self.execute)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1266</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instantiate_function</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span> <span class="n">function_params</span><span class="o">=</span><span class="n">function_params</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/projections/projection.py:867,</span> in <span class="ni">Projection_Base._instantiate_attributes_before_function</span><span class="nt">(self, function, context)</span>
-<span class="g g-Whitespace">    </span><span class="mi">865</span> <span class="k">def</span><span class="w"> </span><span class="nf">_instantiate_attributes_before_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">867</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_instantiate_parameter_ports</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># If Projection has a matrix parameter, it is specified as a keyword arg in the constructor,</span>
-<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1">#    and sender and receiver have been instantiated, then implement it:</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">MATRIX</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">_user_specified</span><span class="p">:</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/projections/pathway/mappingprojection.py:516,</span> in <span class="ni">MappingProjection._instantiate_parameter_ports</span><span class="nt">(self, function, context)</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span> <span class="n">initial_rate</span> <span class="o">=</span> <span class="n">new_variable</span> <span class="o">*</span> <span class="mf">0.0</span>
-<span class="g g-Whitespace">    </span><span class="mi">513</span> <span class="c1"># KDM 7/11/19: instead of simply setting the function, we need to reinstantiate to ensure</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span> <span class="c1"># new defaults get set properly</span>
-<span class="g g-Whitespace">    </span><span class="mi">515</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_ports</span><span class="p">[</span><span class="n">MATRIX</span><span class="p">]</span><span class="o">.</span><span class="n">_instantiate_function</span><span class="p">(</span>
-<span class="ne">--&gt; </span><span class="mi">516</span>     <span class="n">function</span><span class="o">=</span><span class="n">AccumulatorIntegrator</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">517</span>         <span class="n">owner</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_parameter_ports</span><span class="p">[</span><span class="n">MATRIX</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">518</span>         <span class="n">default_variable</span><span class="o">=</span><span class="n">new_variable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">519</span>         <span class="n">initializer</span><span class="o">=</span><span class="n">new_variable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">520</span>         <span class="c1"># rate=initial_rate</span>
-<span class="g g-Whitespace">    </span><span class="mi">521</span>     <span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">522</span>     <span class="n">context</span><span class="o">=</span><span class="n">context</span>
-<span class="g g-Whitespace">    </span><span class="mi">523</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_ports</span><span class="p">[</span><span class="n">MATRIX</span><span class="p">]</span><span class="o">.</span><span class="n">_instantiate_value</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">525</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_ports</span><span class="p">[</span><span class="n">MATRIX</span><span class="p">]</span><span class="o">.</span><span class="n">_update_parameter_components</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
-<span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
-
-<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.integratorfunctions.AccumulatorIntegrator.__init__) at 0x175385e40&gt;:87,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6102387392, __beartype_get_violation, __beartype_conf, __beartype_object_5129746048, __beartype_object_6096813904, __beartype_object_6096935792, __beartype_object_6096935856, __beartype_object_6096813984, __beartype_object_6096935984, __beartype_object_6096977968, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/functions/stateful/integratorfunctions.py:566,</span> in <span class="ni">AccumulatorIntegrator.__init__</span><span class="nt">(self, default_variable, rate, increment, noise, initializer, params, owner, prefs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">554</span> <span class="nd">@check_user_specified</span>
-<span class="g g-Whitespace">    </span><span class="mi">555</span> <span class="nd">@beartype</span>
-<span class="g g-Whitespace">    </span><span class="mi">556</span> <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">563</span>              <span class="n">owner</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">564</span>              <span class="n">prefs</span><span class="p">:</span>  <span class="n">Optional</span><span class="p">[</span><span class="n">ValidPrefSet</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">566</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">567</span>         <span class="n">default_variable</span><span class="o">=</span><span class="n">default_variable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">568</span>         <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">569</span>         <span class="n">increment</span><span class="o">=</span><span class="n">increment</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">570</span>         <span class="n">noise</span><span class="o">=</span><span class="n">noise</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">571</span>         <span class="n">initializer</span><span class="o">=</span><span class="n">initializer</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">572</span>         <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">573</span>         <span class="n">owner</span><span class="o">=</span><span class="n">owner</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">574</span>         <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">575</span>     <span class="p">)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
-<span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
-
-<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.integratorfunctions.IntegratorFunction.__init__) at 0x16bb62840&gt;:88,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6102387392, __beartype_get_violation, __beartype_conf, __beartype_object_5129746048, __beartype_object_6096813904, __beartype_object_6096935792, __beartype_object_6096935856, __beartype_object_6096813984, __beartype_object_6096935984, __beartype_object_6096977968, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/functions/stateful/integratorfunctions.py:239,</span> in <span class="ni">IntegratorFunction.__init__</span><span class="nt">(self, default_variable, rate, noise, initializer, params, owner, prefs, context, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">226</span> <span class="nd">@check_user_specified</span>
-<span class="g g-Whitespace">    </span><span class="mi">227</span> <span class="nd">@beartype</span>
-<span class="g g-Whitespace">    </span><span class="mi">228</span> <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">236</span>              <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">237</span>              <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">239</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">240</span>         <span class="n">default_variable</span><span class="o">=</span><span class="n">default_variable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">241</span>         <span class="n">initializer</span><span class="o">=</span><span class="n">initializer</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">242</span>         <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">243</span>         <span class="n">noise</span><span class="o">=</span><span class="n">noise</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">244</span>         <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">245</span>         <span class="n">owner</span><span class="o">=</span><span class="n">owner</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">246</span>         <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">247</span>         <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">248</span>         <span class="o">**</span><span class="n">kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">249</span>     <span class="p">)</span>
 
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/context.py:742,</span> in <span class="ni">handle_external_context.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(context, *args, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">739</span>             <span class="k">pass</span>
@@ -1549,47 +1441,57 @@ np.array([-1, -1, -1, -1, -1]).</p>
 <span class="nn">    747         not</span> in <span class="ni">str</span><span class="nt">(e)</span>
 <span class="g g-Whitespace">    </span><span class="mi">748</span>     <span class="p">):</span>
 
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/ports/outputport.py:971,</span> in <span class="ni">OutputPort.__init__</span><span class="nt">(self, owner, reference_value, variable, input_shapes, function, projections, params, name, prefs, index, assign, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">963</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_variable</span> <span class="o">=</span> <span class="n">variable</span>
+<span class="g g-Whitespace">    </span><span class="mi">965</span> <span class="c1"># FIX: 5/26/16</span>
+<span class="g g-Whitespace">    </span><span class="mi">966</span> <span class="c1"># IMPLEMENTATION NOTE:</span>
+<span class="g g-Whitespace">    </span><span class="mi">967</span> <span class="c1"># Consider adding self to owner.output_ports here (and removing from ControlProjection._instantiate_sender)</span>
+<span class="g g-Whitespace">    </span><span class="mi">968</span> <span class="c1">#  (test for it, and create if necessary, as per OutputPorts in ControlProjection._instantiate_sender),</span>
+<span class="g g-Whitespace">    </span><span class="mi">969</span> 
+<span class="g g-Whitespace">    </span><span class="mi">970</span> <span class="c1"># Validate sender (as variable) and params</span>
+<span class="ne">--&gt; </span><span class="mi">971</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">972</span>     <span class="n">owner</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">973</span>     <span class="n">variable</span><span class="o">=</span><span class="n">variable</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">974</span>     <span class="n">input_shapes</span><span class="o">=</span><span class="n">input_shapes</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">975</span>     <span class="n">projections</span><span class="o">=</span><span class="n">projections</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">976</span>     <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">977</span>     <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">978</span>     <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">979</span>     <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">980</span>     <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">981</span>     <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">982</span>     <span class="n">assign</span><span class="o">=</span><span class="n">assign</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">983</span>     <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">984</span> <span class="p">)</span>
+
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
 <span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 <span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
 
-<span class="nn">File &lt;@beartype(psyneulink.core.components.functions.stateful.statefulfunction.StatefulFunction.__init__) at 0x17536ac00&gt;:88,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6102387392, __beartype_get_violation, __beartype_conf, __beartype_object_5129746048, __beartype_object_6096813904, __beartype_object_6096935792, __beartype_object_6096935856, __beartype_object_6096813984, __beartype_object_6096935984, __beartype_object_6096977968, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
+<span class="nn">File &lt;@beartype(psyneulink.core.components.ports.port.Port_Base.__init__) at 0x17f8f8720&gt;:36,</span> in <span class="ni">__init__</span><span class="nt">(__beartype_object_6435059008, __beartype_get_violation, __beartype_conf, __beartype_args_name_keywordable, __beartype_check_meta, __beartype_func, *args, **kwargs)</span>
 
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/functions/stateful/statefulfunction.py:251,</span> in <span class="ni">StatefulFunction.__init__</span><span class="nt">(self, default_variable, rate, noise, initializer, params, owner, prefs, context, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">248</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;stateful_attributes&quot;</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">249</span>     <span class="bp">self</span><span class="o">.</span><span class="n">stateful_attributes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;previous_value&quot;</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">251</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">252</span>     <span class="n">default_variable</span><span class="o">=</span><span class="n">default_variable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">253</span>     <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">254</span>     <span class="n">initializer</span><span class="o">=</span><span class="n">initializer</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">255</span>     <span class="n">noise</span><span class="o">=</span><span class="n">noise</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">256</span>     <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">257</span>     <span class="n">owner</span><span class="o">=</span><span class="n">owner</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">258</span>     <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">259</span>     <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">260</span>     <span class="o">**</span><span class="n">kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">261</span> <span class="p">)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
-<span class="ne">--&gt; </span><span class="mi">506</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">orig_kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/functions/function.py:674,</span> in <span class="ni">Function_Base.__init__</span><span class="nt">(self, default_variable, params, owner, name, prefs, context, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">667</span> <span class="n">register_category</span><span class="p">(</span><span class="n">entry</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">668</span>                   <span class="n">base_class</span><span class="o">=</span><span class="n">Function_Base</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">669</span>                   <span class="n">registry</span><span class="o">=</span><span class="n">FunctionRegistry</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">670</span>                   <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">671</span>                   <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">672</span> <span class="bp">self</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">owner</span>
-<span class="ne">--&gt; </span><span class="mi">674</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">675</span>     <span class="n">default_variable</span><span class="o">=</span><span class="n">default_variable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">676</span>     <span class="n">param_defaults</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">677</span>     <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">679</span>     <span class="o">**</span><span class="n">kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">680</span> <span class="p">)</span>
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/ports/port.py:1101,</span> in <span class="ni">Port_Base.__init__</span><span class="nt">(self, owner, variable, input_shapes, projections, function, params, name, prefs, context, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1093</span> <span class="n">register_category</span><span class="p">(</span><span class="n">entry</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1094</span>                   <span class="n">base_class</span><span class="o">=</span><span class="n">Port_Base</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1095</span>                   <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1096</span>                   <span class="n">registry</span><span class="o">=</span><span class="n">owner</span><span class="o">.</span><span class="n">_portRegistry</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1097</span>                   <span class="c1"># sub_group_attr=&#39;owner&#39;,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1098</span>                   <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1100</span> <span class="c1"># VALIDATE VARIABLE, PARAM_SPECS, AND INSTANTIATE self.function</span>
+<span class="ne">-&gt; </span><span class="mi">1101</span> <span class="nb">super</span><span class="p">(</span><span class="n">Port_Base</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1102</span>     <span class="n">default_variable</span><span class="o">=</span><span class="n">variable</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1103</span>     <span class="n">input_shapes</span><span class="o">=</span><span class="n">input_shapes</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span>     <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1105</span>     <span class="n">projections</span><span class="o">=</span><span class="n">projections</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1106</span>     <span class="n">param_defaults</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1107</span>     <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1108</span>     <span class="n">prefs</span><span class="o">=</span><span class="n">prefs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1109</span>     <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">   </span><span class="mi">1110</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1112</span> <span class="c1"># IMPLEMENTATION NOTE:  MOVE TO COMPOSITION ONCE THAT IS IMPLEMENTED</span>
+<span class="g g-Whitespace">   </span><span class="mi">1113</span> <span class="c1"># INSTANTIATE PROJECTIONS SPECIFIED IN projections ARG OR params[PROJECTIONS:&lt;&gt;]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1114</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">projections</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
 <span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:506,</span> in <span class="ni">check_user_specified.&lt;locals&gt;.check_user_specified_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_prev_constructor</span> <span class="o">=</span> <span class="n">constructor</span>
@@ -1611,38 +1513,102 @@ np.array([-1, -1, -1, -1, -1]).</p>
 <span class="g g-Whitespace">   </span><span class="mi">1158</span> <span class="p">)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1159</span> <span class="k">if</span> <span class="n">var</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/component.py:2408,</span> in <span class="ni">Component._initialize_parameters</span><span class="nt">(self, context, **param_defaults)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2406</span>     <span class="n">val</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">_parse</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2407</span>     <span class="n">p</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2408</span>     <span class="n">p</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">skip_history</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2410</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">default_value</span><span class="p">,</span> <span class="n">Function</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">2411</span>     <span class="n">p</span><span class="o">.</span><span class="n">default_value</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">p</span>
-
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:1562,</span> in <span class="ni">Parameter._set</span><span class="nt">(self, value, context, skip_history, skip_log, skip_delivery, compilation_sync, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1556</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">setter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1557</span>     <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">   </span><span class="mi">1558</span>         <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_default_setter_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1559</span>         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1560</span>         <span class="s1">&#39;compilation_sync&#39;</span><span class="p">:</span><span class="n">compilation_sync</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1561</span>     <span class="p">}</span>
-<span class="ne">-&gt; </span><span class="mi">1562</span>     <span class="n">value</span> <span class="o">=</span> <span class="n">call_with_pruned_args</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setter</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1564</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_value</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1565</span>     <span class="n">value</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1566</span>     <span class="n">execution_id</span><span class="o">=</span><span class="n">execution_id</span><span class="p">,</span>
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/components/component.py:2306,</span> in <span class="ni">Component._initialize_parameters</span><span class="nt">(self, context, **param_defaults)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2292</span> <span class="n">shared_types</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2293</span>     <span class="n">Mechanism</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2294</span>     <span class="n">Port</span><span class="p">,</span>
    <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1571</span>     <span class="n">compilation_sync</span><span class="o">=</span><span class="n">compilation_sync</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1572</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1573</span> <span class="k">return</span> <span class="n">value</span>
+<span class="g g-Whitespace">   </span><span class="mi">2302</span>     <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2303</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2304</span> <span class="n">alias_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_parameters</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">ParameterAlias</span><span class="p">)}</span>
+<span class="ne">-&gt; </span><span class="mi">2306</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Parameters</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">class_parameters</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2308</span> <span class="c1"># assign defaults based on pass in params and class defaults</span>
+<span class="g g-Whitespace">   </span><span class="mi">2309</span> <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span>
+<span class="nn">   2310     k: v for (k, v)</span> in <span class="ni">self.class_defaults.values(show_all=True).items</span><span class="nt">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">2311</span>     <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">alias_names</span>
+<span class="g g-Whitespace">   </span><span class="mi">2312</span> <span class="p">}</span>
 
-<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/utilities.py:1872,</span> in <span class="ni">call_with_pruned_args</span><span class="nt">(func, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1867</span>         <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="g g-Whitespace">   </span><span class="mi">1869</span>     <span class="k">return</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span>
-<span class="ne">-&gt; </span><span class="mi">1872</span> <span class="k">def</span><span class="w"> </span><span class="nf">call_with_pruned_args</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1873</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1874</span><span class="sd">         Calls **func** with only the **args** and **kwargs** that</span>
-<span class="g g-Whitespace">   </span><span class="mi">1875</span><span class="sd">         exist in its signature</span>
-<span class="g g-Whitespace">   </span><span class="mi">1876</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1877</span>     <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">prune_unused_args</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:2264,</span> in <span class="ni">ParametersBase.__init__</span><span class="nt">(self, owner, parent)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2262</span>     <span class="n">aliases_to_create</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_param</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">name</span>
+<span class="g g-Whitespace">   </span><span class="mi">2263</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2264</span>     <span class="n">new_param</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">parent_param</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2265</span>     <span class="n">new_param</span><span class="o">.</span><span class="n">_owner</span> <span class="o">=</span> <span class="bp">self</span>
+<span class="g g-Whitespace">   </span><span class="mi">2266</span>     <span class="n">new_param</span><span class="o">.</span><span class="n">_inherited</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/copy.py:153,</span> in <span class="ni">deepcopy</span><span class="nt">(x, memo, _nil)</span>
+<span class="g g-Whitespace">    </span><span class="mi">151</span> <span class="n">copier</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;__deepcopy__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">152</span> <span class="k">if</span> <span class="n">copier</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">153</span>     <span class="n">y</span> <span class="o">=</span> <span class="n">copier</span><span class="p">(</span><span class="n">memo</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span>     <span class="n">reductor</span> <span class="o">=</span> <span class="n">dispatch_table</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:1126,</span> in <span class="ni">Parameter.__deepcopy__</span><span class="nt">(self, memo)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1125</span> <span class="k">def</span><span class="w"> </span><span class="nf">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memo</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1126</span>     <span class="n">result</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1127</span>         <span class="o">**</span><span class="p">{</span>
+<span class="g g-Whitespace">   </span><span class="mi">1128</span>             <span class="n">k</span><span class="p">:</span> <span class="n">copy_parameter_value</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">memo</span><span class="o">=</span><span class="n">memo</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1129</span>             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_attrs</span>
+<span class="g g-Whitespace">   </span><span class="mi">1130</span>         <span class="p">},</span>
+<span class="g g-Whitespace">   </span><span class="mi">1131</span>         <span class="n">_owner</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_owner</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1132</span>         <span class="n">_inherited</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_inherited</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1133</span>         <span class="n">_user_specified</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_user_specified</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1134</span>         <span class="n">_scalar_converted</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_scalar_converted</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1135</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1137</span>     <span class="c1"># make sure default values are always deepcopied</span>
+<span class="g g-Whitespace">   </span><span class="mi">1138</span>     <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1139</span>         <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inherited</span>
+<span class="g g-Whitespace">   </span><span class="mi">1140</span>         <span class="ow">and</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">memo</span>
+<span class="g g-Whitespace">   </span><span class="mi">1141</span>         <span class="ow">and</span> <span class="n">memo</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_value</span><span class="p">)]</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_value</span>
+<span class="g g-Whitespace">   </span><span class="mi">1142</span>     <span class="p">):</span>
+
+<span class="nn">File ~/Documents/GitHub/younesStrittmatter/princeton/psyneulink-related/502B/.venv/lib/python3.11/site-packages/psyneulink/core/globals/parameters.py:1095,</span> in <span class="ni">Parameter.__init__</span><span class="nt">(self, default_value, name, stateful, modulable, structural, modulation_combination_function, read_only, function_arg, pnl_internal, aliases, user, values, getter, setter, loggable, log, log_condition, delivery_condition, history, history_max_length, history_min_length, fallback_default, retain_old_simulation_data, constructor_argument, spec, parse_spec, valid_types, reference, dependencies, initializer, port, mdf_name, specify_none, _owner, _inherited, _inherited_source, _user_specified, _scalar_converted, _tracking_compiled_struct, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1055</span> <span class="k">if</span> <span class="n">dependencies</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1056</span>     <span class="n">dependencies</span> <span class="o">=</span> <span class="n">create_union_set</span><span class="p">(</span><span class="n">dependencies</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1058</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1059</span>     <span class="n">default_value</span><span class="o">=</span><span class="n">default_value</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1060</span>     <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1061</span>     <span class="n">stateful</span><span class="o">=</span><span class="n">stateful</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1062</span>     <span class="n">modulable</span><span class="o">=</span><span class="n">modulable</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1063</span>     <span class="n">structural</span><span class="o">=</span><span class="n">structural</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1064</span>     <span class="n">modulation_combination_function</span><span class="o">=</span><span class="n">modulation_combination_function</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1065</span>     <span class="n">read_only</span><span class="o">=</span><span class="n">read_only</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1066</span>     <span class="n">function_arg</span><span class="o">=</span><span class="n">function_arg</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1067</span>     <span class="n">pnl_internal</span><span class="o">=</span><span class="n">pnl_internal</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1068</span>     <span class="n">aliases</span><span class="o">=</span><span class="n">aliases</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1069</span>     <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1070</span>     <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1071</span>     <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1072</span>     <span class="n">setter</span><span class="o">=</span><span class="n">setter</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1073</span>     <span class="n">loggable</span><span class="o">=</span><span class="n">loggable</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1074</span>     <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1075</span>     <span class="n">log_condition</span><span class="o">=</span><span class="n">log_condition</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1076</span>     <span class="n">delivery_condition</span><span class="o">=</span><span class="n">delivery_condition</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1077</span>     <span class="n">history</span><span class="o">=</span><span class="n">history</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1078</span>     <span class="n">history_max_length</span><span class="o">=</span><span class="n">history_max_length</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1079</span>     <span class="n">history_min_length</span><span class="o">=</span><span class="n">history_min_length</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1080</span>     <span class="n">fallback_default</span><span class="o">=</span><span class="n">fallback_default</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1081</span>     <span class="n">retain_old_simulation_data</span><span class="o">=</span><span class="n">retain_old_simulation_data</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1082</span>     <span class="n">constructor_argument</span><span class="o">=</span><span class="n">constructor_argument</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1083</span>     <span class="n">spec</span><span class="o">=</span><span class="n">spec</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1084</span>     <span class="n">parse_spec</span><span class="o">=</span><span class="n">parse_spec</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1085</span>     <span class="n">valid_types</span><span class="o">=</span><span class="n">valid_types</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1086</span>     <span class="n">reference</span><span class="o">=</span><span class="n">reference</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1087</span>     <span class="n">dependencies</span><span class="o">=</span><span class="n">dependencies</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1088</span>     <span class="n">initializer</span><span class="o">=</span><span class="n">initializer</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1089</span>     <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1090</span>     <span class="n">mdf_name</span><span class="o">=</span><span class="n">mdf_name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1091</span>     <span class="n">specify_none</span><span class="o">=</span><span class="n">specify_none</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1092</span>     <span class="n">_inherited</span><span class="o">=</span><span class="n">_inherited</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1093</span>     <span class="n">_inherited_source</span><span class="o">=</span><span class="n">_inherited_source</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1094</span>     <span class="n">_user_specified</span><span class="o">=</span><span class="n">_user_specified</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1095</span>     <span class="n">_temp_uninherited</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1096</span>     <span class="n">_scalar_converted</span><span class="o">=</span><span class="n">_scalar_converted</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1097</span>     <span class="n">_tracking_compiled_struct</span><span class="o">=</span><span class="n">_tracking_compiled_struct</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1098</span>     <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">   </span><span class="mi">1099</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span> <span class="bp">self</span><span class="o">.</span><span class="n">_owner</span> <span class="o">=</span> <span class="n">_owner</span>
+<span class="g g-Whitespace">   </span><span class="mi">1102</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">]</span> \
+<span class="g g-Whitespace">   </span><span class="mi">1103</span>     <span class="o">+</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__dict__</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_additional_param_attr_properties</span><span class="p">]</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1830,8 +1796,7 @@ Coherence.pkl  Penalties.pkl
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1912,8 +1877,8 @@ By ...
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>
