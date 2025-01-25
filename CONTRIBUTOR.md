@@ -54,4 +54,8 @@ During development you can replace {{ repo_url }} with the actual repository url
 You can still run `jupyter-book build .` in the `book` folder, to test if everything works as expected but 
 the links will not work in this build.
 
-```python
+## Exercises and Solutions
+
+We use post-processing to style exercise and solution cells.
+To mark a cell as an exercise or solution cell, it needs to start with `### Exercise` or `### Solution` respectively.
+Make sure that the cell is a markdown cell and not a code cell. Also, make sure that the solution is contained in one single cell.

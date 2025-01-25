@@ -27,7 +27,7 @@ import nbformat
 exercise_template = Template(
 """
 ---
-<h3>&#129504 {{ title }}</h3>
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 {{ title }}</h3>
 
 {{ content }}
 
@@ -38,7 +38,7 @@ exercise_template = Template(
 hint_template = Template(
 """
 ---
-<details><summary style="background: #e6d8ad44; color: #eee">&#128269 {{ title }}</summary>
+<details><summary style="background: #d6c89d; color: #e9e9e9">&#128269 {{ title }}</summary>
 
 {{ content }}
                          
@@ -49,9 +49,9 @@ hint_template = Template(
 solution_template = Template(
 """
 ---
-<details><summary style='background: #ade6bb44; color:#eee'>&#128273 {{ title }}</summary>
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 {{ title }}</summary>
 
-{{ content }}</details>
+{{ content }}
 
 </details>
 """)
@@ -115,20 +115,20 @@ def build_notebook(path=BUILD_DIR, yaml_path=f"{BUILD_DIR}/_config.yml"):
 
 def process_notebook(path=BUILD_DIR):
     with open(path, 'r', encoding='utf-8') as f:
-        notebook = nbformat.read(f, as_version=4)
+        notebook = nbformat.read(f, as_version=nbformat.NO_CONVERT)
     for cell in notebook['cells']:
         if cell['cell_type'] == 'markdown':
             if '### Exercise' in cell['source']:
                 title = cell['source'].split('\n')[0][4:]
-                content = ''.join(cell['source'].split('\n')[1:]) if len(cell['source'].split('\n')) > 1 else ''
+                content = '\n'.join(cell['source'].split('\n')[1:]) if len(cell['source'].split('\n')) > 1 else ''
                 cell['source'] = exercise_template.render(title=title, content=content)
             if '### Hint' in cell['source']:
                 title = cell['source'].split('\n')[0][4:]
-                content = ''.join(cell['source'].split('\n')[1:]) if len(cell['source'].split('\n')) > 1 else ''
+                content = '\n'.join(cell['source'].split('\n')[1:]) if len(cell['source'].split('\n')) > 1 else ''
                 cell['source'] = hint_template.render(title=title, content=content)
             if '### Solution' in cell['source']:
                 title = cell['source'].split('\n')[0][4:]
-                content = ''.join(cell['source'].split('\n')[1:]) if len(cell['source'].split('\n')) > 1 else ''
+                content = '\n'.join(cell['source'].split('\n')[1:]) if len(cell['source'].split('\n')) > 1 else ''
                 cell['source'] = solution_template.render(title=title, content=content)
     with open(path, 'w', encoding='utf-8') as f:
         nbformat.write(notebook, f)
