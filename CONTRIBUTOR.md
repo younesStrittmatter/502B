@@ -42,20 +42,12 @@ in to these files (in the *.md or *.ipynb files) have the following format
 ### Data
 Data is stored in the folder `data` in the root directory
 
-To load data in the notebooks, you should use the following code snippet:
-
-```bash
-!git clone {{ repo_url }}/data/<relative_path_from_data_folder> data
-```
-
-During development you can replace {{ repo_url }} with the actual repository url.
-
-Load it via:
+To load data in the notebooks, you should use raw urls like this:
 
 ```python
-data = pd.read_csv('data/<file_name>')
+data = pd.read_pickle('{{ raw_data_url }}/drift_diffusion_models/coherence.pkl')
 ```
-
+During development you can replace {{ repo_url }} with the actual repository url.
 
 ## Development
 
