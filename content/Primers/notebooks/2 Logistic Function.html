@@ -483,10 +483,10 @@ f(x) = \frac{1}{1 + e^{-gain * (x - bias)}} + offset
         </div></div>
 </div>
 <hr class="docutils" />
-<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 1</h3>
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 1</h3>
 <p>Can you find a parameter settings that makes the logistic function output 1 when the input is 1?</p>
 <hr class="docutils" />
-<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution 1</summary>
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 Solution 1</summary>
 <p>An easy way to do this is to shift the curve by 1 to the right and 0.5 up. This can be achieved by setting the bias to 1 and the offset to 0.5.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_transfer</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">TransferMechanism</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">Logistic</span><span class="p">(</span><span class="n">gain</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
 <span class="n">logistic_transfer</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>

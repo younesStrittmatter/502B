@@ -450,7 +450,7 @@
 <li><p>Jack and ____________ went up ______ ____________ ?</p></li>
 </ul>
 <hr class="docutils" />
-<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution</summary>
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 Solution</summary>
 <ul class="simple">
 <li><p>Peaches and cream</p></li>
 <li><p>Cause and effect</p></li>
@@ -711,7 +711,7 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </div>
 </div>
 <hr class="docutils" />
-<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 1</h3>
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 1</h3>
 <p>Suppose you want to know what a Hebbian Model #1 learner would associate and infer it had seen 10 small red circles, 7 medium yellow rectangles, and 4 large blue triangles if instead of the stimuli described earlier. Then, what does it infer if we present it the color purple?</p>
 <p>Create a set of stimuli and then a correlation matrix that fit this situation. How do you code purple as a stimulus? What output do you get from testing the trained model on an input of purple?  Explain how you interpret this output.</p>
 <div class="cell tag_remove-output docutils container">
@@ -736,7 +736,7 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </div>
 </div>
 <hr class="docutils" />
-<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution 1</summary>
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 Solution 1</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a set of stimuli</span>
 <span class="n">stimulus_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="n">src</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">[</span><span class="n">myr</span><span class="p">]</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">+</span> <span class="p">[</span><span class="n">lbt</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
 
@@ -756,7 +756,7 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </pre></div>
 </div>
 </details><hr class="docutils" />
-<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 2</h3>
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 2</h3>
 <p>In the example of <a class="reference internal" href="#hebbian-model-2"><span class="xref myst">Hebbian Model #2</span></a> above, we used 3 loops to update all the values in cor_mat. You should reason through how and why this works by considering a few specific examples. When i = 0, what are the values of stim?  When x and y equal 0, what number will be updated in cor_mat?</p>
 </section>
 <section id="exercise-2a">
@@ -796,7 +796,7 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </div>
 </div>
 <hr class="docutils" />
-<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution 2a</summary>
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 Solution 2a</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new, all zeros correlation matrix</span>
 <span class="n">cor_mat_compact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">size_f</span><span class="p">,</span> <span class="n">size_f</span><span class="p">))</span>
 
@@ -818,7 +818,7 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </pre></div>
 </div>
 </details><hr class="docutils" />
-<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 2b</h3>
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 2b</h3>
 <p>Matrix multiplication can simplify the code even more, eliminating the need for any loops.  Use the transpose function .T and matrix multiplication function &#64; to matrix multiply stim_mat by itself transposed.  As a final step, multiply this entire function by a value that will reproduce the same matrix values in cor_mat above.</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
@@ -833,7 +833,7 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </div>
 </div>
 <hr class="docutils" />
-<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution</summary>
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 Solution</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cor_mat_compactest</span> <span class="o">=</span> <span class="n">sm_3_uniform</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">sm_3_uniform</span> <span class="o">*</span> <span class="n">learning_rate</span>
 
 <span class="c1"># Verify correctness</span>
@@ -880,7 +880,7 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </div>
 </div>
 <hr class="docutils" />
-<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 3</h3>
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 3</h3>
 <p>To calculate the activation, we use the following shorter version:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">active_mat_purple</span> <span class="o">=</span> <span class="n">purple</span> <span class="o">@</span> <span class="n">cor_mat_nonuniform</span>
 </pre></div>
@@ -893,7 +893,7 @@ When you see lightning, what do you expect to hear? Associations can build up in
 </div>
 <p>Please convince yourself, that these are equivalent</p>
 <hr class="docutils" />
-<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution 3</summary>
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 Solution 3</summary>
 <p><strong>Method 1</strong></p>
 <p>In the first method, <code class="docutils literal notranslate"><span class="pre">purple</span> <span class="pre">&#64;</span> <span class="pre">cor_mat_nonuniform</span></code> performs matrix multiplication. This computes the dot product of the purple vector with each column of cor_mat_nonuniform and is mathematically equivalent to:</p>
 <div class="math notranslate nohighlight">
@@ -1016,7 +1016,7 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 <p>From another perspective, a neuron with positive excitatory connections to itself would behave a bit like a microphone placed next to a speaker that is amplifying the input to the microphone – a runaway positive feedback loop.  In most cases we don’t want our models to have seizures.</p>
 <p>It follows, that when constructing correlation matrices, it could be useful to remove self-correlation.</p>
 <hr class="docutils" />
-<h3 style="background: #758ca2; color: #eee">&#129504 Exercise 4</h3>
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 4</h3>
 <p>Create a correlation matrix that does not include self-correlation.</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
@@ -1036,7 +1036,7 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 </div>
 </div>
 <hr class="docutils" />
-<details><summary style='background: #32de8a; color:#eee'>&#128273 Solution 4</summary>
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 Solution 4</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the Correlation Matrix</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">.1</span>
 <span class="n">cor_mat_no_self</span> <span class="o">=</span> <span class="n">sm_nonuniform</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">sm_nonuniform</span> <span class="o">*</span> <span class="n">learning_rate</span>
@@ -1287,7 +1287,7 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 <img alt="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" src="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" />
 <img alt="../../../_images/ecf41acb1fa68d98325ef7173ffa13a76bdfd9bc3bcfd83ba4dc728ef656b90e.png" src="../../../_images/ecf41acb1fa68d98325ef7173ffa13a76bdfd9bc3bcfd83ba4dc728ef656b90e.png" />
 <img alt="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" src="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2b526d990&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2a13aac50&gt;
 </pre></div>
 </div>
 <img alt="../../../_images/3b04a1fa34ccd67f0ad93b90d1f0a12965f2b6f4c360456d077410d61605ca08.png" src="../../../_images/3b04a1fa34ccd67f0ad93b90d1f0a12965f2b6f4c360456d077410d61605ca08.png" />
