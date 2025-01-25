@@ -26,7 +26,8 @@ import nbformat
 
 exercise_template = Template(
 """
-<h3 style="background: #add8e644; color: #eee">{{ title }}</h3>
+---
+<h3>&#129504 {{ title }}</h3>
 
 {{ content }}
 
@@ -36,7 +37,8 @@ exercise_template = Template(
 
 hint_template = Template(
 """
-<details><summary style="background: #e6d8ad44; color: #eee">{{ title }}</summary>
+---
+<details><summary style="background: #e6d8ad44; color: #eee">&#128269 {{ title }}</summary>
 
 {{ content }}
                          
@@ -46,7 +48,8 @@ hint_template = Template(
 
 solution_template = Template(
 """
-<details><summary style='background: #ade6bb44; color:#eee'>{{ title }}</summary>
+---
+<details><summary style='background: #ade6bb44; color:#eee'>&#128273 {{ title }}</summary>
 
 {{ content }}</details>
 
@@ -118,7 +121,6 @@ def process_notebook(path=BUILD_DIR):
             if '### Exercise' in cell['source']:
                 title = cell['source'].split('\n')[0][4:]
                 content = ''.join(cell['source'].split('\n')[1:]) if len(cell['source'].split('\n')) > 1 else ''
-                print(title, content)
                 cell['source'] = exercise_template.render(title=title, content=content)
             if '### Hint' in cell['source']:
                 title = cell['source'].split('\n')[0][4:]
