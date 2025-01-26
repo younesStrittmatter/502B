@@ -515,7 +515,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining the probability to move up (probability to move down is 1 - prob)</span>
 <span class="n">probability</span> <span class="o">=</span> <span class="mf">.5</span>
- 
+
 <span class="c1"># Defining the starting position </span>
 <span class="n">bias</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">bias</span><span class="p">]</span>
@@ -529,25 +529,24 @@ document.write(`
 <span class="c1"># Creating a list of random numbers to decide the direction of the walk</span>
 <span class="n">random_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n_steps</span><span class="p">)</span>
 <span class="n">direction</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">probability</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">random_list</span><span class="p">]</span>
- 
+
 <span class="c1"># Bounds the walk at +/-threshold</span>
 <span class="k">for</span> <span class="n">dr</span> <span class="ow">in</span> <span class="n">direction</span><span class="p">:</span>
     <span class="n">positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dr</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="ow">or</span> <span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">threshold</span><span class="p">:</span>
         <span class="k">break</span>
- 
 
 <span class="c1"># plotting down the graph of the random walk in 1D</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random walk starting at </span><span class="si">{</span><span class="n">bias</span><span class="si">}</span><span class="s1"> for </span><span class="si">{</span><span class="n">n_steps</span><span class="si">}</span><span class="s1"> time steps or until +/-</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s1"> is reached.&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random walk starting at </span><span class="si">{</span><span class="n">bias</span><span class="si">}</span><span class="s1"> for </span><span class="si">{</span><span class="n">n_steps</span><span class="si">}</span><span class="s1"> time steps or until +/-</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s1"> is reached.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/618590f566d4f5d71435a6f70730787c50617be0429f1dfb2c2bbc9643b849f3.png" src="../../../_images/618590f566d4f5d71435a6f70730787c50617be0429f1dfb2c2bbc9643b849f3.png" />
+<img alt="../../../_images/40082997d1498dd3aa179e8afdefe28b0ebc336b8643e46cf22a9304308d0027.png" src="../../../_images/40082997d1498dd3aa179e8afdefe28b0ebc336b8643e46cf22a9304308d0027.png" />
 </div>
 </div>
 </section>
@@ -561,7 +560,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining the probability to move up (probability to move down is 1 - prob)</span>
 <span class="n">probability</span> <span class="o">=</span> <span class="mf">.5</span>
- 
+
 <span class="c1"># Defining the starting position </span>
 <span class="n">bias</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">bias</span><span class="p">]</span>
@@ -573,29 +572,29 @@ document.write(`
 <span class="n">threshold</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="c1"># Defining the drift rate (constant drift in one direction)</span>
-<span class="n">drift_rate</span> <span class="o">=</span> <span class="c1"># TODO: Add code here</span>
+<span class="n">drift_rate</span> <span class="o">=</span>  <span class="c1"># TODO: Your code here</span>
 
 <span class="c1"># Creating a list of random numbers to decide the direction of the walk</span>
 <span class="n">random_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n_steps</span><span class="p">)</span>
 <span class="n">direction</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">probability</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">random_list</span><span class="p">]</span>
- 
+
 <span class="c1"># Adjust your random walk to include the drift rate</span>
 <span class="k">for</span> <span class="n">dr</span> <span class="ow">in</span> <span class="n">direction</span><span class="p">:</span>
-    <span class="c1"># TODO: Add code here</span>
- 
+    <span class="c1"># TODO: Your code here</span>
+
 <span class="c1"># plotting down the graph of the random walk in 1D</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random walk starting at </span><span class="si">{</span><span class="n">bias</span><span class="si">}</span><span class="s1"> for </span><span class="si">{</span><span class="n">n_steps</span><span class="si">}</span><span class="s1"> time steps or until +/-</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s1"> is reached.&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random walk starting at </span><span class="si">{</span><span class="n">bias</span><span class="si">}</span><span class="s1"> for </span><span class="si">{</span><span class="n">n_steps</span><span class="si">}</span><span class="s1"> time steps or until +/-</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s1"> is reached.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
-    <span class="n">drift_rate</span> <span class="o">=</span> <span class="c1"># TODO: Add code here</span>
-                 <span class="o">^</span>
+    <span class="n">drift_rate</span> <span class="o">=</span>  <span class="c1"># TODO: Your code here</span>
+                  <span class="o">^</span>
 <span class="ne">SyntaxError</span>: invalid syntax
 </pre></div>
 </div>
@@ -706,8 +705,8 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 <span class="n">time_pos_pos_decision</span> <span class="o">=</span> <span class="n">time_pos</span><span class="p">[</span><span class="n">decision_pos</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">time_pos_neg_decision</span> <span class="o">=</span> <span class="n">time_pos</span><span class="p">[</span><span class="n">decision_pos</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">time_pos_pos_decision</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Positive Decisions&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">time_pos_neg_decision</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Negative Decisions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">time_pos_pos_decision</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Positive Decisions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">time_pos_neg_decision</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Negative Decisions&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Response Time Distribution for Positive and Negative Decisions&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
@@ -718,7 +717,7 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/298849725ed4e468ad3e8b19b46e2e123a350bd93969532992c761b0355b2954.png" src="../../../_images/298849725ed4e468ad3e8b19b46e2e123a350bd93969532992c761b0355b2954.png" />
+<img alt="../../../_images/b383599ca6c59dfcefc8faba79ff7f9ec083c3b3d641319d7a5e449350007a3e.png" src="../../../_images/b383599ca6c59dfcefc8faba79ff7f9ec083c3b3d641319d7a5e449350007a3e.png" />
 </div>
 </div>
 <p>The default behaviour of the <code class="docutils literal notranslate"><span class="pre">DDM</span></code> is to execute multiple time steps per call until the threshold is reached. This behavior can be changed by setting the <code class="docutils literal notranslate"><span class="pre">execute_until_finished</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">False</span></code>. Then, the integrator will only execute one time step per call.</p>
@@ -759,7 +758,7 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/4c060cbb1f7076775950683b9d8d055914fc6b2b053db15f65a3b9481b5d0a46.png" src="../../../_images/4c060cbb1f7076775950683b9d8d055914fc6b2b053db15f65a3b9481b5d0a46.png" />
+<img alt="../../../_images/9a4d6dd6b93560cefbf9064c3c64c52b67ed587ef7f13683ac0fa02d5c3118b7.png" src="../../../_images/9a4d6dd6b93560cefbf9064c3c64c52b67ed587ef7f13683ac0fa02d5c3118b7.png" />
 </div>
 </div>
 <p>Try changing the rate in the above cell to see how it affects the decision-making process.</p>
@@ -804,68 +803,393 @@ A possible sequence of evidence the visual might sample: <code class="docutils l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/1fe0a7fa8787daeab13b3a0277783ad397d1565d12bbf5944a2424acc206f595.png" src="../../../_images/1fe0a7fa8787daeab13b3a0277783ad397d1565d12bbf5944a2424acc206f595.png" />
+<img alt="../../../_images/437ebdba27b6271798da0383bffefd703c944e942a359426b70333798104fc5e.png" src="../../../_images/437ebdba27b6271798da0383bffefd703c944e942a359426b70333798104fc5e.png" />
 </div>
 </div>
 <p>The above cell simulates the random walk implemented in the beginning.</p>
 </section>
 <section id="analytical-solutions-to-the-ddm">
 <h3>Analytical Solutions to the DDM<a class="headerlink" href="#analytical-solutions-to-the-ddm" title="Link to this heading">#</a></h3>
-<p>PsyNeuLink also allows to calculate the analytic solutions to the DDM described in <a class="reference internal" href="#"><span class="xref myst">Bogacz et al (2006</span></a>. The <code class="docutils literal notranslate"><span class="pre">DriftDiffusionAnalytical</span></code> function can be used to calculate the analytic solutions to the DDM. The function returns the decision variable, response time, accuracy, and error rate. It also returns the moments (mean, variance, and skew) for conditional (correct/positive or incorrect/negative) response time distributions.</p>
-<p>The Drift Diffusion Model Functions that calculate analytic solutions [Bogacz et al (2006), Srivastava et al. (2016)] is DriftDiffusionAnalytical function, the mechanism generates a single estimate of the outcome for the decision process (see Execution for details). In addition to DECISION_VARIABLE and RESPONSE_TIME, the Function returns an accuracy value (represented in the PROBABILITY_UPPER_THRESHOLD OutputPort), and an error rate value (in the PROBABIILITY_LOWER_THRESHOLD OutputPort, and moments (mean, variance, and skew) for conditional (correctpositive or incorrectnegative) response time distributions. These are; the mean RT for correct responses (RT_CORRECT_MEAN, the RT variance for correct responses (RT_CORRECT_VARIANCE, the RT skew for correct responses (RT_CORRECT_SKEW, the mean RT for incorrect responses (RT_INCORRECT_MEAN, the RT variance for incorrect responses (RT_INCORRECT_VARIANCE, the RT skew for incorrect responses (RT_INCORRECT_SKEW.</p>
-<hr class="docutils" />
-<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 4</h3>
-<p>How do the parameters of the DDM map on to reaction times in lab experiments and real life decision-making?</p>
-<p>We have some hypothetical experimental data from different experimental conditions for you to analyze. In this task, subjects had to respond to the color or direction of moving stimuli. A cue would preceed each trial to indicate whether the trial was a color trial or direction trial.</p>
-<p>Conditions:</p>
-<p>A.</p>
-<ol class="arabic simple">
-<li><p>In condition A1, subjects get no penalties for wrong answers.</p></li>
-<li><p>In condition A2, subjects get a penalty for responding incorrectly.</p></li>
-</ol>
-<p>B.</p>
-<ol class="arabic simple" start="3">
-<li><p>In condition B1, subjects saw stimuli with high coherence, so all the stimuli were one color, or they were all moving in the same direction.</p></li>
-<li><p>In condition B2, subjects saw stimuli with low coherence, so the stimuli were composed of multiple colors, or they saw stimuli moving in multiple directions.</p></li>
-</ol>
-<p>Q1. Build a single path integrator (not analytic) that corresponds to one of the response options for A1.  Then build the analogue for A2, differing by only one parameter.   Do the same for B1 and B2 (the parameter distinguishing B1 and B2 should be different than for A1 and A2).  (When you are done you will have 4 integrators.)</p>
-<p>Q2. Run 100 iterations of each integrator until it meets threshold, and plot the resulting RT distributions.</p>
-<p>Q3. How do your RT distributions compare to the actual data (plotted for you below)?</p>
+<p>PsyNeuLink also allows to calculate the analytic solutions to the DDM described in <a class="reference external" href="https://sites.engineering.ucsb.edu/~moehlis/moehlis_papers/psych.pdf">Bogacz et al (2006</a>. The <code class="docutils literal notranslate"><span class="pre">DriftDiffusionAnalytical</span></code> function can be used to calculate the analytic solutions to the DDM. The function returns the <code class="docutils literal notranslate"><span class="pre">DECISION_VARIABLE</span></code>, <code class="docutils literal notranslate"><span class="pre">RESPONSE_TIME</span></code>, accuracy, and (<code class="docutils literal notranslate"><span class="pre">PROBABILITY_UPPER_THRESHOLD</span></code> error rate (<code class="docutils literal notranslate"><span class="pre">PROBABIILITY_LOWER_THRESHOLD</span></code>. It also returns the moments (mean, variance, and skew) for conditional (correct/positive or incorrect/negative) response time distributions (<code class="docutils literal notranslate"><span class="pre">RT_CORRECT_MEAN</span></code>, <code class="docutils literal notranslate"><span class="pre">RT_CORRECT_VARIANCE</span></code>, <code class="docutils literal notranslate"><span class="pre">RT_CORRECT_SKEW</span></code>).</p>
+<p>Here, we will use an additional pacakge <code class="docutils literal notranslate"><span class="pre">scipy</span></code> to plot the probability density function of the response time distributions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">scipy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">pearson3</span>
+<span class="n">num_trials</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="n">penalties_path</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/younesStrittmatter/502B/raw/refs/heads/main/data/drift_diffusion_models/penalties.pkl&quot;</span>
-<span class="n">coherence_path</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/younesStrittmatter/502B/raw/refs/heads/main/data/drift_diffusion_models/coherence.pkl&quot;</span>
+<span class="c1"># Instate the DDM mechanism</span>
+<span class="n">ddm_integrator</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">DDM</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">DriftDiffusionAnalytical</span><span class="p">(</span>
+    <span class="n">noise</span><span class="o">=</span><span class="mf">.25</span><span class="p">,</span>
+    <span class="n">starting_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">non_decision_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">drift_rate</span><span class="o">=</span><span class="mf">.05</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span>
+    <span class="n">output_ports</span><span class="o">=</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">PROBABILITY_UPPER_THRESHOLD</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">PROBABILITY_LOWER_THRESHOLD</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RT_CORRECT_MEAN</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RT_CORRECT_VARIANCE</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RT_CORRECT_SKEW</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RT_INCORRECT_MEAN</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RT_INCORRECT_VARIANCE</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RT_INCORRECT_SKEW</span><span class="p">]</span>
+<span class="p">)</span>
 
-<span class="n">A</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">penalties_path</span><span class="p">)</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">coherence_path</span><span class="p">)</span>
+<span class="c1"># Create a compositions with only the integrator</span>
+<span class="n">DDM</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">Composition</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;DDM&#39;</span><span class="p">)</span>
+<span class="n">DDM</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">ddm_integrator</span><span class="p">)</span>
 
-<span class="n">Ax</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">A</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="s1">&#39;ZeroPenalty&#39;</span><span class="p">]</span>
-<span class="n">Ay</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">A</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="s1">&#39;HighPenalty&#39;</span><span class="p">]</span>
-<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="c1"># (start, stop, number of bins)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">([</span><span class="n">Ax</span><span class="p">,</span> <span class="n">Ay</span><span class="p">],</span> <span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ZeroPenalty&#39;</span><span class="p">,</span> <span class="s1">&#39;HighPenalty&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;RT Frequency by Penalty&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># Run it</span>
+<span class="n">DDM</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="n">ddm_integrator</span><span class="p">:</span> <span class="mf">.5</span><span class="p">},</span> <span class="n">num_trials</span><span class="o">=</span><span class="n">num_trials</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;execid&#39;</span><span class="p">)</span>
 
-<span class="n">Bx</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">B</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="s1">&#39;HighCoherence&#39;</span><span class="p">]</span>
-<span class="n">By</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">B</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="s1">&#39;LowCoherence&#39;</span><span class="p">]</span>
-<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">([</span><span class="n">Bx</span><span class="p">,</span> <span class="n">By</span><span class="p">],</span> <span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;HighCoherence&#39;</span><span class="p">,</span> <span class="s1">&#39;LowCoherence&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;RT Frequency by Coherence&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="c1"># Extract the data (here we access the values directly)</span>
+<span class="c1"># vals = DDM.parameters.value</span>
+<span class="n">probability_correct</span> <span class="o">=</span> <span class="n">ddm_integrator</span><span class="o">.</span><span class="n">output_ports</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">PROBABILITY_UPPER_THRESHOLD</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">probability_incorrect</span> <span class="o">=</span> <span class="n">ddm_integrator</span><span class="o">.</span><span class="n">output_ports</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">PROBABILITY_LOWER_THRESHOLD</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">rt_correct_mean</span> <span class="o">=</span> <span class="n">ddm_integrator</span><span class="o">.</span><span class="n">output_ports</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RT_CORRECT_MEAN</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rt_correct_variance</span> <span class="o">=</span> <span class="n">ddm_integrator</span><span class="o">.</span><span class="n">output_ports</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RT_CORRECT_VARIANCE</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rt_correct_skew</span> <span class="o">=</span> <span class="n">ddm_integrator</span><span class="o">.</span><span class="n">output_ports</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RT_CORRECT_SKEW</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rt_correct_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">rt_correct_variance</span><span class="p">)</span>
+
+<span class="n">rt_incorrect_mean</span> <span class="o">=</span> <span class="n">ddm_integrator</span><span class="o">.</span><span class="n">output_ports</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RT_INCORRECT_MEAN</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rt_incorrect_variance</span> <span class="o">=</span> <span class="n">ddm_integrator</span><span class="o">.</span><span class="n">output_ports</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RT_INCORRECT_VARIANCE</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rt_incorrect_skew</span> <span class="o">=</span> <span class="n">ddm_integrator</span><span class="o">.</span><span class="n">output_ports</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RT_INCORRECT_SKEW</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rt_incorrect_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">rt_incorrect_variance</span><span class="p">)</span>
+
+<span class="c1"># Generate the Pearson Type III distributions</span>
+<span class="n">x_correct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">rt_correct_mean</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">rt_correct_std</span><span class="p">,</span> <span class="n">rt_correct_mean</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">rt_correct_std</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pdf_correct</span> <span class="o">=</span> <span class="n">pearson3</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_correct</span><span class="p">,</span> <span class="n">rt_correct_skew</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">rt_correct_mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">rt_correct_std</span><span class="p">)</span> <span class="o">*</span> <span class="n">probability_correct</span>
+
+<span class="n">x_incorrect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">rt_incorrect_mean</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">rt_incorrect_std</span><span class="p">,</span> <span class="n">rt_incorrect_mean</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">rt_incorrect_std</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pdf_incorrect</span> <span class="o">=</span> <span class="n">pearson3</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_incorrect</span><span class="p">,</span> <span class="n">rt_incorrect_skew</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">rt_incorrect_mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">rt_incorrect_std</span><span class="p">)</span> <span class="o">*</span> <span class="n">probability_incorrect</span>
+
+<span class="c1"># Plot the distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_correct</span><span class="p">,</span> <span class="n">pdf_correct</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Correct&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_incorrect</span><span class="p">,</span> <span class="n">pdf_incorrect</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Incorrect&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Analytical RT distributions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;RT&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/34afb21018fc4bd198af6b10da1ae54e52ff77cc37da69abb7eef66d98764c69.png" src="../../../_images/34afb21018fc4bd198af6b10da1ae54e52ff77cc37da69abb7eef66d98764c69.png" />
-<img alt="../../../_images/ef55333d6a49732da8fe6797e80b41c6649b2f50673cce0c4705f095de888ec7.png" src="../../../_images/ef55333d6a49732da8fe6797e80b41c6649b2f50673cce0c4705f095de888ec7.png" />
+<img alt="../../../_images/26c2ef8d4e4f084613bd8c6f6552eb09d40ba6745e613c402bc93ab9679ea596.png" src="../../../_images/26c2ef8d4e4f084613bd8c6f6552eb09d40ba6745e613c402bc93ab9679ea596.png" />
 </div>
 </div>
+<hr class="docutils" />
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 4</h3>
+<p>Why did we use <code class="docutils literal notranslate"><span class="pre">num_trials</span> <span class="pre">=</span> <span class="pre">1</span></code> in th eabove cell? What would happen if we set <code class="docutils literal notranslate"><span class="pre">num_trials</span> <span class="pre">=</span> <span class="pre">100</span></code>?</p>
+<hr class="docutils" />
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 Solution 4</summary>
+<p>This is an analytical solution for the DDM which means we are expecting the exact same output for each trial. Running the DDM for multiple trials would not change the output. We would get the same output for each trial. This is why we use <code class="docutils literal notranslate"><span class="pre">num_trials</span> <span class="pre">=</span> <span class="pre">1</span></code> in this case. As output we get the moments of the response time distributions an not (as in <code class="docutils literal notranslate"><span class="pre">DriftDiffusionIntegrater</span></code>) a single decision and reaction time.</p>
+</details>
+<hr class="docutils" />
+<hr class="docutils" />
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 5</h3>
+<p>How do the parameters of the DDM map on to reaction times in lab experiments and real life decision-making?</p>
+<p>Here, we work with hypothetical experimental data from two experiments (A and B). Each experiment has two conditions (1 and 2). The task was a <a class="reference internal" href="#the-two-alternative-forced-choice-2afc-tafc-task"><span class="xref myst">2AFC task</span></a> as described earlier. The subjects had to respond to the direction of moving stimuli.</p>
+<hr class="docutils" />
+<p><strong>Experiment : Penalty Manipulation</strong></p>
+<ol class="arabic simple">
+<li><p>In the <em>zero penalty</em> condition, subjects got no penalties for wrong answers.</p></li>
+<li><p>In the <em>high penalty</em> condition, subjects got a penalty for responding incorrectly.</p></li>
+</ol>
+<hr class="docutils" />
+<p><strong>Experiment 2: Coherence Manipulation</strong></p>
+<ol class="arabic simple">
+<li><p>In the <em>high coherence</em> condition, subjects saw stimuli with high <em>coherence</em> (most dots moved in the same direction).</p></li>
+<li><p>In the <em>low coherence</em> condition subjects saw stimuli with low coherence(most dots moved randomly and only a few of them moved in the target direction).</p></li>
+</ol>
+<hr class="docutils" />
+<p>Here, you see the reaction time distributions for the two experiments:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paths to the data</span>
+<span class="n">penalties_path</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/younesStrittmatter/502B/raw/refs/heads/main/data/drift_diffusion_models/penalties.pkl&quot;</span>
+<span class="n">coherence_path</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/younesStrittmatter/502B/raw/refs/heads/main/data/drift_diffusion_models/coherence.pkl&quot;</span>
+
+    
+<span class="c1"># Load and prepare the data for Experiment A</span>
+<span class="n">penalties_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">penalties_path</span><span class="p">)</span>
+<span class="n">max_rt</span> <span class="o">=</span> <span class="n">penalties_df</span><span class="o">.</span><span class="n">rt</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="c1"># Filter the data</span>
+<span class="c1"># Low penalties</span>
+<span class="n">penalties_zero_penalty_df</span> <span class="o">=</span> <span class="n">penalties_df</span><span class="p">[</span><span class="n">penalties_df</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="s1">&#39;ZeroPenalty&#39;</span><span class="p">]</span>
+<span class="c1"># Correct</span>
+<span class="n">rt_zero_penalty_correct</span> <span class="o">=</span> <span class="n">penalties_zero_penalty_df</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">penalties_zero_penalty_df</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># Incorrect</span>
+<span class="n">rt_zero_penalty_incorrect</span> <span class="o">=</span> <span class="n">penalties_zero_penalty_df</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">penalties_zero_penalty_df</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># High penalties</span>
+<span class="n">penalties_high_penalty_df</span> <span class="o">=</span> <span class="n">penalties_df</span><span class="p">[</span><span class="n">penalties_df</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="s1">&#39;HighPenalty&#39;</span><span class="p">]</span>
+<span class="c1"># Correct</span>
+<span class="n">rt_high_penalty_correct</span> <span class="o">=</span> <span class="n">penalties_high_penalty_df</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">penalties_high_penalty_df</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># Incorrect</span>
+<span class="n">rt_high_penalty_incorrect</span> <span class="o">=</span> <span class="n">penalties_high_penalty_df</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">penalties_high_penalty_df</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+
+<span class="c1"># Load and prepare the data for Experiment B</span>
+<span class="n">coherence_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">coherence_path</span><span class="p">)</span>
+
+<span class="c1"># Filter the data</span>
+<span class="c1"># High coherence</span>
+<span class="n">coherence_high_coherence_df</span> <span class="o">=</span> <span class="n">coherence_df</span><span class="p">[</span><span class="n">coherence_df</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="s1">&#39;HighCoherence&#39;</span><span class="p">]</span>
+<span class="c1"># Correct</span>
+<span class="n">rt_high_coherence_correct</span> <span class="o">=</span> <span class="n">coherence_high_coherence_df</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">coherence_high_coherence_df</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># Incorrect</span>
+<span class="n">rt_high_coherence_incorrect</span> <span class="o">=</span> <span class="n">coherence_high_coherence_df</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">coherence_high_coherence_df</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Low coherence</span>
+<span class="n">coherence_low_coherence_df</span> <span class="o">=</span> <span class="n">coherence_df</span><span class="p">[</span><span class="n">coherence_df</span><span class="o">.</span><span class="n">condition</span> <span class="o">==</span> <span class="s1">&#39;LowCoherence&#39;</span><span class="p">]</span>
+<span class="c1"># Correct</span>
+<span class="n">rt_low_coherence_correct</span> <span class="o">=</span> <span class="n">coherence_low_coherence_df</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">coherence_low_coherence_df</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># Incorrect</span>
+<span class="n">rt_low_coherence_incorrect</span> <span class="o">=</span> <span class="n">coherence_low_coherence_df</span><span class="o">.</span><span class="n">rt</span><span class="p">[</span><span class="n">coherence_low_coherence_df</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+
+<span class="c1"># This function is used to plot the RT distributions</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_rt_distributions</span><span class="p">(</span><span class="n">rt_correct</span><span class="p">,</span> <span class="n">rt_incorrect</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">x_max</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">bins</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mf">.1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x_max</span> <span class="o">/</span> <span class="mf">.1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rt_correct</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Correct&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rt_incorrect</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Wrong&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Response Time&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    
+<span class="c1"># Plot the RT distributions for Experiment A</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;RT Frequency by Penalty&#39;</span><span class="p">)</span>
+<span class="n">plot_rt_distributions</span><span class="p">(</span><span class="n">rt_zero_penalty_correct</span><span class="p">,</span> <span class="n">rt_zero_penalty_incorrect</span><span class="p">,</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Zero Penalty&#39;</span><span class="p">,</span> <span class="n">max_rt</span><span class="p">)</span>
+<span class="n">plot_rt_distributions</span><span class="p">(</span><span class="n">rt_high_penalty_correct</span><span class="p">,</span> <span class="n">rt_high_penalty_incorrect</span><span class="p">,</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;High Penalty&#39;</span><span class="p">,</span> <span class="n">max_rt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Plot the RT distributions for Experiment B</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;RT Frequency by Coherence&#39;</span><span class="p">)</span>
+<span class="n">plot_rt_distributions</span><span class="p">(</span><span class="n">rt_high_coherence_correct</span><span class="p">,</span> <span class="n">rt_high_coherence_incorrect</span><span class="p">,</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;High Coherence&#39;</span><span class="p">,</span> <span class="n">max_rt</span><span class="p">)</span>
+<span class="n">plot_rt_distributions</span><span class="p">(</span><span class="n">rt_low_coherence_correct</span><span class="p">,</span> <span class="n">rt_low_coherence_incorrect</span><span class="p">,</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Low Coherence&#39;</span><span class="p">,</span> <span class="n">max_rt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/2f51f8d67324f8dcb8d96288e7d318ba8a0bca720dad3994b96f129258271706.png" src="../../../_images/2f51f8d67324f8dcb8d96288e7d318ba8a0bca720dad3994b96f129258271706.png" />
+<img alt="../../../_images/76fcb57929b9ae3694a6c5e9a902335d2c7f8cee307b37cc729d810ab59dc48d.png" src="../../../_images/76fcb57929b9ae3694a6c5e9a902335d2c7f8cee307b37cc729d810ab59dc48d.png" />
+</div>
+</div>
+<hr class="docutils" />
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 5a</h3>
+<p>Build a single path integrator (not analytic) that corresponds to the zero penalty condition in Experiment A (A1). Then build the analogue for the other condition by changing only one parameter of the <code class="docutils literal notranslate"><span class="pre">DriftDiffusionIntegrator</span></code>. Run the integrators for 100 trials and plot the resulting RT distributions.</p>
+<p><strong>Note:</strong> The goal is not to fit the data exactly but to understand how the parameters influence the RT distributions and how to get qualitatively similar results. It is not important that the absolute values of the RT distributions match the data but that you can reproduce the general differences in RT distributions between the two conditions.</p>
+<hr class="docutils" />
+<details><summary style="background: #d6c89d; color: #e9e9e9">&#128269 Hint 5a - 1</summary>
+<p>The general difference between the two conditions in Experiment A is that the RTs where higher and that the error rate was lower.</p>
+</details>
+<hr class="docutils" />
+<hr class="docutils" />
+<details><summary style="background: #d6c89d; color: #e9e9e9">&#128269 Hint 5a - 2</summary>
+<p>You can start with the following code snippet that builds the integrator for the zero penalty condition in Experiment A (A1). You can then modify this code to build the integrator for the high penalty condition in Experiment A (A2).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_trials</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Instate the DDM mechanism</span>
+<span class="n">ddm_integrator_a1</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">DDM</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">DriftDiffusionIntegrator</span><span class="p">(</span>
+    <span class="n">noise</span><span class="o">=</span><span class="mf">.25</span><span class="p">,</span>
+    <span class="n">starting_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">non_decision_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">rate</span><span class="o">=</span><span class="mf">.05</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Tell the DDM to store its outputs at each trial</span>
+<span class="n">ddm_integrator_a1</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">set_log_conditions</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">])</span>
+
+<span class="c1"># Create a compositions with only the integrator</span>
+<span class="n">DDM_a1</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">Composition</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;DDM A1&#39;</span><span class="p">)</span>
+<span class="n">DDM_a1</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">ddm_integrator_a1</span><span class="p">)</span>
+
+<span class="c1"># Run it</span>
+<span class="n">DDM_a1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="n">ddm_integrator_a1</span><span class="p">:</span> <span class="mf">1.</span><span class="p">},</span> <span class="n">num_trials</span><span class="o">=</span><span class="n">num_trials</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;execid&#39;</span><span class="p">)</span>
+
+<span class="c1"># Extract the logged data</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">ddm_integrator_a1</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray_dictionary</span><span class="p">()[</span><span class="s1">&#39;execid&#39;</span><span class="p">]</span>
+<span class="n">decision_pos</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">]</span>
+<span class="n">time_pos</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">]</span> <span class="o">/</span> <span class="mf">5.</span> <span class="c1"># Here, we divide by 5 to get a better fit</span>
+
+<span class="c1"># For each decision variable, plot the response time frequency</span>
+<span class="n">time_pos_pos_decision</span> <span class="o">=</span> <span class="n">time_pos</span><span class="p">[</span><span class="n">decision_pos</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">time_pos_neg_decision</span> <span class="o">=</span> <span class="n">time_pos</span><span class="p">[</span><span class="n">decision_pos</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">max_rt</span> <span class="o">=</span> <span class="n">time_pos</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="c1"># Plot the RT distributions for Experiment A1</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plot_rt_distributions</span><span class="p">(</span><span class="n">time_pos_pos_decision</span><span class="p">,</span> <span class="n">time_pos_neg_decision</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;Experiment A1&#39;</span><span class="p">,</span> <span class="n">max_rt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</details>
+<hr class="docutils" />
+<hr class="docutils" />
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 Solution 5a</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_trials</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1">## Experiment A1 - Zero Penalty</span>
+<span class="c1"># Instate the DDM mechanism for Experiment A1</span>
+<span class="n">ddm_integrator_a1</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">DDM</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">DriftDiffusionIntegrator</span><span class="p">(</span>
+    <span class="n">noise</span><span class="o">=</span><span class="mf">.25</span><span class="p">,</span>
+    <span class="n">starting_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">non_decision_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">rate</span><span class="o">=</span><span class="mf">.05</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Tell the DDM to store its outputs at each trial</span>
+<span class="n">ddm_integrator_a1</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">set_log_conditions</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">])</span>
+
+<span class="c1"># Create a compositions with only the integrator</span>
+<span class="n">DDM_a1</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">Composition</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;DDM A1&#39;</span><span class="p">)</span>
+<span class="n">DDM_a1</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">ddm_integrator_a1</span><span class="p">)</span>
+
+
+<span class="c1">## Experiment A2 - High Penalty</span>
+<span class="c1"># Instate the DDM mechanism for Experiment A2</span>
+<span class="n">ddm_integrator_a2</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">DDM</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">DriftDiffusionIntegrator</span><span class="p">(</span>
+    <span class="n">noise</span><span class="o">=</span><span class="mf">.25</span><span class="p">,</span>
+    <span class="n">starting_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">non_decision_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">rate</span><span class="o">=</span><span class="mf">.05</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">3.</span><span class="p">)</span>  <span class="c1"># Here, we manipulate the threshold. All other parameters are the same as in A1</span>
+<span class="p">)</span>
+
+<span class="c1"># Tell the DDM to store its outputs at each trial</span>
+<span class="n">ddm_integrator_a2</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">set_log_conditions</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">])</span>
+
+<span class="c1"># Create a compositions with only the integrator</span>
+<span class="n">DDM_a2</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">Composition</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;DDM A2&#39;</span><span class="p">)</span>
+<span class="n">DDM_a2</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">ddm_integrator_a2</span><span class="p">)</span>
+
+<span class="c1"># </span>
+<span class="c1"># # Run both integrators</span>
+<span class="n">DDM_a1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="n">ddm_integrator_a1</span><span class="p">:</span> <span class="mf">1.</span><span class="p">},</span> <span class="n">num_trials</span><span class="o">=</span><span class="n">num_trials</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;execid&#39;</span><span class="p">)</span>
+<span class="n">DDM_a2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="n">ddm_integrator_a2</span><span class="p">:</span> <span class="mf">1.</span><span class="p">},</span> <span class="n">num_trials</span><span class="o">=</span><span class="n">num_trials</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;execid&#39;</span><span class="p">)</span>
+<span class="c1"># </span>
+<span class="c1"># Extract the logged data</span>
+<span class="n">log_a1</span> <span class="o">=</span> <span class="n">ddm_integrator_a1</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray_dictionary</span><span class="p">()[</span><span class="s1">&#39;execid&#39;</span><span class="p">]</span>
+<span class="n">decision_pos_a1</span> <span class="o">=</span> <span class="n">log_a1</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">]</span>
+<span class="n">time_pos_a1</span> <span class="o">=</span> <span class="n">log_a1</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">]</span> <span class="o">/</span> <span class="mf">5.</span> <span class="c1"># Here, we divide by 5 to get a better fit</span>
+
+<span class="c1"># For each decision variable, plot the response time frequency</span>
+<span class="n">time_pos_pos_decision_a1</span> <span class="o">=</span> <span class="n">time_pos_a1</span><span class="p">[</span><span class="n">decision_pos_a1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">time_pos_neg_decision_a1</span> <span class="o">=</span> <span class="n">time_pos_a1</span><span class="p">[</span><span class="n">decision_pos_a1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">log_a2</span> <span class="o">=</span> <span class="n">ddm_integrator_a2</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray_dictionary</span><span class="p">()[</span><span class="s1">&#39;execid&#39;</span><span class="p">]</span>
+<span class="n">decision_pos_a2</span> <span class="o">=</span> <span class="n">log_a2</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">]</span>
+<span class="n">time_pos_a2</span> <span class="o">=</span> <span class="n">log_a2</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">]</span> <span class="o">/</span> <span class="mf">5.</span> <span class="c1"># Here, we divide by 5 to get a better fit</span>
+
+<span class="c1"># For each decision variable, plot the response time frequency</span>
+<span class="n">time_pos_pos_decision_a2</span> <span class="o">=</span> <span class="n">time_pos_a2</span><span class="p">[</span><span class="n">decision_pos_a2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">time_pos_neg_decision_a2</span> <span class="o">=</span> <span class="n">time_pos_a2</span><span class="p">[</span><span class="n">decision_pos_a2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">max_rt</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">time_pos_a1</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">time_pos_a2</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+
+<span class="c1"># Plot the RT distributions for Experiment A1</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plot_rt_distributions</span><span class="p">(</span><span class="n">time_pos_pos_decision_a1</span><span class="p">,</span> <span class="n">time_pos_neg_decision_a1</span><span class="p">,</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;A1 Zero Penalty&#39;</span><span class="p">,</span> <span class="n">max_rt</span><span class="p">)</span>
+<span class="n">plot_rt_distributions</span><span class="p">(</span><span class="n">time_pos_pos_decision_a2</span><span class="p">,</span> <span class="n">time_pos_neg_decision_a2</span><span class="p">,</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;A2 High Penalty&#39;</span><span class="p">,</span> <span class="n">max_rt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</details>
+<hr class="docutils" />
+<hr class="docutils" />
+<h3 style="background: #256ca2; color: #e9e9e9">&#129504 Exercise 5b</h3>
+<p>Repeat the same process for Experiment B. Build the integrators for the high and low coherence conditions (B1 and B2) and run them for 100 trials. Plot the resulting RT distributions.</p>
+<hr class="docutils" />
+<details><summary style="background: #d6c89d; color: #e9e9e9">&#128269 Hint 5b</summary>
+<p>The general difference between the two conditions is that in the high coherence condition the participants are faster and more accurate.</p>
+</details>
+<hr class="docutils" />
+<hr class="docutils" />
+<details><summary style='background: #22ae6a; color:#e9e9e9'>&#128273 Solution 5b</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_trials</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1">## Experiment B1 - High Coherence</span>
+<span class="c1"># Instate the DDM mechanism for Experiment b1</span>
+<span class="n">ddm_integrator_b1</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">DDM</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">DriftDiffusionIntegrator</span><span class="p">(</span>
+    <span class="n">noise</span><span class="o">=</span><span class="mf">.25</span><span class="p">,</span>
+    <span class="n">starting_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">non_decision_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">rate</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span>  <span class="c1"># Here, we manipulate the drift rate</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Tell the DDM to store its outputs at each trial</span>
+<span class="n">ddm_integrator_b1</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">set_log_conditions</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">])</span>
+
+<span class="c1"># Create a compositions with only the integrator</span>
+<span class="n">DDM_b1</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">Composition</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;DDM B1&#39;</span><span class="p">)</span>
+<span class="n">DDM_b1</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">ddm_integrator_b1</span><span class="p">)</span>
+
+
+<span class="c1">## Experiment B2 - Low Coherence</span>
+<span class="c1"># Instate the DDM mechanism for Experiment B2</span>
+<span class="n">ddm_integrator_b2</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">DDM</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">pnl</span><span class="o">.</span><span class="n">DriftDiffusionIntegrator</span><span class="p">(</span>
+    <span class="n">noise</span><span class="o">=</span><span class="mf">.25</span><span class="p">,</span>
+    <span class="n">starting_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">non_decision_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">rate</span><span class="o">=</span><span class="mf">.05</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>  
+<span class="p">)</span>
+
+<span class="c1"># Tell the DDM to store its outputs at each trial</span>
+<span class="n">ddm_integrator_b2</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">set_log_conditions</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">,</span> <span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">])</span>
+
+<span class="c1"># Create a compositions with only the integrator</span>
+<span class="n">DDM_b2</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">Composition</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;DDM B2&#39;</span><span class="p">)</span>
+<span class="n">DDM_b2</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">ddm_integrator_b2</span><span class="p">)</span>
+
+<span class="c1"># </span>
+<span class="c1"># # Run both integrators</span>
+<span class="n">DDM_b1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="n">ddm_integrator_b1</span><span class="p">:</span> <span class="mf">1.</span><span class="p">},</span> <span class="n">num_trials</span><span class="o">=</span><span class="n">num_trials</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;execid&#39;</span><span class="p">)</span>
+<span class="n">DDM_b2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="n">ddm_integrator_b2</span><span class="p">:</span> <span class="mf">1.</span><span class="p">},</span> <span class="n">num_trials</span><span class="o">=</span><span class="n">num_trials</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;execid&#39;</span><span class="p">)</span>
+<span class="c1"># </span>
+<span class="c1"># Extract the logged data</span>
+<span class="n">log_b1</span> <span class="o">=</span> <span class="n">ddm_integrator_b1</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray_dictionary</span><span class="p">()[</span><span class="s1">&#39;execid&#39;</span><span class="p">]</span>
+<span class="n">decision_pos_b1</span> <span class="o">=</span> <span class="n">log_b1</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">]</span>
+<span class="n">time_pos_b1</span> <span class="o">=</span> <span class="n">log_b1</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">]</span> <span class="o">/</span> <span class="mf">10.</span> <span class="c1"># Here, we divide by 10 to get a better fit</span>
+
+<span class="c1"># For each decision variable, plot the response time frequency</span>
+<span class="n">time_pos_pos_decision_b1</span> <span class="o">=</span> <span class="n">time_pos_b1</span><span class="p">[</span><span class="n">decision_pos_b1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">time_pos_neg_decision_b1</span> <span class="o">=</span> <span class="n">time_pos_b1</span><span class="p">[</span><span class="n">decision_pos_b1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">log_b2</span> <span class="o">=</span> <span class="n">ddm_integrator_b2</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">nparray_dictionary</span><span class="p">()[</span><span class="s1">&#39;execid&#39;</span><span class="p">]</span>
+<span class="n">decision_pos_b2</span> <span class="o">=</span> <span class="n">log_b2</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">DECISION_VARIABLE</span><span class="p">]</span>
+<span class="n">time_pos_b2</span> <span class="o">=</span> <span class="n">log_b2</span><span class="p">[</span><span class="n">pnl</span><span class="o">.</span><span class="n">RESPONSE_TIME</span><span class="p">]</span> <span class="o">/</span> <span class="mf">10.</span> <span class="c1"># Here, we divide by 10 to get a better fit</span>
+
+<span class="c1"># For each decision variable, plot the response time frequency</span>
+<span class="n">time_pos_pos_decision_b2</span> <span class="o">=</span> <span class="n">time_pos_b2</span><span class="p">[</span><span class="n">decision_pos_b2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">time_pos_neg_decision_b2</span> <span class="o">=</span> <span class="n">time_pos_b2</span><span class="p">[</span><span class="n">decision_pos_b2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">max_rt</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">time_pos_b1</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">time_pos_b2</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+
+<span class="c1"># Plot the RT distributions for Experiment b1</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plot_rt_distributions</span><span class="p">(</span><span class="n">time_pos_pos_decision_b1</span><span class="p">,</span> <span class="n">time_pos_neg_decision_b1</span><span class="p">,</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;B1 High Coherence&#39;</span><span class="p">,</span> <span class="n">max_rt</span><span class="p">)</span>
+<span class="n">plot_rt_distributions</span><span class="p">(</span><span class="n">time_pos_pos_decision_b2</span><span class="p">,</span> <span class="n">time_pos_neg_decision_b2</span><span class="p">,</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;B2 Low Coherence&#39;</span><span class="p">,</span> <span class="n">max_rt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</details>
+<hr class="docutils" />
 </section>
 </section>
 </section>

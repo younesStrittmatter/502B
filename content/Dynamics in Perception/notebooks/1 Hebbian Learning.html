@@ -429,9 +429,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-correlation">Self-correlation</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hebbian-learning-in-psyneulink">Hebbian Learning In PsyNeuLink</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hebbian-learning-in-psyneulink">Hebbian Learning In PsyNeuLink</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hebbian-model-3">Hebbian Model #3</a></li>
 </ul>
 </li>
@@ -653,6 +651,7 @@ When you see lightning, what do you expect to hear? Associations can build up in
 <span class="c1"># This consolidates the contributions from the activated neurons</span>
 <span class="n">active_mat</span> <span class="o">=</span> <span class="n">active_mat</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
+
 <span class="c1"># This plot visualizes the activations from a triangular stimulus. The output is an array,</span>
 <span class="c1"># and its values are mapped to the principal diagonal of this image. All off-diagonal elements are zero.</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_activation</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">ub</span><span class="p">):</span>
@@ -663,7 +662,10 @@ When you see lightning, what do you expect to hear? Associations can build up in
     <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)),</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Activation Value&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
 <span class="n">plot_activation</span><span class="p">(</span><span class="n">active_mat</span><span class="p">,</span> <span class="s2">&quot;Activations of a Triangular Stimulus with Cor_mat_command&quot;</span><span class="p">)</span>
+
 
 <span class="c1"># This plot shows the same values but as a line plot.</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_activation_line</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
@@ -674,6 +676,8 @@ When you see lightning, what do you expect to hear? Associations can build up in
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Feature&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Activation Strength&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
 <span class="n">plot_activation_line</span><span class="p">(</span><span class="n">active_mat</span><span class="p">,</span> <span class="s2">&quot;Activations of a Triangular Stimulus with Cor_mat_command&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -730,17 +734,17 @@ When you see lightning, what do you expect to hear? Associations can build up in
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a set of stimuli</span>
-<span class="n">stimulus_matrix</span> <span class="o">=</span> <span class="c1"># TODO: Your code here</span>
+<span class="n">stimulus_matrix</span> <span class="o">=</span>  <span class="c1"># TODO: Your code here</span>
 
 <span class="c1"># Compute the correlation matrix with numpy</span>
-<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="c1"># TODO: Your code here</span>
+<span class="n">correlation_matrix</span> <span class="o">=</span>  <span class="c1"># TODO: Your code here</span>
 
 <span class="c1"># Define the purple stimulus</span>
-<span class="n">purple</span> <span class="o">=</span> <span class="c1"># TODO: Your code here</span>
+<span class="n">purple</span> <span class="o">=</span>  <span class="c1"># TODO: Your code here</span>
 
 <span class="c1"># Compute the activations for the purple stimulus</span>
 <span class="c1"># TODO: Your code here</span>
-<span class="n">active_mat_purple</span> <span class="o">=</span> <span class="c1"># TODO: Your code here</span>
+<span class="n">active_mat_purple</span> <span class="o">=</span>  <span class="c1"># TODO: Your code here</span>
 
 <span class="c1"># Plot the activations for the purple stimulus</span>
 <span class="n">plot_activation_line</span><span class="p">(</span><span class="n">active_mat_purple</span><span class="p">,</span> <span class="s2">&quot;Activations of a Purple Stimulus&quot;</span><span class="p">)</span>
@@ -797,14 +801,14 @@ When you see lightning, what do you expect to hear? Associations can build up in
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">.1</span>
 
 <span class="k">for</span> <span class="n">stim</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sm_3_uniform</span><span class="p">):</span>  <span class="c1"># progress through all stimuli</span>
-  <span class="n">cor_mat_compact</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">cor_mat_compact</span> <span class="o">=</span>  <span class="c1"># TODO: Your code here</span>
 
 <span class="c1"># Verify that we got the same answer as before</span>
 
 <span class="c1"># allclose returns True if each entry of the first array is equal to the corresponding entry in the second, and False otherwise </span>
-<span class="n">same_ans</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">cor_mat_compact</span><span class="p">,</span> <span class="n">cor_mat_manual</span><span class="p">)</span> 
+<span class="n">same_ans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">cor_mat_compact</span><span class="p">,</span> <span class="n">cor_mat_manual</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">same_ans</span><span class="p">:</span>
-  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cor_mat_compact and cor_mat_manual matrices are equal&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cor_mat_compact and cor_mat_manual matrices are equal&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -838,12 +842,12 @@ When you see lightning, what do you expect to hear? Associations can build up in
 <p>Matrix multiplication can simplify the code even more, eliminating the need for any loops.  Use the transpose function .T and matrix multiplication function &#64; to matrix multiply stim_mat by itself transposed.  As a final step, multiply this entire function by a value that will reproduce the same matrix values in cor_mat above.</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cor_mat_compactest</span> <span class="o">=</span> <span class="o">...</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cor_mat_compactest</span> <span class="o">=</span>  <span class="c1"># TODO: Your code here</span>
 
 <span class="c1"># Verify correctness</span>
-<span class="n">same_ans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">cor_mat_compactest</span><span class="p">,</span><span class="n">cor_mat_manual</span><span class="p">)</span> 
+<span class="n">same_ans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">cor_mat_compactest</span><span class="p">,</span> <span class="n">cor_mat_manual</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">same_ans</span><span class="p">:</span>
-  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cor_mat_compactest and cor_mat_manual matrices are equal&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cor_mat_compactest and cor_mat_manual matrices are equal&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -875,8 +879,8 @@ When you see lightning, what do you expect to hear? Associations can build up in
 <span class="n">lb</span> <span class="o">=</span> <span class="o">-</span><span class="n">ub</span>
 
 <span class="n">plot_correlation_matrix</span><span class="p">(</span>
-    <span class="n">cor_mat_nonuniform</span><span class="p">,</span> 
-    <span class="n">title</span><span class="o">=</span> <span class="s2">&quot;Correlation Matrix Created by Matrix Multiplication for Nonuniform Stimuli&quot;</span><span class="p">,</span>
+    <span class="n">cor_mat_nonuniform</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Correlation Matrix Created by Matrix Multiplication for Nonuniform Stimuli&quot;</span><span class="p">,</span>
     <span class="n">lb</span><span class="o">=</span><span class="n">lb</span><span class="p">,</span>
     <span class="n">ub</span><span class="o">=</span><span class="n">ub</span>
 <span class="p">)</span>
@@ -1087,12 +1091,12 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 </div>
 </details>
 </section>
-</section>
 <hr class="docutils" />
 <section id="hebbian-learning-in-psyneulink">
-<h2>Hebbian Learning In PsyNeuLink<a class="headerlink" href="#hebbian-learning-in-psyneulink" title="Link to this heading">#</a></h2>
+<h3>Hebbian Learning In PsyNeuLink<a class="headerlink" href="#hebbian-learning-in-psyneulink" title="Link to this heading">#</a></h3>
 <p>Hebbian learning is achieved in PsyNeuLink by creating an appropriately sized recurrent transfer mechanism, and enabling learning. To do this we simply set the argument <code class="docutils literal notranslate"><span class="pre">enable_learning</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> when defining your transfer mechanism.</p>
 <p>To initialize your matrix to zero, as we have been doing, set the arguments “auto” to 0 and “hetero” to 0.</p>
+</section>
 <section id="hebbian-model-3">
 <h3>Hebbian Model #3<a class="headerlink" href="#hebbian-model-3" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -1261,24 +1265,28 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
     <span class="n">hetero</span><span class="o">=</span><span class="mi">0</span>
 <span class="p">)</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">clear_value</span><span class="p">():</span>
     <span class="n">Hebb_mech</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
 
 <span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">():</span>
     <span class="n">vis_info</span><span class="p">()</span>
     <span class="n">clear_value</span><span class="p">()</span>
-    
+
 
 <span class="n">Hebb_comp</span> <span class="o">=</span> <span class="n">pnl</span><span class="o">.</span><span class="n">Composition</span><span class="p">()</span>
 
 <span class="n">Hebb_comp</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">Hebb_mech</span><span class="p">)</span>
 
-<span class="n">inputs_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">Hebb_mech</span><span class="p">:[</span><span class="n">src</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="o">+</span><span class="p">[</span><span class="n">myr</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">}</span>
-<span class="n">out</span><span class="o">=</span><span class="n">Hebb_comp</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">num_trials</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-      <span class="n">call_after_trial</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span>
-      <span class="n">inputs</span><span class="o">=</span><span class="n">inputs_dict</span><span class="p">)</span>
+<span class="n">inputs_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">Hebb_mech</span><span class="p">:</span> <span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="p">[</span><span class="n">myr</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Hebb_comp</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">num_trials</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                      <span class="n">call_after_trial</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span>
+                      <span class="n">inputs</span><span class="o">=</span><span class="n">inputs_dict</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Hebb_mech</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">base</span><span class="p">)</span>
+<span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Hebb_mech</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">base</span><span class="p">))</span>
+<span class="n">lb</span> <span class="o">=</span> <span class="o">-</span><span class="n">ub</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Hebb_mech</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">lb</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">ub</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1309,10 +1317,10 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 <img alt="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" src="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" />
 <img alt="../../../_images/ecf41acb1fa68d98325ef7173ffa13a76bdfd9bc3bcfd83ba4dc728ef656b90e.png" src="../../../_images/ecf41acb1fa68d98325ef7173ffa13a76bdfd9bc3bcfd83ba4dc728ef656b90e.png" />
 <img alt="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" src="../../../_images/09f3fcfbd60e5733ae9647735a7677572450e4a0ff5717f5795c2082a27ee7b4.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2b28344d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2accfbd10&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/3b04a1fa34ccd67f0ad93b90d1f0a12965f2b6f4c360456d077410d61605ca08.png" src="../../../_images/3b04a1fa34ccd67f0ad93b90d1f0a12965f2b6f4c360456d077410d61605ca08.png" />
+<img alt="../../../_images/8336cab76ab789c7361def739142dfbdfb58e3fb8403b8af854502bc0c761522.png" src="../../../_images/8336cab76ab789c7361def739142dfbdfb58e3fb8403b8af854502bc0c761522.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1410,9 +1418,7 @@ activation_j &amp;= \sum_{i} scaled\_mat_{i, j} \\
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-correlation">Self-correlation</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hebbian-learning-in-psyneulink">Hebbian Learning In PsyNeuLink</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hebbian-learning-in-psyneulink">Hebbian Learning In PsyNeuLink</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hebbian-model-3">Hebbian Model #3</a></li>
 </ul>
 </li>
